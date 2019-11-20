@@ -6,7 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class ManagerUtil {
 
-    public static Integer getPrincipalId() {
+    public static Integer getAuthorizedUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User principal = (User) auth.getPrincipal();
         return principal != null ? principal.getId() : null;

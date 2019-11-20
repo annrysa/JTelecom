@@ -25,6 +25,10 @@ public class Loyalty {
     @Column(name = "amount")
     private Integer amount;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "loyalty_id", referencedColumnName = "loyalty_id")
+    private UserLoyalty userLoyalty;
+
 
     public Loyalty() {
     }
@@ -59,5 +63,13 @@ public class Loyalty {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public UserLoyalty getUserLoyalty() {
+        return userLoyalty;
+    }
+
+    public void setUserLoyalty(UserLoyalty userLoyalty) {
+        this.userLoyalty = userLoyalty;
     }
 }

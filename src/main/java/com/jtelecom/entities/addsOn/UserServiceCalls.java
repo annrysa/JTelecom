@@ -20,7 +20,6 @@ public class UserServiceCalls extends UserServices {
     @Column(name = "user_id")
     private int userId;
 
-
     public UserServiceCalls() {
         super();
     }

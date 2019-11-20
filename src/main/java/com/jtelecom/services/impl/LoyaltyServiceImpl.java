@@ -36,6 +36,11 @@ public class LoyaltyServiceImpl implements LoyaltyService {
     }
 
     @Override
+    public UserLoyalty findLoyaltyByUserId(Integer userId) {
+        return userLoyaltyRepository.findByUserId(userId);
+    }
+
+    @Override
     public Loyalty findLoyaltyById(Integer loyaltyId) {
         return loyaltyRepository.findByLoyaltyId(loyaltyId);
     }
@@ -48,10 +53,16 @@ public class LoyaltyServiceImpl implements LoyaltyService {
     @Override
     public UserLoyalty save(Integer loyaltyId, Integer userId, String loyaltyCode, String dueDateActive, Integer isActive) {
         UserLoyalty userLoyalty = new UserLoyalty(loyaltyId, userId, loyaltyCode, dueDateActive, isActive);
-        delete(userId);
+        UserLoyalty result = save(userLoyalty);
+        return result;
+    }
+
+    @Override
+    public UserLoyalty save(UserLoyalty userLoyalty) {
+        delete(userLoyalty.getUserId());
         UserLoyalty result = userLoyaltyRepository.save(userLoyalty);
         if (result != null) {
-            addLoyaltyRecord(OrderAction.ACTIVATED, userId, result.getLoyaltyId());
+            addLoyaltyRecord(OrderAction.ACTIVATED, userLoyalty.getUserId(), result.getLoyaltyId());
         }
         return result;
     }

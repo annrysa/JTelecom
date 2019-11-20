@@ -6,6 +6,8 @@ import com.jtelecom.entities.tariff.UserTariff;
 public interface TariffService {
     Tariff findTariffById(Integer id);
 
+    UserTariff findTariffByUserId(Integer userId);
+
     Iterable<Tariff> findAll();
 
     UserTariff save(Integer tariffId, Integer userId);

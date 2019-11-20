@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Homepage controller.
+ * Tariff controller.
  */
 @Controller
 @RequestMapping("user")
@@ -46,7 +46,7 @@ public class TariffController {
     @RequestMapping(value = "activateTariff", method = RequestMethod.POST)
     public String activateService(@RequestParam("tariffId") Integer tariffId,
                                   Model model) throws UserFriendlyExeption {
-        UserTariff userTariff = tariffService.save(tariffId, ManagerUtil.getPrincipalId());
+        UserTariff userTariff = tariffService.save(tariffId, ManagerUtil.getAuthorizedUserId());
         model.addAttribute("tariffAdd", userTariff);
         System.out.println("Returning tariff: " + userTariff);
         return "tariffAdded";
@@ -55,7 +55,7 @@ public class TariffController {
     @RequestMapping(value = "deactivateTariff", method = RequestMethod.POST)
     public String deactivateServiceByType(@RequestParam("tariffId") Integer tariffId,
                                           Model model) throws UserFriendlyExeption {
-        tariffService.delete(tariffId, ManagerUtil.getPrincipalId());
+        tariffService.delete(tariffId, ManagerUtil.getAuthorizedUserId());
         model.addAttribute("tariffDelete", tariffId);
         System.out.println("Returning tariff: " + tariffId);
         return "tariffDeleted";

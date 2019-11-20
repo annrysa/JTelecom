@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserById(Integer userId) {
+        return userRepository.findById(new Long(userId)).orElse(null);
+    }
+
+    @Override
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);

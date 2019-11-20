@@ -39,10 +39,8 @@ public class ServiceRoaming {
     @Column(name = "sms")
     private String sms;
 
-
     @Column(name = "calls_min_abroad_out")
     private String callsMinAbroadOut;
-
 
     @Column(name = "calls_min_abroad_in")
     private String callsMinAbroadIn;

@@ -3,12 +3,12 @@ package com.jtelecom.services.impl;
 import com.jtelecom.entities.history.OrderHistory;
 import com.jtelecom.entities.tariff.Tariff;
 import com.jtelecom.entities.tariff.UserTariff;
-import com.jtelecom.ui.OrderAction;
-import com.jtelecom.ui.OrderType;
 import com.jtelecom.repositories.history.OrderHistoryRepository;
 import com.jtelecom.repositories.tariff.TariffRepository;
 import com.jtelecom.repositories.tariff.UserTariffRepository;
 import com.jtelecom.services.TariffService;
+import com.jtelecom.ui.OrderAction;
+import com.jtelecom.ui.OrderType;
 import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +45,11 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
+    public UserTariff findTariffByUserId(Integer userId) {
+        return userTariffRepository.findUserTariffByUserId(userId);
+    }
+
+    @Override
     public Iterable<Tariff> findAll() {
         Iterable<Tariff> tariffs = tariffRepository.findAll();
         return tariffs;
@@ -54,7 +59,7 @@ public class TariffServiceImpl implements TariffService {
     @Transactional
     public UserTariff save(Integer tariffId, Integer userId) {
         UserTariff userTariff = new UserTariff(tariffId, userId);
-        UserTariff existingUserTariff = userTariffRepository.findUserTariffByUserId(userId);
+        UserTariff existingUserTariff = findTariffByUserId(userId);
         if (existingUserTariff != null) {
             delete(existingUserTariff.getTariffId(), existingUserTariff.getUserId());
         }

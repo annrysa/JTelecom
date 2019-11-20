@@ -12,45 +12,39 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tariff")
 public class Tariff {
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tarrif_id")
-    private int id;
-
+    private int tariffId;
     @Column(name = "name")
     private String name;
-
     @Column(name = "description")
     private String description;
-
     @Column(name = "price")
     private Integer price;
-
     @Column(name = "sms")
     private String sms;
-
     @Column(name = "internet")
     private String internet;
-
     @Column(name = "internet_unlimited")
     private Integer internetUnlimited;
-
     @Column(name = "calls_min")
     private String callsMin;
-
     @Column(name = "calls_min_abroad")
     private String callsMinAbroad;
-
     @Column(name = "calls_min_unlimited")
     private Integer callsMinUnlimited;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tarrif_id", referencedColumnName = "tarrif_id")
+    private UserTariff userTariff;
+
+    public int getTariffId() {
+        return tariffId;
+    }
+
+    public void setTariffId(int tariffId) {
+        this.tariffId = tariffId;
+    }
 
     public String getName() {
         return name;
@@ -122,5 +116,13 @@ public class Tariff {
 
     public void setCallsMinUnlimited(Integer callsMinUnlimited) {
         this.callsMinUnlimited = callsMinUnlimited;
+    }
+
+    public UserTariff getUserTariff() {
+        return userTariff;
+    }
+
+    public void setUserTariff(UserTariff userTariff) {
+        this.userTariff = userTariff;
     }
 }

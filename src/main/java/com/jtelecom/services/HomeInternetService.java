@@ -14,6 +14,8 @@ public interface HomeInternetService {
 
     UserHomeInternet save(Integer homeInternetId, Integer userId, String appointment, Integer isActive);
 
+    UserHomeInternet save(UserHomeInternet userHomeInternet);
+
     void delete(Integer homeInternetId, Integer userId, String appointment, Integer isActive);
 
     void delete(Integer userId);

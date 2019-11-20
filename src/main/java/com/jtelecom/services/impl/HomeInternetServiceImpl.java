@@ -58,10 +58,16 @@ public class HomeInternetServiceImpl implements HomeInternetService {
     @Override
     public UserHomeInternet save(Integer homeInternetId, Integer userId, String appointment, Integer isActive) {
         UserHomeInternet userHomeInternet = new UserHomeInternet(homeInternetId, userId, appointment, isActive);
-        delete(userId);
+        UserHomeInternet result = save(userHomeInternet);
+        return result;
+    }
+
+    @Override
+    public UserHomeInternet save(UserHomeInternet userHomeInternet) {
+        delete(userHomeInternet.getUserId());
         UserHomeInternet result = userHomeInternetRepository.save(userHomeInternet);
         if (result != null) {
-            addHomeInternetRecord(OrderAction.ACTIVATED, userId, result.getHomeInternetId());
+            addHomeInternetRecord(OrderAction.ACTIVATED, userHomeInternet.getUserId(), result.getHomeInternetId());
         }
         return result;
     }

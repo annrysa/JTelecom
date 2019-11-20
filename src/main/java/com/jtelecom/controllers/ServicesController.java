@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Homepage controller.
+ * Adds-on controller.
  */
 @Controller
 @RequestMapping("user")
@@ -62,7 +62,7 @@ public class ServicesController {
     public String activateService(@RequestParam("serviceId") Integer serviceId, @RequestParam("serviceType") String serviceType,
                                   Model model) throws UserFriendlyExeption {
         AddsOnUiModel convert = uiModelToOrderModelConverter.convert(serviceId, serviceType);
-        UserServices userServices = userAddsOnService.saveServiceByType(convert, ManagerUtil.getPrincipalId());
+        UserServices userServices = userAddsOnService.saveServiceByType(convert, ManagerUtil.getAuthorizedUserId());
         model.addAttribute("serviceAdd", userServices);
         System.out.println("Returning service: " + userServices);
         return "serviceAdded";
@@ -72,7 +72,7 @@ public class ServicesController {
     public String deactivateServiceByType(@RequestParam("serviceId") Integer serviceId, @RequestParam("serviceType") String serviceType,
                                           Model model) throws UserFriendlyExeption {
         AddsOnUiModel convert = uiModelToOrderModelConverter.convert(serviceId, serviceType);
-        userAddsOnService.deleteServiceByType(convert, ManagerUtil.getPrincipalId());
+        userAddsOnService.deleteServiceByType(convert, ManagerUtil.getAuthorizedUserId());
         model.addAttribute("serviceDelete", serviceId);
         System.out.println("Returning service: " + serviceId);
         return "serviceDeleted";

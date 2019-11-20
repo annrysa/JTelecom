@@ -22,6 +22,9 @@ import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserAddsOnServiceImpl implements UserAddsOnService {
 
@@ -89,6 +92,20 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
             default:
                 throw new UserFriendlyExeption("Service type not existing");
         }
+    }
+
+    @Override
+    public List<UserServices> findServicesByUserId(Integer userId) {
+        List<UserServices> result = new ArrayList<>();
+        List<UserServiceCalls> calls = userServiceCallsRepository.findAllByUserId(userId);
+        List<UserServiceInternet> internets = userServiceInternetRepository.findAllByUserId(userId);
+        List<UserServiceRoaming> roamings = userServiceRoamingRepository.findAllByUserId(userId);
+
+        result.addAll(calls);
+        result.addAll(internets);
+        result.addAll(roamings);
+
+        return result;
     }
 
     @Override

@@ -3,10 +3,7 @@ package com.jtelecom.entities.homeInternet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -32,6 +29,10 @@ public class HomeInternet {
 
     @Column(name = "internet_unlimited")
     private Integer internetUnlimited;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "home_internet_id", referencedColumnName = "home_internet_id")
+    private UserHomeInternet userHomeInternet;
 
     public HomeInternet() {
     }
@@ -82,5 +83,13 @@ public class HomeInternet {
 
     public void setInternetUnlimited(Integer internetUnlimited) {
         this.internetUnlimited = internetUnlimited;
+    }
+
+    public UserHomeInternet getUserHomeInternet() {
+        return userHomeInternet;
+    }
+
+    public void setUserHomeInternet(UserHomeInternet userHomeInternet) {
+        this.userHomeInternet = userHomeInternet;
     }
 }

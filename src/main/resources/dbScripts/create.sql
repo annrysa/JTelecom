@@ -50,7 +50,7 @@ CREATE TABLE tarrif
 
 CREATE TABLE user_tarrif
 (
-id BIGINT PRIMARY KEY AUTO_INCREMENT,
+tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
 user_id BIGINT NOT NULL,
 tarrif_id BIGINT NOT NULL
 );
@@ -145,7 +145,7 @@ CREATE TABLE service_internet
 
  CREATE TABLE user_service_internet
  (
- id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
  user_id BIGINT NOT NULL,
  service_id BIGINT NOT NULL
  );
@@ -155,7 +155,7 @@ CREATE TABLE service_internet
 
  CREATE TABLE user_service_roaming
  (
- id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
  user_id BIGINT NOT NULL,
  service_id BIGINT NOT NULL
  );
@@ -165,7 +165,7 @@ CREATE TABLE service_internet
 
  CREATE TABLE user_service_calls
  (
- id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
  user_id BIGINT NOT NULL,
  service_id BIGINT NOT NULL
  );
@@ -222,7 +222,7 @@ CREATE TABLE service_internet
 
  CREATE TABLE user_home_internet
  (
- id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
  home_internet_id BIGINT NOT NULL,
  user_id BIGINT NOT NULL,
  appointment VARCHAR(100),
@@ -262,7 +262,7 @@ amount BIGINT
 
 CREATE TABLE user_loyalty
 (
-id BIGINT PRIMARY KEY AUTO_INCREMENT,
+tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
 loyalty_id BIGINT NOT NULL,
 user_id BIGINT NOT NULL,
 loyalty_code VARCHAR(100) NOT NULL,
