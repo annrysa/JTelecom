@@ -32,32 +32,32 @@ public class TariffController {
         Iterable<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
         System.out.println("Returning tariffs: " + tariffs);
-        return "tariffs";
+        return "user/tariffs";
     }
 
-    @RequestMapping(value = "tariff/{tariffId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/tariffs/{tariffId}", method = RequestMethod.GET)
     public String showServiceDetails(@PathVariable Integer tariffId, Model model) {
         Tariff tariffCallsById = tariffService.findTariffById(tariffId);
         model.addAttribute("tariff", tariffCallsById);
         System.out.println("Returning tariff : " + tariffCallsById);
-        return "tariffDetails";
+        return "user/tariffDetails";
     }
 
-    @RequestMapping(value = "activateTariff", method = RequestMethod.POST)
-    public String activateService(@RequestParam("tariffId") Integer tariffId,
+    @RequestMapping(value = "/activateTariff/{tariffId}", method = RequestMethod.POST)
+    public String activateService(@PathVariable Integer tariffId,
                                   Model model) throws UserFriendlyExeption {
         UserTariff userTariff = tariffService.save(tariffId, ManagerUtil.getAuthorizedUserId());
         model.addAttribute("tariffAdd", userTariff);
         System.out.println("Returning tariff: " + userTariff);
-        return "tariffAdded";
+        return "user/tariffAdded";
     }
 
-    @RequestMapping(value = "deactivateTariff", method = RequestMethod.POST)
-    public String deactivateServiceByType(@RequestParam("tariffId") Integer tariffId,
+    @RequestMapping(value = "/deactivateTariff/{tariffId}", method = RequestMethod.POST)
+    public String deactivateServiceByType(@PathVariable Integer tariffId,
                                           Model model) throws UserFriendlyExeption {
         tariffService.delete(tariffId, ManagerUtil.getAuthorizedUserId());
         model.addAttribute("tariffDelete", tariffId);
         System.out.println("Returning tariff: " + tariffId);
-        return "tariffDeleted";
+        return "user/tariffDeleted";
     }
 }

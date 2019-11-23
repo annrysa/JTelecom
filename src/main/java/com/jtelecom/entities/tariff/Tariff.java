@@ -10,12 +10,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tariff")
 public class Tariff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tarrif_id")
-    private int tariffId;
+    @Column(name = "tariff_id")
+    private Integer tariffId;
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -35,14 +34,14 @@ public class Tariff {
     @Column(name = "calls_min_unlimited")
     private Integer callsMinUnlimited;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tarrif_id", referencedColumnName = "tarrif_id")
+    @JoinColumn(name = "tariff_id", referencedColumnName = "tariff_id")
     private UserTariff userTariff;
 
-    public int getTariffId() {
+    public Integer getTariffId() {
         return tariffId;
     }
 
-    public void setTariffId(int tariffId) {
+    public void setTariffId(Integer tariffId) {
         this.tariffId = tariffId;
     }
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Tariffs</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(tariffs)}">
+        <h2>Tariff List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Details</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="tariff : ${tariffs}">
+                <td th:text="${tariff.name}">Name</td>
+                <td th:text="${tariff.description}">Descirption</td>
+                <td th:text="${tariff.price}">Price</td>
+                <td><a th:href="${'/user/tariffs/' + tariff.tariffId}">View</a></td>
+                <div th:if="${not #lists.isEmpty(tariff.userTariff)}">
+                    <td><a th:href="${'/user/deactivateTariff/' + tariff.tariffId}">Deactivate</a></td>
+                </div>
+                <div th:if="${#lists.isEmpty(tariff.userTariff)}">
+                    <td><a th:href="${'/user/activateTariff/' + tariff.tariffId}">Activate</a></td>
+                </div>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

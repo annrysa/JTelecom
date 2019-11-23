@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "user_tarrif")
+@Table(name = "user_tariff")
 public class UserTariff {
 
     @Id
@@ -17,7 +17,7 @@ public class UserTariff {
     @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "tarrif_id")
+    @Column(name = "tariff_id")
     private int tariffId;
 
 

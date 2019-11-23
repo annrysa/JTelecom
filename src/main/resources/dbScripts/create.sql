@@ -34,9 +34,9 @@ INSERT INTO user VALUES(2,'Peter','Moss','peter@gmail.com','098888888',0,'$2a$10
 INSERT INTO user_role
 VALUES (1,1);
 
-CREATE TABLE tarrif
+CREATE TABLE tariff
 (
- tarrif_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ tariff_id BIGINT PRIMARY KEY AUTO_INCREMENT,
  name VARCHAR(60) NOT NULL,
  description VARCHAR(150),
  price BIGINT NOT NULL,
@@ -48,27 +48,27 @@ CREATE TABLE tarrif
  calls_min_unlimited BIGINT
 );
 
-CREATE TABLE user_tarrif
+CREATE TABLE user_tariff
 (
-tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
+id BIGINT PRIMARY KEY AUTO_INCREMENT,
 user_id BIGINT NOT NULL,
-tarrif_id BIGINT NOT NULL
+tariff_id BIGINT NOT NULL
 );
 
-ALTER TABLE user_tarrif ADD CONSTRAINT tarrif_id_fk FOREIGN KEY (tarrif_id) REFERENCES tarrif (tarrif_id);
-ALTER TABLE user_tarrif ADD CONSTRAINT user_tarrif_id_fk FOREIGN KEY (user_id) REFERENCES user (user_id);
+ALTER TABLE user_tariff ADD CONSTRAINT tariff_id_fk FOREIGN KEY (tariff_id) REFERENCES tariff (tariff_id);
+ALTER TABLE user_tariff ADD CONSTRAINT user_tarif_id_fk FOREIGN KEY (user_id) REFERENCES user (user_id);
 
-INSERT INTO tarrif VALUES
+INSERT INTO tariff VALUES
 (1, 'JTelecom SuperNet Start', '4 +2 GB Internet / 80 min in Ukraine', 90, 0, '4 GB + 2 GB/3 months 4G/3G Internet', 0, '80 min within Ukraine or to Poland', '30 min calls abroad', 0);
-INSERT INTO tarrif VALUES
+INSERT INTO tariff VALUES
 (2, 'JTelecom SuperNet Pro', '10 GB Internet / 1500 min in Ukraine', 125, 100, '10GB 4G/3G Internet', 0, '120 min within Ukraine or to Poland', '30 min calls abroad', 0);
-INSERT INTO tarrif VALUES
+INSERT INTO tariff VALUES
 (3, 'JTelecom SuperNet Unlim', 'Unlimited Internet / 1500 min in Ukraine', 185, 100, 'Unlimited Internet', 1, '200 min within Ukraine or to Poland', '30 min calls abroad', 0);
-INSERT INTO tarrif VALUES
+INSERT INTO tariff VALUES
 (4, 'JTelecom SuperNet Lux', 'Unlimited Internet / 2000 min in Ukraine', 225, 200, 'Unlimited Internet', 1, 'Unlimited calls within Ukraine or to Poland', '30 min calls abroad', 1);
 
-INSERT INTO user_tarrif VALUES (1,1,1);
-INSERT INTO user_tarrif VALUES (2,2,4);
+INSERT INTO user_tariff VALUES (1,1,1);
+INSERT INTO user_tariff VALUES (2,2,4);
 
 CREATE TABLE service_internet
 (
@@ -137,15 +137,15 @@ CREATE TABLE service_internet
 
  INSERT INTO service_internet
  VALUES
- (2,'Data sharing for day','Use your smartphones as modem within 24 hours!',10,10,'1 day','According to tarrif',1);
+ (2,'Data sharing for day','Use your smartphones as modem within 24 hours!',10,10,'1 day','According to tariff',1);
 
  INSERT INTO service_internet
  VALUES
- (3,'Data sharing for month','Use your smartphones as modem the whole month!',50,50,'1 month','According to tarrif',1);
+ (3,'Data sharing for month','Use your smartphones as modem the whole month!',50,50,'1 month','According to tariff',1);
 
  CREATE TABLE user_service_internet
  (
- tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
+ id BIGINT PRIMARY KEY AUTO_INCREMENT,
  user_id BIGINT NOT NULL,
  service_id BIGINT NOT NULL
  );
@@ -155,7 +155,7 @@ CREATE TABLE service_internet
 
  CREATE TABLE user_service_roaming
  (
- tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
+ id BIGINT PRIMARY KEY AUTO_INCREMENT,
  user_id BIGINT NOT NULL,
  service_id BIGINT NOT NULL
  );
@@ -165,7 +165,7 @@ CREATE TABLE service_internet
 
  CREATE TABLE user_service_calls
  (
- tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
+ id BIGINT PRIMARY KEY AUTO_INCREMENT,
  user_id BIGINT NOT NULL,
  service_id BIGINT NOT NULL
  );
@@ -222,7 +222,7 @@ CREATE TABLE service_internet
 
  CREATE TABLE user_home_internet
  (
- tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
+ id BIGINT PRIMARY KEY AUTO_INCREMENT,
  home_internet_id BIGINT NOT NULL,
  user_id BIGINT NOT NULL,
  appointment VARCHAR(100),
@@ -262,7 +262,7 @@ amount BIGINT
 
 CREATE TABLE user_loyalty
 (
-tariffId BIGINT PRIMARY KEY AUTO_INCREMENT,
+id BIGINT PRIMARY KEY AUTO_INCREMENT,
 loyalty_id BIGINT NOT NULL,
 user_id BIGINT NOT NULL,
 loyalty_code VARCHAR(100) NOT NULL,
