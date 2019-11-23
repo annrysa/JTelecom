@@ -20,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
@@ -45,10 +45,13 @@ public class User {
     private String phone;
 
     @Column(name = "balance")
-    private String balance;
+    private Integer balance;
 
     @Column(name = "active")
     private int active;
+
+    @Column(name = "loyalty")
+    private Integer loyalty;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -62,19 +65,19 @@ public class User {
         this.phone = phone;
     }
 
-    public String getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -124,5 +127,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Integer getLoyalty() {
+        return loyalty;
+    }
+
+    public void setLoyalty(Integer loyalty) {
+        this.loyalty = loyalty;
     }
 }

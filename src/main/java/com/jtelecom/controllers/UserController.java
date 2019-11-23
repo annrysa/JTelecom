@@ -1,11 +1,16 @@
 package com.jtelecom.controllers;
 
+import com.jtelecom.converters.UiModelToOrderModelConverter;
 import com.jtelecom.entities.addsOn.UserServices;
+import com.jtelecom.entities.homeInternet.HomeInternet;
 import com.jtelecom.entities.homeInternet.UserHomeInternet;
+import com.jtelecom.entities.loyalty.Loyalty;
 import com.jtelecom.entities.loyalty.UserLoyalty;
+import com.jtelecom.entities.tariff.Tariff;
 import com.jtelecom.entities.tariff.UserTariff;
 import com.jtelecom.entities.user.User;
 import com.jtelecom.services.*;
+import com.jtelecom.ui.LoyaltyInfoUi;
 import com.jtelecom.utils.ManagerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,6 +32,8 @@ public class UserController {
     private UserAddsOnService userAddsOnService;
     private HomeInternetService homeInternetService;
     private LoyaltyService loyaltyService;
+    private ManagerUtil managerUtil;
+    private UiModelToOrderModelConverter uiModelToOrderModelConverter;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -48,30 +56,49 @@ public class UserController {
     }
 
     @Autowired
+    public void setManagerUtil(ManagerUtil managerUtil) {
+        this.managerUtil = managerUtil;
+    }
+
+    @Autowired
     public void setLoyaltyService(LoyaltyService loyaltyService) {
         this.loyaltyService = loyaltyService;
     }
 
+    @Autowired
+    public void setUiModelToOrderModelConverter(UiModelToOrderModelConverter uiModelToOrderModelConverter) {
+        this.uiModelToOrderModelConverter = uiModelToOrderModelConverter;
+    }
+
     @RequestMapping(value = {"/user-info"}, method = RequestMethod.GET)
     public ModelAndView userInfo(ModelAndView modelAndView) {
-        Integer authorizedUserId = ManagerUtil.getAuthorizedUserId();
-        User userInfo = userService.findUserById(authorizedUserId);
-        UserTariff tariffInfo = tariffService.findTariffByUserId(authorizedUserId);
+        Integer authorizedUserId = managerUtil.getAuthorizedUserId();
+        User userInfo = managerUtil.getAuthorizedUser();
+        UserTariff userTariff = tariffService.findTariffByUserId(authorizedUserId);
+        Tariff tariffInfo = tariffService.findTariffById(userTariff.getTariffId(), authorizedUserId);
         List<UserServices> servicesInfo = userAddsOnService.findServicesByUserId(authorizedUserId);
         UserHomeInternet homeInternetInfo = homeInternetService.findUserHomeInternetByUserId(authorizedUserId);
-        UserLoyalty loyaltyInfo = loyaltyService.findLoyaltyByUserId(authorizedUserId);
+        HomeInternet homeInternetById = homeInternetService.findHomeInternetById(homeInternetInfo.getHomeInternetId());
+        Iterable<UserLoyalty> loyaltyInfo = loyaltyService.findLoyaltyByUserId(authorizedUserId);
+        List<Integer> loyaltyIds = new ArrayList<>();
+        for (UserLoyalty loyaltyById : loyaltyInfo) {
+            loyaltyIds.add(loyaltyById.getLoyaltyId());
+        }
+        Iterable<Loyalty> loyaltiesById = loyaltyService.findAllLoyaltyByIds(loyaltyIds);
+        List<LoyaltyInfoUi> loyaltiesInfo = uiModelToOrderModelConverter.convert(loyaltiesById, loyaltyInfo);
         modelAndView.addObject("userInfo", userInfo);
         modelAndView.addObject("tariffInfo", tariffInfo);
         modelAndView.addObject("servicesInfo", servicesInfo);
-        modelAndView.addObject("homeInternetInfo", homeInternetInfo);
-        modelAndView.addObject("loyaltyInfo", loyaltyInfo);
-        modelAndView.setViewName("user-info");
+        modelAndView.addObject("homeInternetUserInfo", homeInternetInfo);
+        modelAndView.addObject("homeInternetInfo", homeInternetById);
+        modelAndView.addObject("loyaltiesInfo", loyaltiesInfo);
+        modelAndView.setViewName("user/user-info");
         return modelAndView;
     }
 
     @RequestMapping(value = "/user-edit", method = RequestMethod.GET)
     public ModelAndView getUserEdit(ModelAndView modelAndView) {
-        User userEdit = userService.findUserById(ManagerUtil.getAuthorizedUserId());
+        User userEdit = userService.findUserById(managerUtil.getAuthorizedUserId());
         modelAndView.addObject("userEdit", userEdit);
         modelAndView.setViewName("user-edit");
 

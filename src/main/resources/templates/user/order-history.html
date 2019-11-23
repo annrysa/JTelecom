@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Tariff Details</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <h2>Order history</h2>
+    <div class="container">
+
+        <form th:action="@{/logout}" method="get">
+
+        </form>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" th:href="@{/user/home-internet}">Home Internet</a></li>
+                        <li><a href="#" th:href="@{/user/loyalty}">Bonuses</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div th:if="${not #lists.isEmpty(orderHistory)}">
+
+        <table class="table table-striped">
+            <tr>
+                <th>No</th>
+                <th>Operation</th>
+            </tr>
+            <tr th:each="order, state : ${orderHistory}">
+                <td th:text="${state.index+1}">Name</td>
+                <td th:text="${order.name}">operation</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

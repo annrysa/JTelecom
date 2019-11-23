@@ -1,14 +1,40 @@
 package com.jtelecom.utils;
 
 import com.jtelecom.entities.user.User;
+import com.jtelecom.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ManagerUtil {
 
-    public static Integer getAuthorizedUserId() {
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+
+    public User getAuthorizedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User principal = (User) auth.getPrincipal();
-        return principal != null ? principal.getId() : null;
+        User user = userService.findUserByEmail(auth.getName());
+        return user;
+    }
+
+    public Integer getAuthorizedUserId() {
+        User user = getAuthorizedUser();
+        return user != null ? user.getId() : null;
+    }
+
+    public Integer getAuthorizedUserBalance() {
+        User user = getAuthorizedUser();
+        return user != null ? user.getBalance() : 0;
+    }
+
+    public Integer setBalance(Integer price) {
+        return getAuthorizedUser().getBalance() - price;
     }
 }

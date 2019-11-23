@@ -26,6 +26,12 @@ public class ServicesController {
     private AddsOnAllService serviceCallsService;
     private UserAddsOnService userAddsOnService;
     private UiModelToOrderModelConverter uiModelToOrderModelConverter;
+    private ManagerUtil managerUtil;
+
+    @Autowired
+    public void setManagerUtil(ManagerUtil managerUtil) {
+        this.managerUtil = managerUtil;
+    }
 
     @Autowired
     public void setServiceCallsService(AddsOnAllService serviceCallsService) {
@@ -62,7 +68,7 @@ public class ServicesController {
     public String activateService(@RequestParam("serviceId") Integer serviceId, @RequestParam("serviceType") String serviceType,
                                   Model model) throws UserFriendlyExeption {
         AddsOnUiModel convert = uiModelToOrderModelConverter.convert(serviceId, serviceType);
-        UserServices userServices = userAddsOnService.saveServiceByType(convert, ManagerUtil.getAuthorizedUserId());
+        UserServices userServices = userAddsOnService.saveServiceByType(convert, managerUtil.getAuthorizedUserId());
         model.addAttribute("serviceAdd", userServices);
         System.out.println("Returning service: " + userServices);
         return "serviceAdded";
@@ -72,7 +78,7 @@ public class ServicesController {
     public String deactivateServiceByType(@RequestParam("serviceId") Integer serviceId, @RequestParam("serviceType") String serviceType,
                                           Model model) throws UserFriendlyExeption {
         AddsOnUiModel convert = uiModelToOrderModelConverter.convert(serviceId, serviceType);
-        userAddsOnService.deleteServiceByType(convert, ManagerUtil.getAuthorizedUserId());
+        userAddsOnService.deleteServiceByType(convert, managerUtil.getAuthorizedUserId());
         model.addAttribute("serviceDelete", serviceId);
         System.out.println("Returning service: " + serviceId);
         return "serviceDeleted";

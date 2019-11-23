@@ -3,10 +3,14 @@ package com.jtelecom.services;
 import com.jtelecom.entities.loyalty.Loyalty;
 import com.jtelecom.entities.loyalty.UserLoyalty;
 
+import java.util.List;
+
 public interface LoyaltyService {
     Loyalty findLoyaltyById(Integer loyaltyId);
 
-    UserLoyalty findLoyaltyByUserId(Integer userId);
+    Iterable<UserLoyalty> findLoyaltyByUserId(Integer userId);
+
+    Iterable<Loyalty> findAllLoyaltyByIds(List<Integer> loyaltyIds);
 
     Iterable<Loyalty> findAll();
 

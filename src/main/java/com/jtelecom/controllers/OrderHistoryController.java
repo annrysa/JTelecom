@@ -14,6 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class OrderHistoryController {
 
     private OrderHistoryService orderHistoryService;
+    private ManagerUtil managerUtil;
+
+    @Autowired
+    public void setManagerUtil(ManagerUtil managerUtil) {
+        this.managerUtil = managerUtil;
+    }
 
     @Autowired
     public void setOrderHistoryService(OrderHistoryService orderHistoryService) {
@@ -22,9 +28,9 @@ public class OrderHistoryController {
 
     @RequestMapping(value = {"/order-history"}, method = RequestMethod.GET)
     public ModelAndView orderHistoryAll(ModelAndView modelAndView) {
-        Iterable<OrderHistory> orderHistory = orderHistoryService.findByUserId(ManagerUtil.getAuthorizedUserId());
+        Iterable<OrderHistory> orderHistory = orderHistoryService.findByUserId(managerUtil.getAuthorizedUserId());
         modelAndView.addObject("orderHistory", orderHistory);
-        modelAndView.setViewName("order-history");
+        modelAndView.setViewName("user/order-history");
         return modelAndView;
     }
 }

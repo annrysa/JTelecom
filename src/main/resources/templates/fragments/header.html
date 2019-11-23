@@ -13,20 +13,26 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+                    <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
                     <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/products}">Products</a></li>
-                        <li><a href="#" th:href="@{/product/new}">Create new product</a></li>
+                        <li><a href="#" th:href="@{/user/tariffs}">Tariffs</a></li>
+                        <li><a href="#" th:href="@{/user/services}">Services</a></li>
+                        <li><a href="#" th:href="@{/user/home-internet}">Home Internet</a></li>
+                        <li><a href="#" th:href="@{/user/loyalty}">Loyalty</a></li>
                     </ul>
-
                 </div>
+                <form th:action="@{/logout}" method="get">
+                    <button class="btn btn-danger pull-right" name="registration"
+                            type="Submit">Logout
+                    </button>
+                </form>
             </div>
         </nav>
 
         <div class="jumbotron">
             <div class="row text-center">
                 <div class="">
-                    <h2>Spring Boot Example</h2>
+                    <h2>JTelecom</h2>
                     <h3>Welcome</h3>
                 </div>
             </div>

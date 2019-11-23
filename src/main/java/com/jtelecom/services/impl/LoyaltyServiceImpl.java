@@ -13,6 +13,8 @@ import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LoyaltyServiceImpl implements LoyaltyService {
 
@@ -36,8 +38,13 @@ public class LoyaltyServiceImpl implements LoyaltyService {
     }
 
     @Override
-    public UserLoyalty findLoyaltyByUserId(Integer userId) {
+    public Iterable<UserLoyalty> findLoyaltyByUserId(Integer userId) {
         return userLoyaltyRepository.findByUserId(userId);
+    }
+
+    @Override
+    public Iterable<Loyalty> findAllLoyaltyByIds(List<Integer> loyaltyIds) {
+        return loyaltyRepository.findAllByLoyaltyIdIn(loyaltyIds);
     }
 
     @Override
@@ -59,7 +66,7 @@ public class LoyaltyServiceImpl implements LoyaltyService {
 
     @Override
     public UserLoyalty save(UserLoyalty userLoyalty) {
-        delete(userLoyalty.getUserId());
+//        delete(userLoyalty.getUserId());
         UserLoyalty result = userLoyaltyRepository.save(userLoyalty);
         if (result != null) {
             addLoyaltyRecord(OrderAction.ACTIVATED, userLoyalty.getUserId(), result.getLoyaltyId());
@@ -76,11 +83,11 @@ public class LoyaltyServiceImpl implements LoyaltyService {
 
     @Override
     public void delete(Integer userId) {
-        UserLoyalty byUserId = userLoyaltyRepository.findByUserId(userId);
-        if (byUserId != null) {
-            userLoyaltyRepository.delete(byUserId);
-            addLoyaltyRecord(OrderAction.DEACTIVATED, userId, byUserId.getLoyaltyId());
-        }
+//        UserLoyalty byUserId = userLoyaltyRepository.findByUserId(userId);
+//        if (byUserId != null) {
+//            userLoyaltyRepository.delete(byUserId);
+//            addLoyaltyRecord(OrderAction.DEACTIVATED, userId, byUserId.getLoyaltyId());
+//        }
     }
 
     private void addLoyaltyRecord(OrderAction orderAction, Integer userId, Integer loyaltyId) {

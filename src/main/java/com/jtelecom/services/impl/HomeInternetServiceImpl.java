@@ -37,7 +37,7 @@ public class HomeInternetServiceImpl implements HomeInternetService {
 
     @Override
     public HomeInternet findHomeInternetById(Integer id) {
-        return null;
+        return homeInternetRepository.findByHomeInternetId(id);
     }
 
     @Override

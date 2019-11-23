@@ -97,6 +97,7 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
     @Override
     public List<UserServices> findServicesByUserId(Integer userId) {
         List<UserServices> result = new ArrayList<>();
+        //todo : replace with type
         List<UserServiceCalls> calls = userServiceCallsRepository.findAllByUserId(userId);
         List<UserServiceInternet> internets = userServiceInternetRepository.findAllByUserId(userId);
         List<UserServiceRoaming> roamings = userServiceRoamingRepository.findAllByUserId(userId);

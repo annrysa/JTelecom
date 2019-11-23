@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -33,9 +34,9 @@ public class Tariff {
     private String callsMinAbroad;
     @Column(name = "calls_min_unlimited")
     private Integer callsMinUnlimited;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "tariff_id", referencedColumnName = "tariff_id")
-    private UserTariff userTariff;
+    private Set<UserTariff> userTariff;
 
     public Integer getTariffId() {
         return tariffId;
@@ -117,11 +118,11 @@ public class Tariff {
         this.callsMinUnlimited = callsMinUnlimited;
     }
 
-    public UserTariff getUserTariff() {
+    public Set<UserTariff> getUserTariff() {
         return userTariff;
     }
 
-    public void setUserTariff(UserTariff userTariff) {
+    public void setUserTariff(Set<UserTariff> userTariff) {
         this.userTariff = userTariff;
     }
 }
