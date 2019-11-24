@@ -12,4 +12,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying(clearAutomatically = true)
     @Query("UPDATE User u SET u.balance =:balance WHERE u.id =:userId")
     void updateBalance(@Param("userId") Integer userId, @Param("balance") Integer balance);
+
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE User u SET u.loyalty =:loyalty WHERE u.id =:userId")
+    void updateLoyalty(@Param("userId") Integer userId, @Param("loyalty") Integer loyalty);
 }

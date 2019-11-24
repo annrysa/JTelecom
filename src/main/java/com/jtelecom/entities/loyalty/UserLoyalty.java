@@ -12,13 +12,13 @@ public class UserLoyalty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "loyalty_id")
-    private int loyaltyId;
+    private Integer loyaltyId;
 
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
 
     @Column(name = "loyalty_code")
     private String loyaltyCode;
@@ -41,19 +41,19 @@ public class UserLoyalty {
         this.isActive = isActive;
     }
 
-    public int getLoyaltyId() {
+    public Integer getLoyaltyId() {
         return loyaltyId;
     }
 
-    public void setLoyaltyId(int loyaltyId) {
+    public void setLoyaltyId(Integer loyaltyId) {
         this.loyaltyId = loyaltyId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -81,11 +81,11 @@ public class UserLoyalty {
         this.isActive = isActive;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

@@ -9,6 +9,7 @@ import com.jtelecom.repositories.homeInternet.UserHomeInternetRepository;
 import com.jtelecom.services.HomeInternetService;
 import com.jtelecom.ui.OrderAction;
 import com.jtelecom.ui.OrderType;
+import com.jtelecom.utils.DateConstructorUtil;
 import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,7 +92,7 @@ public class HomeInternetServiceImpl implements HomeInternetService {
     private void addHomeInternetRecord(OrderAction orderAction, Integer userId, Integer internetId) {
         HomeInternet homeInternetById = findHomeInternetById(internetId);
         String details = OrderRecordUtil.setOrderAction(orderAction, OrderType.HOME_INTERNET, homeInternetById.getName());
-        OrderHistory orderHistory = new OrderHistory(userId, details);
+        OrderHistory orderHistory = new OrderHistory(userId, details, DateConstructorUtil.getOrderDate());
         orderHistoryRepository.save(orderHistory);
     }
 }

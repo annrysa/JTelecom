@@ -31,12 +31,14 @@
 
         <table class="table table-striped">
             <tr>
-                <th>No</th>
+                <th></th>
                 <th>Operation</th>
+                <th>Date</th>
             </tr>
             <tr th:each="order, state : ${orderHistory}">
                 <td th:text="${state.index+1}">Name</td>
                 <td th:text="${order.name}">operation</td>
+                <td th:text="${order.dateTime}">date</td>
             </tr>
         </table>
     </div>

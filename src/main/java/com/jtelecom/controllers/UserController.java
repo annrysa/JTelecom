@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/user-info"}, method = RequestMethod.GET)
-    public ModelAndView userInfo(ModelAndView modelAndView) {
+    public ModelAndView userInfo(ModelAndView modelAndView) throws ParseException {
         Integer authorizedUserId = managerUtil.getAuthorizedUserId();
         User userInfo = managerUtil.getAuthorizedUser();
         UserTariff userTariff = tariffService.findTariffByUserId(authorizedUserId);
@@ -79,6 +80,7 @@ public class UserController {
         List<UserServices> servicesInfo = userAddsOnService.findServicesByUserId(authorizedUserId);
         UserHomeInternet homeInternetInfo = homeInternetService.findUserHomeInternetByUserId(authorizedUserId);
         HomeInternet homeInternetById = homeInternetService.findHomeInternetById(homeInternetInfo.getHomeInternetId());
+        loyaltyService.updateLoyaltyStatus();
         Iterable<UserLoyalty> loyaltyInfo = loyaltyService.findLoyaltyByUserId(authorizedUserId);
         List<Integer> loyaltyIds = new ArrayList<>();
         for (UserLoyalty loyaltyById : loyaltyInfo) {

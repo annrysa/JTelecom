@@ -16,7 +16,7 @@ public class ServiceInternet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "service_id")
-    private int serviceId;
+    private Integer serviceId;
 
     @Column(name = "name")
     private String name;
@@ -39,11 +39,11 @@ public class ServiceInternet {
     @Column(name = "internet_sharing")
     private Integer internetSharing;
 
-    public int getServiceId() {
+    public Integer getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(Integer serviceId) {
         this.serviceId = serviceId;
     }
 

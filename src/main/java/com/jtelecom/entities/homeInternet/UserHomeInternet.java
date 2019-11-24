@@ -12,13 +12,13 @@ public class UserHomeInternet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "home_internet_id")
-    private int homeInternetId;
+    private Integer homeInternetId;
 
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
 
     @Column(name = "appointment")
     private String appointment;
@@ -29,26 +29,26 @@ public class UserHomeInternet {
     public UserHomeInternet() {
     }
 
-    public UserHomeInternet(int homeInternetId, int userId, String appointment, Integer isActive) {
+    public UserHomeInternet(Integer homeInternetId, int userId, String appointment, Integer isActive) {
         this.homeInternetId = homeInternetId;
         this.userId = userId;
         this.appointment = appointment;
         this.isActive = isActive;
     }
 
-    public int getHomeInternetId() {
+    public Integer getHomeInternetId() {
         return homeInternetId;
     }
 
-    public void setHomeInternetId(int homeInternetId) {
+    public void setHomeInternetId(Integer homeInternetId) {
         this.homeInternetId = homeInternetId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -68,11 +68,11 @@ public class UserHomeInternet {
         this.isActive = isActive;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

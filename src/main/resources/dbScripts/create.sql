@@ -37,9 +37,9 @@ VALUES (1,1);
 CREATE TABLE tariff
 (
  tariff_id BIGINT PRIMARY KEY AUTO_INCREMENT,
- name VARCHAR(60) NOT NULL,
+ name VARCHAR(60),
  description VARCHAR(150),
- price BIGINT NOT NULL,
+ price BIGINT,
  sms VARCHAR(100),
  internet VARCHAR(100),
  internet_unlimited BIGINT,
@@ -51,8 +51,8 @@ CREATE TABLE tariff
 CREATE TABLE user_tariff
 (
 id BIGINT PRIMARY KEY AUTO_INCREMENT,
-user_id BIGINT NOT NULL,
-tariff_id BIGINT NOT NULL
+user_id BIGINT,
+tariff_id BIGINT
 );
 
 ALTER TABLE user_tariff ADD CONSTRAINT tariff_id_fk FOREIGN KEY (tariff_id) REFERENCES tariff (tariff_id);
@@ -73,9 +73,9 @@ INSERT INTO user_tariff VALUES (2,2,4);
 CREATE TABLE service_internet
 (
  service_id BIGINT PRIMARY KEY AUTO_INCREMENT,
- name VARCHAR(60) NOT NULL,
+ name VARCHAR(60),
  description VARCHAR(600),
- price BIGINT NOT NULL,
+ price BIGINT,
  activation_cost BIGINT,
  validity VARCHAR(20),
  internet VARCHAR(100),
@@ -85,9 +85,9 @@ CREATE TABLE service_internet
  CREATE TABLE service_roaming
  (
  service_id BIGINT PRIMARY KEY AUTO_INCREMENT,
- name VARCHAR(60) NOT NULL,
+ name VARCHAR(60),
  description VARCHAR(600),
- price BIGINT NOT NULL,
+ price BIGINT,
  activation_cost BIGINT,
  validity VARCHAR(20),
  sms VARCHAR(100) DEFAULT NULL,
@@ -99,9 +99,9 @@ CREATE TABLE service_internet
  CREATE TABLE service_calls
  (
  service_id BIGINT PRIMARY KEY AUTO_INCREMENT,
- name VARCHAR(60) NOT NULL,
+ name VARCHAR(60),
  description VARCHAR(600),
- price BIGINT NOT NULL,
+ price BIGINT,
  validity VARCHAR(20),
  activation_cost BIGINT,
  calls_min_abroad VARCHAR(100)
@@ -146,8 +146,8 @@ CREATE TABLE service_internet
  CREATE TABLE user_service_internet
  (
  id BIGINT PRIMARY KEY AUTO_INCREMENT,
- user_id BIGINT NOT NULL,
- service_id BIGINT NOT NULL
+ user_id BIGINT,
+ service_id BIGINT
  );
 
  ALTER TABLE user_service_internet ADD CONSTRAINT service_int_id_fk FOREIGN KEY (service_id) REFERENCES service_internet (service_id);
@@ -156,8 +156,8 @@ CREATE TABLE service_internet
  CREATE TABLE user_service_roaming
  (
  id BIGINT PRIMARY KEY AUTO_INCREMENT,
- user_id BIGINT NOT NULL,
- service_id BIGINT NOT NULL
+ user_id BIGINT,
+ service_id BIGINT
  );
 
  ALTER TABLE user_service_roaming ADD CONSTRAINT service_roam_id_fk FOREIGN KEY (service_id) REFERENCES service_roaming (service_id);
@@ -166,8 +166,8 @@ CREATE TABLE service_internet
  CREATE TABLE user_service_calls
  (
  id BIGINT PRIMARY KEY AUTO_INCREMENT,
- user_id BIGINT NOT NULL,
- service_id BIGINT NOT NULL
+ user_id BIGINT,
+ service_id BIGINT
  );
 
  ALTER TABLE user_service_calls ADD CONSTRAINT service_call_id_fk FOREIGN KEY (service_id) REFERENCES service_calls (service_id);
@@ -188,34 +188,35 @@ CREATE TABLE service_internet
  CREATE TABLE order_history
  (
  order_id BIGINT PRIMARY KEY AUTO_INCREMENT,
- user_id BIGINT NOT NULL,
- name VARCHAR(200) NOT NULL
+ user_id BIGINT,
+ name VARCHAR(200),
+ date_time VARCHAR(200)
  );
 
  ALTER TABLE order_history ADD CONSTRAINT user_order_id_fk FOREIGN KEY (user_id) REFERENCES user (user_id);
 
  INSERT INTO order_history
  VALUES
- (1,1,'Activated tariff \'JTelecom SuperNet Start\'');
+ (1,1,'Activated tariff \'JTelecom SuperNet Start\'', '24 Nov 2019 19:17');
 
  INSERT INTO order_history
  VALUES
- (2,1,'Activated service \'Roaming WeekEnd\'');
+ (2,1,'Activated service \'Roaming WeekEnd\'', '24 Nov 2019 19:17');
 
  INSERT INTO order_history
  VALUES
- (3,1,'Activated service \'+12 GB\'');
+ (3,1,'Activated service \'+12 GB\'', '24 Nov 2019 19:17');
 
  INSERT INTO order_history
  VALUES
- (4,1,'Activated service \'30 minutes to Ukraine and world\'');
+ (4,1,'Activated service \'30 minutes to Ukraine and world\'', '24 Nov 2019 19:17');
 
  CREATE TABLE home_internet
  (
  home_internet_id BIGINT PRIMARY KEY AUTO_INCREMENT,
- name VARCHAR(60) NOT NULL,
+ name VARCHAR(60),
  description VARCHAR(150),
- price BIGINT NOT NULL,
+ price BIGINT,
  internet VARCHAR(100),
  internet_unlimited BIGINT
  );
@@ -223,8 +224,8 @@ CREATE TABLE service_internet
  CREATE TABLE user_home_internet
  (
  id BIGINT PRIMARY KEY AUTO_INCREMENT,
- home_internet_id BIGINT NOT NULL,
- user_id BIGINT NOT NULL,
+ home_internet_id BIGINT,
+ user_id BIGINT,
  appointment VARCHAR(100),
  is_active BIGINT DEFAULT 0
  );
@@ -250,12 +251,12 @@ VALUES
 
  INSERT INTO order_history
  VALUES
- (5,1,'Activated home Internet \'Base RED S\'');
+ (5,1,'Activated home Internet \'Base RED S\'', '24 Nov 2019 19:17');
 
 CREATE TABLE loyalty
 (
 loyalty_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(60) NOT NULL,
+name VARCHAR(60),
 description VARCHAR(150),
 amount BIGINT
 );
@@ -263,9 +264,9 @@ amount BIGINT
 CREATE TABLE user_loyalty
 (
 id BIGINT PRIMARY KEY AUTO_INCREMENT,
-loyalty_id BIGINT NOT NULL,
-user_id BIGINT NOT NULL,
-loyalty_code VARCHAR(100) NOT NULL,
+loyalty_id BIGINT,
+user_id BIGINT,
+loyalty_code VARCHAR(100),
 due_date_active VARCHAR(100),
 is_active BIGINT
 );
@@ -287,8 +288,11 @@ is_active BIGINT
 
  INSERT INTO user_loyalty
  VALUES
- (1,1,1, '2815263670567', '31 December 2019',1);
+ (1,1,1, '2815263670567', '23 Nov 2019 21:20',1);
+ INSERT INTO user_loyalty
+ VALUES
+ (2,1,1, '2815263670567', '31 Dec 2019 19:20',1);
 
  INSERT INTO order_history
  VALUES
- (6,1,'Activated bonus \'100 UAH for pizza\'');
+ (6,1,'Activated bonus \'100 UAH for pizza\'', '24 Nov 2019 19:17');

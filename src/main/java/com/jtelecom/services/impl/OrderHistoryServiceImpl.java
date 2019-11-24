@@ -20,10 +20,4 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
     public Iterable<OrderHistory> findByUserId(Integer userId) {
         return orderHistoryRepository.findAllByUserId(userId);
     }
-
-    @Override
-    public OrderHistory save(Integer userId, String details) {
-
-        return null;
-    }
 }

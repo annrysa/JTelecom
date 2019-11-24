@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +14,7 @@ public class HomeInternet {
 
     @Id
     @Column(name = "home_internet_id")
-    private int homeInternetId;
+    private Integer homeInternetId;
 
     @Column(name = "name")
     private String name;
@@ -30,18 +31,18 @@ public class HomeInternet {
     @Column(name = "internet_unlimited")
     private Integer internetUnlimited;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "home_internet_id", referencedColumnName = "home_internet_id")
-    private UserHomeInternet userHomeInternet;
+    private Set<UserHomeInternet> userHomeInternet;
 
     public HomeInternet() {
     }
 
-    public int getHomeInternetId() {
+    public Integer getHomeInternetId() {
         return homeInternetId;
     }
 
-    public void setHomeInternetId(int homeInternetId) {
+    public void setHomeInternetId(Integer homeInternetId) {
         this.homeInternetId = homeInternetId;
     }
 
@@ -85,11 +86,11 @@ public class HomeInternet {
         this.internetUnlimited = internetUnlimited;
     }
 
-    public UserHomeInternet getUserHomeInternet() {
+    public Set<UserHomeInternet> getUserHomeInternet() {
         return userHomeInternet;
     }
 
-    public void setUserHomeInternet(UserHomeInternet userHomeInternet) {
+    public void setUserHomeInternet(Set<UserHomeInternet> userHomeInternet) {
         this.userHomeInternet = userHomeInternet;
     }
 }

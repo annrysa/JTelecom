@@ -162,7 +162,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Activation code</th>
-                    <th>Due date</th>
+                    <th>Expired</th>
                     <th>Status</th>
                 </tr>
                 <tr th:each="loyalties : ${loyaltiesInfo}">
@@ -174,7 +174,7 @@
                         <td th:text="'Active'"></td>
                     </div>
                     <div th:if="${loyalties.status != 1}">
-                        <td th:text="'Not active'"></td>
+                        <td th:text="'Expired'"></td>
                     </div>
                 </tr>
             </table>

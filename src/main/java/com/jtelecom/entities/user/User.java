@@ -48,7 +48,7 @@ public class User {
     private Integer balance;
 
     @Column(name = "active")
-    private int active;
+    private Integer active;
 
     @Column(name = "loyalty")
     private Integer loyalty;
@@ -113,11 +113,11 @@ public class User {
         this.lastname = lastname;
     }
 
-    public int getActive() {
+    public Integer getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 

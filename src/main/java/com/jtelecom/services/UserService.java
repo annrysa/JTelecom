@@ -8,4 +8,6 @@ public interface UserService {
     User findUserById(Integer userId);
 
     User saveUser(User user);
+
+    void updateLoyalty(Integer loyalty, Integer userId);
 }

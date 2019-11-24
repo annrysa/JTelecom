@@ -25,7 +25,7 @@ public class HomeInternetController {
     public ModelAndView homeInternetAll(ModelAndView modelAndView) {
         Iterable<HomeInternet> homeInternetInfo = homeInternetService.findAll();
         modelAndView.addObject("homeInternetInfo", homeInternetInfo);
-        modelAndView.setViewName("home-internet");
+        modelAndView.setViewName("user/home-internet");
         return modelAndView;
     }
 
@@ -33,7 +33,7 @@ public class HomeInternetController {
     public ModelAndView homeInternetDetails(@PathVariable Integer homeInternetId, ModelAndView modelAndView) {
         HomeInternet homeInternetDetailsInfo = homeInternetService.findHomeInternetById(homeInternetId);
         modelAndView.addObject("homeInternetDetailsInfo", homeInternetDetailsInfo);
-        modelAndView.setViewName("home-internet-details");
+        modelAndView.setViewName("user/home-internet-details");
         return modelAndView;
     }
 
@@ -43,7 +43,7 @@ public class HomeInternetController {
         UserHomeInternet userHomeInternetInfo = homeInternetService.save(userHomeInternet);
         modelAndView.addObject("successMessage", "Home Internet has been activated");
         modelAndView.addObject("userHomeInternetInfo", userHomeInternetInfo);
-        modelAndView.setViewName("home-internet-details");
+        modelAndView.setViewName("user/home-internet-details");
 
         return modelAndView;
     }

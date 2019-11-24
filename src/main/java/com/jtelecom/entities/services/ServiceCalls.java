@@ -16,7 +16,7 @@ public class ServiceCalls {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "service_id")
-    private int serviceId;
+    private Integer serviceId;
 
     @Column(name = "name")
     private String name;
@@ -36,11 +36,11 @@ public class ServiceCalls {
     @Column(name = "calls_min_abroad")
     private String callsMinAbroad;
 
-    public int getServiceId() {
+    public Integer getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(Integer serviceId) {
         this.serviceId = serviceId;
     }
 

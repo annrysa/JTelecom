@@ -24,20 +24,24 @@ public class UserTariff {
     @Column(name = "tariff_id")
     private Integer tariffId;
 
-//    @ManyToOne
-//    @JoinColumn(name="tariff_id")
-//    private Tariff tariff;
-
     public UserTariff(int userId, int tariffId) {
         this.userId = userId;
         this.tariffId = tariffId;
     }
 
-    public int getUserId() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -48,20 +52,4 @@ public class UserTariff {
     public void setTariffId(Integer tariffId) {
         this.tariffId = tariffId;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-//    public Tariff getTariff() {
-//        return tariff;
-//    }
-//
-//    public void setTariff(Tariff tariff) {
-//        this.tariff = tariff;
-//    }
 }

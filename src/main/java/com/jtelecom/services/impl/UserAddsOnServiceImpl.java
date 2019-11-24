@@ -18,6 +18,7 @@ import com.jtelecom.services.UserAddsOnService;
 import com.jtelecom.ui.AddsOnUiModel;
 import com.jtelecom.ui.OrderAction;
 import com.jtelecom.ui.OrderType;
+import com.jtelecom.utils.DateConstructorUtil;
 import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -160,7 +161,7 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
 
     private void addAddsOnRecord(OrderAction orderAction, String name, Integer userId) {
         String details = OrderRecordUtil.setOrderAction(orderAction, OrderType.SERVICE, name);
-        OrderHistory orderHistory = new OrderHistory(userId, details);
+        OrderHistory orderHistory = new OrderHistory(userId, details, DateConstructorUtil.getOrderDate());
         orderHistoryRepository.save(orderHistory);
     }
 }

@@ -12,13 +12,13 @@ public class UserServiceCalls extends UserServices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "service_id")
-    private int serviceId;
+    private Integer serviceId;
 
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
 
     public UserServiceCalls() {
         super();
@@ -29,27 +29,27 @@ public class UserServiceCalls extends UserServices {
         this.userId = userId;
     }
 
-    public int getServiceId() {
+    public Integer getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(Integer serviceId) {
         this.serviceId = serviceId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

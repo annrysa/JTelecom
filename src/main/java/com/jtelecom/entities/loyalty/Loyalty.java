@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +15,7 @@ public class Loyalty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "loyalty_id")
-    private int loyaltyId;
+    private Integer loyaltyId;
 
     @Column(name = "name")
     private String name;
@@ -25,19 +26,18 @@ public class Loyalty {
     @Column(name = "amount")
     private Integer amount;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "loyalty_id", referencedColumnName = "loyalty_id")
-    private UserLoyalty userLoyalty;
-
+    private Set<UserLoyalty> userLoyalty;
 
     public Loyalty() {
     }
 
-    public int getLoyaltyId() {
+    public Integer getLoyaltyId() {
         return loyaltyId;
     }
 
-    public void setLoyaltyId(int loyaltyId) {
+    public void setLoyaltyId(Integer loyaltyId) {
         this.loyaltyId = loyaltyId;
     }
 
@@ -65,11 +65,11 @@ public class Loyalty {
         this.amount = amount;
     }
 
-    public UserLoyalty getUserLoyalty() {
+    public Set<UserLoyalty> getUserLoyalty() {
         return userLoyalty;
     }
 
-    public void setUserLoyalty(UserLoyalty userLoyalty) {
+    public void setUserLoyalty(Set<UserLoyalty> userLoyalty) {
         this.userLoyalty = userLoyalty;
     }
 }

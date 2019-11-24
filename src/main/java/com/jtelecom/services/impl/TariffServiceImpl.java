@@ -10,6 +10,7 @@ import com.jtelecom.repositories.user.UserRepository;
 import com.jtelecom.services.TariffService;
 import com.jtelecom.ui.OrderAction;
 import com.jtelecom.ui.OrderType;
+import com.jtelecom.utils.DateConstructorUtil;
 import com.jtelecom.utils.ManagerUtil;
 import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,7 +117,7 @@ public class TariffServiceImpl implements TariffService {
         Tariff tariffById = findTariffById(tariffId, userId);
         if (tariffById != null) {
             String details = OrderRecordUtil.setOrderAction(orderAction, OrderType.TARIFF, tariffById.getName());
-            OrderHistory orderHistory = new OrderHistory(userId, details);
+            OrderHistory orderHistory = new OrderHistory(userId, details, DateConstructorUtil.getOrderDate());
             orderHistoryRepository.save(orderHistory);
         }
     }

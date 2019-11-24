@@ -9,11 +9,17 @@ import com.jtelecom.repositories.loyalty.UserLoyaltyRepository;
 import com.jtelecom.services.LoyaltyService;
 import com.jtelecom.ui.OrderAction;
 import com.jtelecom.ui.OrderType;
+import com.jtelecom.utils.DateConstructorUtil;
 import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class LoyaltyServiceImpl implements LoyaltyService {
@@ -48,13 +54,82 @@ public class LoyaltyServiceImpl implements LoyaltyService {
     }
 
     @Override
-    public Loyalty findLoyaltyById(Integer loyaltyId) {
-        return loyaltyRepository.findByLoyaltyId(loyaltyId);
+    public Iterable<UserLoyalty> findAll() {
+        return userLoyaltyRepository.findAll();
     }
 
     @Override
-    public Iterable<Loyalty> findAll() {
-        return loyaltyRepository.findAll();
+    @Transactional
+    public void updateLoyaltyStatus() throws ParseException {
+        Iterable<UserLoyalty> all = userLoyaltyRepository.findAll();
+        List<UserLoyalty> userLoyalties = new ArrayList<>();
+        all.forEach(userLoyalties::add);
+
+        for (UserLoyalty ul : userLoyalties) {
+            if (DateConstructorUtil.compareDates(ul.getDueDateActive())) {
+                userLoyaltyRepository.updateUserLoyaltyIsActiveById(0, ul.getId());
+            }
+        }
+    }
+
+    @Override
+    public Loyalty findLoyaltyById(Integer loyaltyId, Integer userId) {
+        Loyalty loyalty = loyaltyRepository.findByLoyaltyId(loyaltyId);
+        List<UserLoyalty> ul = new ArrayList<>();
+        Set<UserLoyalty> result = new HashSet<>();
+        if (loyalty.getUserLoyalty() != null) {
+            for (UserLoyalty userLoyalty : loyalty.getUserLoyalty()) {
+                if (userLoyalty.getLoyaltyId() != null && userLoyalty.getUserId().equals(userId)) {
+                    ul.add(userLoyalty);
+                }
+            }
+            boolean isActive = false;
+            if (!ul.isEmpty()) {
+                UserLoyalty ulResult = ul.get(0);
+                for (UserLoyalty userLoyalty : ul) {
+                    if (!isActive && userLoyalty.getIsActive() == 1) {
+                        isActive = true;
+                        ulResult.setIsActive(1);
+                    }
+                }
+                result.add(ulResult);
+                loyalty.setUserLoyalty(result);
+            }
+        }
+        return loyalty;
+    }
+
+    @Override
+    public Iterable<Loyalty> findAll(Integer userId) {
+        Iterable<Loyalty> loyalties = loyaltyRepository.findAll();
+        List<UserLoyalty> ul = new ArrayList<>();
+        Set<UserLoyalty> result = new HashSet<>();
+        for (Loyalty loyalty : loyalties) {
+            if (loyalty.getUserLoyalty() != null) {
+                for (UserLoyalty userLoyalty : loyalty.getUserLoyalty()) {
+                    if (userLoyalty.getLoyaltyId() != null && userLoyalty.getUserId().equals(userId)) {
+                        ul.add(userLoyalty);
+                    }
+                }
+                boolean isActive = false;
+                if (!ul.isEmpty()) {
+                    UserLoyalty ulResult = ul.get(0);
+                    for (UserLoyalty userLoyalty : ul) {
+                        if (!isActive && userLoyalty.getIsActive() == 1) {
+                            isActive = true;
+                            ulResult.setIsActive(1);
+                        }
+                    }
+                    result.add(ulResult);
+                    for (UserLoyalty userLoyalty : loyalty.getUserLoyalty()) {
+                        if (userLoyalty.getLoyaltyId() != null && userLoyalty.getUserId().equals(userId)) {
+                            loyalty.setUserLoyalty(result);
+                        }
+                    }
+                }
+            }
+        }
+        return loyalties;
     }
 
     @Override
@@ -66,7 +141,6 @@ public class LoyaltyServiceImpl implements LoyaltyService {
 
     @Override
     public UserLoyalty save(UserLoyalty userLoyalty) {
-//        delete(userLoyalty.getUserId());
         UserLoyalty result = userLoyaltyRepository.save(userLoyalty);
         if (result != null) {
             addLoyaltyRecord(OrderAction.ACTIVATED, userLoyalty.getUserId(), result.getLoyaltyId());
@@ -83,17 +157,19 @@ public class LoyaltyServiceImpl implements LoyaltyService {
 
     @Override
     public void delete(Integer userId) {
-//        UserLoyalty byUserId = userLoyaltyRepository.findByUserId(userId);
-//        if (byUserId != null) {
-//            userLoyaltyRepository.delete(byUserId);
-//            addLoyaltyRecord(OrderAction.DEACTIVATED, userId, byUserId.getLoyaltyId());
-//        }
+        Iterable<UserLoyalty> byUserId = userLoyaltyRepository.findByUserId(userId);
+        if (byUserId != null) {
+            byUserId.forEach(userLoyalty -> {
+                userLoyaltyRepository.delete(userLoyalty);
+                addLoyaltyRecord(OrderAction.DEACTIVATED, userId, userLoyalty.getLoyaltyId());
+            });
+        }
     }
 
     private void addLoyaltyRecord(OrderAction orderAction, Integer userId, Integer loyaltyId) {
-        Loyalty loyaltyById = findLoyaltyById(loyaltyId);
+        Loyalty loyaltyById = findLoyaltyById(loyaltyId, userId);
         String details = OrderRecordUtil.setOrderAction(orderAction, OrderType.LOYALTY, loyaltyById.getName());
-        OrderHistory orderHistory = new OrderHistory(userId, details);
+        OrderHistory orderHistory = new OrderHistory(userId, details, DateConstructorUtil.getOrderDate());
         orderHistoryRepository.save(orderHistory);
     }
 }

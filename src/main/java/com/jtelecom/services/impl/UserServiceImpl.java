@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -51,5 +52,11 @@ public class UserServiceImpl implements UserService {
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateLoyalty(Integer loyalty, Integer userId) {
+        userRepository.updateLoyalty(userId, loyalty);
     }
 }

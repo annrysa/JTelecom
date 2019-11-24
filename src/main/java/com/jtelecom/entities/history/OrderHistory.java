@@ -13,10 +13,13 @@ public class OrderHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "user_id")
     private Integer userId;
+
+    @Column(name = "date_time")
+    private String dateTime;
 
     @Column(name = "name")
     private String name;
@@ -24,16 +27,17 @@ public class OrderHistory {
     public OrderHistory() {
     }
 
-    public OrderHistory(Integer userId, String name) {
+    public OrderHistory(Integer userId, String name, String dateTime) {
         this.userId = userId;
+        this.dateTime = dateTime;
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,5 +55,13 @@ public class OrderHistory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 }

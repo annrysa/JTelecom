@@ -7,11 +7,16 @@ import com.jtelecom.ui.AddsOnUiModel;
 import com.jtelecom.ui.LoyaltyInfoUi;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class UiModelToOrderModelConverterImpl implements UiModelToOrderModelConverter {
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy HH:mm", Locale.ENGLISH);
+
     @Override
     public AddsOnUiModel convert(Integer serviceId, String serviceType) {
         AddsOnUiModel addsOnUiModel = new AddsOnUiModel();
@@ -38,6 +43,15 @@ public class UiModelToOrderModelConverterImpl implements UiModelToOrderModelConv
                 ui.setStatus(userLoyalty.getIsActive());
                 result.add(ui);
             });
+        });
+        result.sort((l1, l2) -> {
+            boolean sortResult;
+            try {
+                sortResult = formatter.parse(l1.getDueDate()).after(formatter.parse(l2.getDueDate()));
+            } catch (ParseException e) {
+                return 0;
+            }
+            return sortResult ? -1 : 1;
         });
         return result;
     }

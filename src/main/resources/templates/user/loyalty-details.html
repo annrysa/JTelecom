@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Bonus Details</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <h2>Bonus Details</h2>
+
+    <div>
+        <h4 class="text-warning text-center" th:utext="${message}"></h4>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${loyaltyInfo.name}">Name</p></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Description:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${loyaltyInfo.description}">Description</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Amount:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${loyaltyInfo.amount}+' Bounses'">Amount</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Action:</label>
+                <div class="col-sm-10">
+                    <div th:if="${loyaltyInfo.userLoyalty != null}">
+                        <div th:if="${not #lists.isEmpty(loyaltyInfo.userLoyalty)}">
+                            <div th:each="lu, state : ${loyaltyInfo.userLoyalty}">
+                                <div th:if="${lu.isActive == 1}">
+
+                                    <p class="form-control-static" th:text="'Already activated'"></p>
+                                </div>
+                                <div th:if="${lu.isActive != 1}">
+                                    <p class="form-control-static">
+                                        <a class="btn btn-lg btn-success"
+                                           th:href="${'/user/activateLoyalty/' + loyaltyInfo.loyaltyId}">Activate</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${#lists.isEmpty(loyaltyInfo.userLoyalty)}">
+                            <p class="form-control-static">
+                                <a class="btn btn-lg btn-success"
+                                   th:href="${'/user/activateLoyalty/' + loyaltyInfo.loyaltyId}">Activate</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
