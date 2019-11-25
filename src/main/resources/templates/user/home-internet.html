@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Home Internet</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(homeInternetInfo)}">
+        <h2>Tariff List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Speed</th>
+                <th>Price</th>
+                <th>Details</th>
+                <th>Status</th>
+            </tr>
+            <tr th:each="homeInternet : ${homeInternetInfo}">
+                <td th:text="${homeInternet.name}">Name</td>
+                <div th:if="${homeInternet.internetUnlimited == 1}">
+                    <td th:text="${homeInternet.internet} + ' (Unlimited)'">Description</td>
+                </div>
+                <div th:if="${homeInternet.internetUnlimited != 1}">
+                    <td th:text="${homeInternet.internet}'">Description</td>
+                </div>
+                <td th:text="${homeInternet.price}">Price</td>
+                <td><a th:href="${'/user/home-internet/' + homeInternet.homeInternetId}">View</a></td>
+                <div th:if="${not #lists.isEmpty(homeInternet.userHomeInternet)}">
+                    <td th:text="'Activated'"></td>
+                </div>
+                <div th:if="${#lists.isEmpty(homeInternet.userHomeInternet)}">
+                    <td>
+                        <p class="form-control-static">
+                            <a class="btn btn-lg btn-success"
+                               th:href="${'/user/appointment-home-internet/' + homeInternet.homeInternetId}">Activate</a>
+                        </p>
+                    </td>
+
+                </div>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>
