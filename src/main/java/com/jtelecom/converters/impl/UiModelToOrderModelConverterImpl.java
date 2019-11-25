@@ -18,14 +18,6 @@ public class UiModelToOrderModelConverterImpl implements UiModelToOrderModelConv
     private static final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy HH:mm", Locale.ENGLISH);
 
     @Override
-    public AddsOnUiModel convert(Integer serviceId, String serviceType) {
-        AddsOnUiModel addsOnUiModel = new AddsOnUiModel();
-        addsOnUiModel.setServiceId(serviceId);
-        addsOnUiModel.setServiceType(serviceType);
-        return addsOnUiModel;
-    }
-
-    @Override
     public List<LoyaltyInfoUi> convert(Iterable<Loyalty> loyaltiesIter, Iterable<UserLoyalty> userLoyaltiesIter) {
         List<Loyalty> loyalties = new ArrayList<>();
         List<UserLoyalty> userLoyalties = new ArrayList<>();

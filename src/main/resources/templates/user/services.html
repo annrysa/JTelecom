@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Adds On</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <h2>Internet Adds On</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Details</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="service : ${serviceInternets}">
+            <td th:text="${service.name}">Name</td>
+            <td th:text="${service.description}">Description</td>
+            <td th:text="${service.price}">Price</td>
+            <td><a th:href="${'/user/service-internet/' + service.serviceId}">View</a></td>
+            <div th:if="${#lists.isEmpty(service.userServiceInternets)}">
+                <td>
+                    <p class="form-control-static">
+                        <a class="btn btn-lg btn-success"
+                           th:href="${'/user/activate-service-internet/' + service.serviceId}">Activate</a>
+                    </p>
+                </td>
+            </div>
+            <div th:if="${not #lists.isEmpty(service.userServiceInternets)}">
+                <td>
+                    <p class="form-control-static">
+                        <a class="btn btn-lg btn-success"
+                           th:text="Activated">Activated</a>
+                    </p>
+                </td>
+            </div>
+        </tr>
+    </table>
+    <h2>Calls Adds On</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Details</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="call : ${serviceCalls}">
+            <td th:text="${call.name}">Name</td>
+            <td th:text="${call.description}">Description</td>
+            <td th:text="${call.price}">Price</td>
+            <td><a th:href="${'/user/service-roaming/' + call.serviceId}">View</a></td>
+            <div th:if="${#lists.isEmpty(call.userServiceCalls)}">
+                <td>
+                    <p class="form-control-static">
+                        <a class="btn btn-lg btn-success"
+                           th:href="${'/user/activate-service-roaming/' + call.serviceId}">Activate</a>
+                    </p>
+                </td>
+            </div>
+            <div th:if="${not #lists.isEmpty(call.userServiceCalls)}">
+                <td>
+                    <p class="form-control-static">
+                        <a class="btn btn-lg btn-success"
+                           th:text="Activated">Activated</a>
+                    </p>
+                </td>
+            </div>
+        </tr>
+    </table>
+    <h2>Roaming Adds On</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Details</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="roaming : ${serviceRoamings}">
+            <td th:text="${roaming.name}">Name</td>
+            <td th:text="${roaming.description}">Description</td>
+            <td th:text="${roaming.price}">Price</td>
+            <td><a th:href="${'/user/service-calls/' + roaming.serviceId}">View</a></td>
+            <div th:if="${#lists.isEmpty(roaming.userServiceCalls)}">
+                <td>
+                    <p class="form-control-static">
+                        <a class="btn btn-lg btn-success"
+                           th:href="${'/user/activate-service-calls/' + roaming.serviceId}">Activate</a>
+                    </p>
+                </td>
+            </div>
+            <div th:if="${not #lists.isEmpty(roaming.userServiceCalls)}">
+                <td>
+                    <p class="form-control-static">
+                        <a class="btn btn-lg btn-success"
+                           th:text="Activated">Activated</a>
+                    </p>
+                </td>
+            </div>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

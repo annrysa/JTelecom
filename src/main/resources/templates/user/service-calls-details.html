@@ -2,49 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Home Internet Details</title>
+    <title>Calls Add On</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Home Internet Tariff Details</h2>
-
+    <h2>Calls Add On Details</h2>
     <div>
-        <input type="hidden" th:name="homeInternetId" th:value="${homeInternetInfo.homeInternetId}"/>
-
         <form class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Name:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${homeInternetInfo.name}">Name</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Speed:</label>
-                <div class="col-sm-10">
-                    <div th:if="${homeInternetInfo.internetUnlimited == 1}">
-                        <p class="form-control-static" th:text="${homeInternetInfo.internet} + ' (Unlimited)'">
-                            Amount</p>
-                    </div>
-                    <div th:if="${homeInternetInfo.internetUnlimited != 1}">
-                        <p class="form-control-static" th:text="${homeInternetInfo.internet}">Amount</p>
-                    </div>
+                    <p class="form-control-static" th:text="${service.name}">Name</p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Description:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${homeInternetInfo.description}">Description</p>
+                    <p class="form-control-static" th:text="${service.description}">Name</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">What you get:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${service.callsMinAbroad}">Calls abroad</p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Price:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${homeInternetInfo.price}">Price</p>
+                    <p class="form-control-static" th:text="${service.price}">Price</p>
                 </div>
             </div>
-            <div th:if="${not #lists.isEmpty(homeInternetInfo.userHomeInternet)}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Activation cost:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${service.activationCost}">Activation cost</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Validity:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${service.validity}">Validity</p>
+                </div>
+            </div>
+            <div th:if="${not #lists.isEmpty(service.userServiceCalls)}">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Status:</label>
                     <div class="col-sm-10">
@@ -53,13 +57,13 @@
                     </div>
                 </div>
             </div>
-            <div th:if="${#lists.isEmpty(homeInternetInfo.userHomeInternet)}">
+            <div th:if="${#lists.isEmpty(service.userServiceCalls)}">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Activate:</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
                             <a class="btn btn-lg btn-success"
-                               th:href="${'/user/appointment-home-internet/' + homeInternetInfo.homeInternetId}">Activate</a>
+                               th:href="${'/user/activate-service-calls/' + service.serviceId}">Activate</a>
                         </p></div>
                 </div>
             </div>

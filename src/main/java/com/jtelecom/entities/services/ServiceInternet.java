@@ -1,10 +1,12 @@
 package com.jtelecom.entities.services;
 
+import com.jtelecom.entities.addsOn.UserServiceInternet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -38,6 +40,10 @@ public class ServiceInternet {
 
     @Column(name = "internet_sharing")
     private Integer internetSharing;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "service_id", referencedColumnName = "service_id")
+    private Set<UserServiceInternet> userServiceInternets;
 
     public Integer getServiceId() {
         return serviceId;
@@ -101,5 +107,13 @@ public class ServiceInternet {
 
     public void setInternetSharing(Integer internetSharing) {
         this.internetSharing = internetSharing;
+    }
+
+    public Set<UserServiceInternet> getUserServiceInternets() {
+        return userServiceInternets;
+    }
+
+    public void setUserServiceInternets(Set<UserServiceInternet> userServiceInternets) {
+        this.userServiceInternets = userServiceInternets;
     }
 }

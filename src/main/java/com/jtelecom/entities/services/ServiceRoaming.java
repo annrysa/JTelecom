@@ -1,10 +1,12 @@
 package com.jtelecom.entities.services;
 
+import com.jtelecom.entities.addsOn.UserServiceRoaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -44,6 +46,10 @@ public class ServiceRoaming {
 
     @Column(name = "calls_min_abroad_in")
     private String callsMinAbroadIn;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "service_id", referencedColumnName = "service_id")
+    private Set<UserServiceRoaming> userServiceRoamings;
 
     public Integer getServiceId() {
         return serviceId;
@@ -123,5 +129,13 @@ public class ServiceRoaming {
 
     public void setCallsMinAbroadIn(String callsMinAbroadIn) {
         this.callsMinAbroadIn = callsMinAbroadIn;
+    }
+
+    public Set<UserServiceRoaming> getUserServiceRoamings() {
+        return userServiceRoamings;
+    }
+
+    public void setUserServiceRoamings(Set<UserServiceRoaming> userServiceRoamings) {
+        this.userServiceRoamings = userServiceRoamings;
     }
 }

@@ -3,13 +3,13 @@ package com.jtelecom.ui;
 public class AddsOnUiModel {
 
     private Integer serviceId;
-    private String serviceType;
+    private AddsOnType serviceType;
     private String name;
 
     public AddsOnUiModel() {
     }
 
-    public AddsOnUiModel(Integer serviceId, String serviceType, String name) {
+    public AddsOnUiModel(Integer serviceId, AddsOnType serviceType, String name) {
         this.serviceId = serviceId;
         this.serviceType = serviceType;
         this.name = name;
@@ -23,11 +23,11 @@ public class AddsOnUiModel {
         this.serviceId = serviceId;
     }
 
-    public String getServiceType() {
+    public AddsOnType getServiceType() {
         return serviceType;
     }
 
-    public void setServiceType(String serviceType) {
+    public void setServiceType(AddsOnType serviceType) {
         this.serviceType = serviceType;
     }
 
@@ -37,9 +37,5 @@ public class AddsOnUiModel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public AddsOnType getAddsOnType() {
-        return AddsOnType.valueOf(getServiceType());
     }
 }

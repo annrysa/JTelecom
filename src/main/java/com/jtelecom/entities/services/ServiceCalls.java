@@ -1,10 +1,12 @@
 package com.jtelecom.entities.services;
 
+import com.jtelecom.entities.addsOn.UserServiceCalls;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -35,6 +37,10 @@ public class ServiceCalls {
 
     @Column(name = "calls_min_abroad")
     private String callsMinAbroad;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "service_id", referencedColumnName = "service_id")
+    private Set<UserServiceCalls> userServiceCalls;
 
     public Integer getServiceId() {
         return serviceId;
@@ -102,5 +108,13 @@ public class ServiceCalls {
                 ", validity=" + validity +
                 ", callsMinAbroad='" + callsMinAbroad + '\'' +
                 '}';
+    }
+
+    public Set<UserServiceCalls> getUserServiceCalls() {
+        return userServiceCalls;
+    }
+
+    public void setUserServiceCalls(Set<UserServiceCalls> userServiceCalls) {
+        this.userServiceCalls = userServiceCalls;
     }
 }

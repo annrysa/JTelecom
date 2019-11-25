@@ -15,7 +15,7 @@ import com.jtelecom.repositories.addsOn.UserServiceRoamingRepository;
 import com.jtelecom.repositories.history.OrderHistoryRepository;
 import com.jtelecom.services.AddsOnAllService;
 import com.jtelecom.services.UserAddsOnService;
-import com.jtelecom.ui.AddsOnUiModel;
+import com.jtelecom.ui.AddsOnType;
 import com.jtelecom.ui.OrderAction;
 import com.jtelecom.ui.OrderType;
 import com.jtelecom.utils.DateConstructorUtil;
@@ -61,38 +61,39 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
     }
 
     @Override
-    public UserServices saveServiceByType(AddsOnUiModel addsOnUiModel, Integer userId) throws UserFriendlyExeption {
-        switch (addsOnUiModel.getAddsOnType()) {
-            case CALLS:
-                UserServiceCalls userServiceCalls = new UserServiceCalls(addsOnUiModel.getServiceId(), userId);
-                UserServices saveCalls = userServiceCallsRepository.save(userServiceCalls);
-                UserServiceCalls resultCalls = userServiceCallsRepository
-                        .findUserServiceCallsByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-                if (resultCalls != null) {
-                    addAddsOnRecordByType(addsOnUiModel, OrderAction.ACTIVATED, userId);
-                }
-                return saveCalls;
-            case INTERNET:
-                UserServiceInternet userServiceInternet = new UserServiceInternet(addsOnUiModel.getServiceId(), userId);
-                UserServiceInternet saveInternet = userServiceInternetRepository.save(userServiceInternet);
-                UserServiceInternet resultInternet = userServiceInternetRepository
-                        .findByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-                if (resultInternet != null) {
-                    addAddsOnRecordByType(addsOnUiModel, OrderAction.ACTIVATED, userId);
-                }
-                return saveInternet;
-            case ROAMING:
-                UserServiceRoaming userServiceRoaming = new UserServiceRoaming(addsOnUiModel.getServiceId(), userId);
-                UserServiceRoaming saveRoaming = userServiceRoamingRepository.save(userServiceRoaming);
-                UserServiceRoaming resultRoaming = userServiceRoamingRepository
-                        .findByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-                if (resultRoaming != null) {
-                    addAddsOnRecordByType(addsOnUiModel, OrderAction.ACTIVATED, userId);
-                }
-                return saveRoaming;
-            default:
-                throw new UserFriendlyExeption("Service type not existing");
+    public UserServiceInternet saveServiceInternet(Integer serviceId, Integer userId) throws UserFriendlyExeption {
+        UserServiceInternet userServiceInternet = new UserServiceInternet(serviceId, userId);
+        UserServiceInternet saveInternet = userServiceInternetRepository.save(userServiceInternet);
+        UserServiceInternet resultInternet = userServiceInternetRepository
+                .findByServiceIdAndUserId(serviceId, userId);
+        if (resultInternet != null) {
+            addAddsOnRecordByType(AddsOnType.INTERNET, serviceId, OrderAction.ACTIVATED, userId);
         }
+        return saveInternet;
+    }
+
+    @Override
+    public UserServiceRoaming saveServiceRoaming(Integer serviceId, Integer userId) throws UserFriendlyExeption {
+        UserServiceRoaming userServiceRoaming = new UserServiceRoaming(serviceId, userId);
+        UserServiceRoaming saveRoaming = userServiceRoamingRepository.save(userServiceRoaming);
+        UserServiceRoaming resultRoaming = userServiceRoamingRepository
+                .findByServiceIdAndUserId(serviceId, userId);
+        if (resultRoaming != null) {
+            addAddsOnRecordByType(AddsOnType.ROAMING, serviceId, OrderAction.ACTIVATED, userId);
+        }
+        return saveRoaming;
+    }
+
+    @Override
+    public UserServiceCalls saveServiceCalls(Integer serviceId, Integer userId) throws UserFriendlyExeption {
+        UserServiceCalls userServiceCalls = new UserServiceCalls(serviceId, userId);
+        UserServiceCalls saveCalls = userServiceCallsRepository.save(userServiceCalls);
+        UserServiceCalls resultCalls = userServiceCallsRepository
+                .findUserServiceCallsByServiceIdAndUserId(serviceId, userId);
+        if (resultCalls != null) {
+            addAddsOnRecordByType(AddsOnType.CALLS, serviceId, OrderAction.ACTIVATED, userId);
+        }
+        return saveCalls;
     }
 
     @Override
@@ -111,47 +112,68 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
     }
 
     @Override
-    public void deleteServiceByType(AddsOnUiModel addsOnUiModel, Integer userId) throws UserFriendlyExeption {
-        switch (addsOnUiModel.getAddsOnType()) {
-            case CALLS:
-                UserServiceCalls userServiceCalls = new UserServiceCalls(addsOnUiModel.getServiceId(), userId);
-                userServiceCallsRepository.delete(userServiceCalls);
-                UserServiceCalls resultCalls = userServiceCallsRepository
-                        .findUserServiceCallsByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-                if (resultCalls == null) {
-                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
-                }
-            case INTERNET:
-                UserServiceInternet userServiceInternet = new UserServiceInternet(addsOnUiModel.getServiceId(), userId);
-                userServiceInternetRepository.delete(userServiceInternet);
-                UserServiceInternet resultInternet = userServiceInternetRepository
-                        .findByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-                if (resultInternet == null) {
-                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
-                }
-            case ROAMING:
-                UserServiceRoaming userServiceRoaming = new UserServiceRoaming(addsOnUiModel.getServiceId(), userId);
-                userServiceRoamingRepository.delete(userServiceRoaming);
-                UserServiceRoaming resultRoaming = userServiceRoamingRepository
-                        .findByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-                if (resultRoaming == null) {
-                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
-                }
-            default:
-                throw new UserFriendlyExeption("Service type not existing");
+    public void deleteServiceInternet(Integer serviceId, Integer userId) throws UserFriendlyExeption {
+
+    }
+
+    @Override
+    public void deleteServiceRoaming(Integer serviceId, Integer userId) throws UserFriendlyExeption {
+
+    }
+
+    @Override
+    public void deleteServiceCalls(Integer serviceId, Integer userId) throws UserFriendlyExeption {
+        UserServiceCalls userServiceCalls = new UserServiceCalls(serviceId, userId);
+        userServiceCallsRepository.delete(userServiceCalls);
+        UserServiceCalls resultCalls = userServiceCallsRepository
+                .findUserServiceCallsByServiceIdAndUserId(serviceId, userId);
+        if (resultCalls == null) {
+            addAddsOnRecordByType(AddsOnType.CALLS, serviceId, OrderAction.DEACTIVATED, userId);
         }
     }
 
-    private void addAddsOnRecordByType(AddsOnUiModel addsOnUiModel, OrderAction orderAction, Integer userId) throws UserFriendlyExeption {
-        switch (addsOnUiModel.getAddsOnType()) {
+//    @Override
+//    public void deleteServiceByType(AddsOnUiModel addsOnUiModel, Integer userId) throws UserFriendlyExeption {
+//        switch (addsOnUiModel.getAddsOnType()) {
+//            case CALLS:
+//                UserServiceCalls userServiceCalls = new UserServiceCalls(addsOnUiModel.getServiceId(), userId);
+//                userServiceCallsRepository.delete(userServiceCalls);
+//                UserServiceCalls resultCalls = userServiceCallsRepository
+//                        .findUserServiceCallsByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
+//                if (resultCalls == null) {
+//                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
+//                }
+//            case INTERNET:
+//                UserServiceInternet userServiceInternet = new UserServiceInternet(addsOnUiModel.getServiceId(), userId);
+//                userServiceInternetRepository.delete(userServiceInternet);
+//                UserServiceInternet resultInternet = userServiceInternetRepository
+//                        .findByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
+//                if (resultInternet == null) {
+//                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
+//                }
+//            case ROAMING:
+//                UserServiceRoaming userServiceRoaming = new UserServiceRoaming(addsOnUiModel.getServiceId(), userId);
+//                userServiceRoamingRepository.delete(userServiceRoaming);
+//                UserServiceRoaming resultRoaming = userServiceRoamingRepository
+//                        .findByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
+//                if (resultRoaming == null) {
+//                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
+//                }
+//            default:
+//                throw new UserFriendlyExeption("Service type not existing");
+//        }
+//    }
+
+    private void addAddsOnRecordByType(AddsOnType addsOnType, Integer serviceId, OrderAction orderAction, Integer userId) throws UserFriendlyExeption {
+        switch (addsOnType) {
             case CALLS:
-                ServiceCalls serviceCallsByServiceId = addsOnAllService.findServiceCallsByServiceId(addsOnUiModel.getServiceId());
+                ServiceCalls serviceCallsByServiceId = addsOnAllService.findServiceCallsByServiceId(serviceId, userId);
                 addAddsOnRecord(orderAction, serviceCallsByServiceId.getName(), userId);
             case INTERNET:
-                ServiceInternet serviceInternetByServiceId = addsOnAllService.findServiceInternetByServiceId(addsOnUiModel.getServiceId());
+                ServiceInternet serviceInternetByServiceId = addsOnAllService.findServiceInternetByServiceId(serviceId, userId);
                 addAddsOnRecord(orderAction, serviceInternetByServiceId.getName(), userId);
             case ROAMING:
-                ServiceRoaming serviceRoamingByServiceId = addsOnAllService.findServiceRoamingByServiceId(addsOnUiModel.getServiceId());
+                ServiceRoaming serviceRoamingByServiceId = addsOnAllService.findServiceRoamingByServiceId(serviceId, userId);
                 addAddsOnRecord(orderAction, serviceRoamingByServiceId.getName(), userId);
             default:
                 throw new UserFriendlyExeption("Service type not existing");

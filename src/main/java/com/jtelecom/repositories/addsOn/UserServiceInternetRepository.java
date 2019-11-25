@@ -12,5 +12,7 @@ public interface UserServiceInternetRepository extends CrudRepository<UserServic
 
     List<UserServiceInternet> findAllByUserId(Integer userId);
 
+    UserServiceInternet findByServiceIdAndUserIdAndIsActive(Integer serviceId, Integer userId, Integer isActive);
+
     UserServiceInternet findByUserId(Integer userId);
 }

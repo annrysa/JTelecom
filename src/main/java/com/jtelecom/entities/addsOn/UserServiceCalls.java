@@ -20,6 +20,9 @@ public class UserServiceCalls extends UserServices {
     @Column(name = "user_id")
     private Integer userId;
 
+    @Column(name = "is_active")
+    private Integer isActive;
+
     public UserServiceCalls() {
         super();
     }
@@ -27,6 +30,12 @@ public class UserServiceCalls extends UserServices {
     public UserServiceCalls(int serviceId, int userId) {
         this.serviceId = serviceId;
         this.userId = userId;
+    }
+
+    public UserServiceCalls(Integer serviceId, Integer userId, Integer isActive) {
+        this.serviceId = serviceId;
+        this.userId = userId;
+        this.isActive = isActive;
     }
 
     public Integer getServiceId() {
@@ -51,5 +60,13 @@ public class UserServiceCalls extends UserServices {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 }

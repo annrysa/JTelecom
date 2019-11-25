@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Internet Add On</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <h2>Internet Add On Details</h2>
+    <div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${service.name}">Name</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Description:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${service.description}">Name</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">What you get:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${service.internet}">What you get:</p>
+                </div>
+            </div>
+            <div th:if="${service.internetSharing == 1}">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="'Support Internet sharing'">Support Internet sharing</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Price:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${service.price}">Price</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Activation cost:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${service.activationCost}">Activation cost</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Validity:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${service.validity}">Validity</p>
+                    </div>
+                </div>
+                <div th:if="${not #lists.isEmpty(service.userServiceInternets)}">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Status:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="'Activated'">
+                                Amount</p>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${#lists.isEmpty(service.userServiceInternets)}">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Activate:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">
+                                <a class="btn btn-lg btn-success"
+                                   th:href="${'/user/activate-service-internet/' + service.serviceId}">Activate</a>
+                            </p></div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
