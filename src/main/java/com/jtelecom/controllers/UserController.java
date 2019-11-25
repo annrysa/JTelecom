@@ -79,7 +79,7 @@ public class UserController {
         Tariff tariffInfo = tariffService.findTariffById(userTariff.getTariffId(), authorizedUserId);
         List<UserServices> servicesInfo = userAddsOnService.findServicesByUserId(authorizedUserId);
         UserHomeInternet homeInternetInfo = homeInternetService.findUserHomeInternetByUserId(authorizedUserId);
-        HomeInternet homeInternetById = homeInternetService.findHomeInternetById(homeInternetInfo.getHomeInternetId());
+        HomeInternet homeInternetById = homeInternetService.findHomeInternetById(homeInternetInfo.getHomeInternetId(), managerUtil.getAuthorizedUserId());
         loyaltyService.updateLoyaltyStatus();
         Iterable<UserLoyalty> loyaltyInfo = loyaltyService.findLoyaltyByUserId(authorizedUserId);
         List<Integer> loyaltyIds = new ArrayList<>();

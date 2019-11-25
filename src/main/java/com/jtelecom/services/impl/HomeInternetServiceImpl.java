@@ -14,6 +14,9 @@ import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class HomeInternetServiceImpl implements HomeInternetService {
 
@@ -37,8 +40,14 @@ public class HomeInternetServiceImpl implements HomeInternetService {
     }
 
     @Override
-    public HomeInternet findHomeInternetById(Integer id) {
-        return homeInternetRepository.findByHomeInternetId(id);
+    public HomeInternet findHomeInternetById(Integer id, Integer userId) {
+        HomeInternet hm = homeInternetRepository.findByHomeInternetId(id);
+        UserHomeInternet userHomeInternet = userHomeInternetRepository
+                .findByHomeInternetIdAndUserIdAndIsActive(hm.getHomeInternetId(), userId, 1);
+        Set<UserHomeInternet> uhm = new HashSet<>();
+        uhm.add(userHomeInternet);
+        hm.setUserHomeInternet(userHomeInternet == null ? null : uhm);
+        return hm;
     }
 
     @Override
@@ -52,8 +61,16 @@ public class HomeInternetServiceImpl implements HomeInternetService {
     }
 
     @Override
-    public Iterable<HomeInternet> findAll() {
-        return homeInternetRepository.findAll();
+    public Iterable<HomeInternet> findAll(Integer userId) {
+        Iterable<HomeInternet> all = homeInternetRepository.findAll();
+        for (HomeInternet hm : all) {
+            UserHomeInternet userHomeInternet = userHomeInternetRepository
+                    .findByHomeInternetIdAndUserIdAndIsActive(hm.getHomeInternetId(), userId, 1);
+            Set<UserHomeInternet> uhm = new HashSet<>();
+            uhm.add(userHomeInternet);
+            hm.setUserHomeInternet(userHomeInternet == null ? null : uhm);
+        }
+        return all;
     }
 
     @Override
@@ -90,7 +107,7 @@ public class HomeInternetServiceImpl implements HomeInternetService {
     }
 
     private void addHomeInternetRecord(OrderAction orderAction, Integer userId, Integer internetId) {
-        HomeInternet homeInternetById = findHomeInternetById(internetId);
+        HomeInternet homeInternetById = findHomeInternetById(internetId, userId);
         String details = OrderRecordUtil.setOrderAction(orderAction, OrderType.HOME_INTERNET, homeInternetById.getName());
         OrderHistory orderHistory = new OrderHistory(userId, details, DateConstructorUtil.getOrderDate());
         orderHistoryRepository.save(orderHistory);

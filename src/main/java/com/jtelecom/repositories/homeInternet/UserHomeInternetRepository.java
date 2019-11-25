@@ -7,5 +7,7 @@ public interface UserHomeInternetRepository extends CrudRepository<UserHomeInter
 
     UserHomeInternet findByHomeInternetIdAndUserId(Integer homeInternetId, Integer userId);
 
+    UserHomeInternet findByHomeInternetIdAndUserIdAndIsActive(Integer homeInternetId, Integer userId, Integer isActive);
+
     UserHomeInternet findByUserId(Integer userId);
 }

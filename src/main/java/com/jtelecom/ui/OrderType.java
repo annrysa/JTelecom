@@ -1,7 +1,7 @@
 package com.jtelecom.ui;
 
 public enum OrderType {
-    HOME_INTERNET("home Internet"),
+    HOME_INTERNET("home Internet tariff"),
     LOYALTY("bonus"),
     TARIFF("tariff"),
     SERVICE("service");

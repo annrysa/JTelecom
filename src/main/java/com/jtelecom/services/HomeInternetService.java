@@ -4,13 +4,13 @@ import com.jtelecom.entities.homeInternet.HomeInternet;
 import com.jtelecom.entities.homeInternet.UserHomeInternet;
 
 public interface HomeInternetService {
-    HomeInternet findHomeInternetById(Integer id);
+    HomeInternet findHomeInternetById(Integer id, Integer userId);
 
     UserHomeInternet findByInternetIdAndUserId(Integer id, Integer userId);
 
     UserHomeInternet findUserHomeInternetByUserId(Integer userId);
 
-    Iterable<HomeInternet> findAll();
+    Iterable<HomeInternet> findAll(Integer userId);
 
     UserHomeInternet save(Integer homeInternetId, Integer userId, String appointment, Integer isActive);
 
