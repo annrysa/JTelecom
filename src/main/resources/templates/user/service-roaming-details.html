@@ -9,61 +9,66 @@
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Roaming Add On Details</h2>
+    <h2>Roaming Add On Details
+        <a class="btn btn-lg btn-success pull-right"
+           th:href="${'/user/services'}">Back</a></h2>
+    <h4 class="text-warning text-center" th:utext="${message}"></h4>
     <div>
         <form class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Name:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${service.name}">Name</p>
+                    <p class="form-control-static" th:text="${serviceRoaming.name}">Name</p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Description:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${service.description}">Name</p>
+                    <p class="form-control-static" th:text="${serviceRoaming.description}">Name</p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">What you get:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${service.internet}">What you get:</p>
+                    <p class="form-control-static" th:text="${serviceRoaming.internet}">What you get:</p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Income calls abroad:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${service.callsMinAbroadIn}">Income calls abroad</p>
+                    <p class="form-control-static" th:text="${serviceRoaming.callsMinAbroadIn}">Income calls abroad</p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Outcome calls abroad:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${service.callsMinAbroadOut}">Outcome calls abroad</p>
+                    <p class="form-control-static" th:text="${serviceRoaming.callsMinAbroadOut}">Outcome calls
+                        abroad</p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">SMS:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${service.sms}">SMS</p>
+                    <p class="form-control-static" th:text="${serviceRoaming.sms}">SMS</p>
                 </div>
             </div>
-            <div th:if="${not #lists.isEmpty(service.userServiceRoamings)}">
+            <div th:if="${not #lists.isEmpty(serviceRoaming.userServiceRoamings)}">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Status:</label>
                     <div class="col-sm-10">
-                        <p class="form-control-static" th:text="'Activated'">
-                            Amount</p>
-                    </div>
+                        <p class="form-control-static">
+                            <a class="btn btn-lg btn-warning"
+                               th:href="${'/user/deactivate-service-roaming/' + serviceRoaming.serviceId}">Disconnect</a>
+                        </p></div>
                 </div>
             </div>
-            <div th:if="${#lists.isEmpty(service.userServiceRoamings)}">
+            <div th:if="${#lists.isEmpty(serviceRoaming.userServiceRoamings)}">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Activate:</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
                             <a class="btn btn-lg btn-success"
-                               th:href="${'/user/activate-service-roaming/' + service.serviceId}">Activate</a>
+                               th:href="${'/user/activate-service-roaming/' + serviceRoaming.serviceId}">Activate</a>
                         </p></div>
                 </div>
             </div>

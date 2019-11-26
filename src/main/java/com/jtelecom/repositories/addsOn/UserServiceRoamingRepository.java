@@ -12,7 +12,5 @@ public interface UserServiceRoamingRepository extends CrudRepository<UserService
 
     List<UserServiceRoaming> findAllByUserId(Integer userId);
 
-    UserServiceRoaming findByServiceIdAndUserIdAndIsActive(Integer serviceId, Integer userId, Integer isActive);
-
     UserServiceRoaming findByUserId(Integer userId);
 }

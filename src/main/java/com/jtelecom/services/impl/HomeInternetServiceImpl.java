@@ -14,6 +14,7 @@ import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -78,6 +79,12 @@ public class HomeInternetServiceImpl implements HomeInternetService {
         UserHomeInternet userHomeInternet = new UserHomeInternet(homeInternetId, userId, appointment, isActive);
         UserHomeInternet result = save(userHomeInternet);
         return result;
+    }
+
+    @Override
+    @Transactional
+    public void completeAppointment(Integer homeInternetId, Integer userId) {
+        userHomeInternetRepository.completeAppointment(userId, homeInternetId);
     }
 
     @Override

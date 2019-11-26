@@ -10,4 +10,6 @@ public interface UserService {
     User saveUser(User user);
 
     void updateLoyalty(Integer loyalty, Integer userId);
+
+    void updateBalance(Integer balance, Integer userId);
 }

@@ -12,7 +12,5 @@ public interface UserServiceCallsRepository extends CrudRepository<UserServiceCa
 
     List<UserServiceCalls> findAllByUserId(Integer userId);
 
-    UserServiceCalls findByServiceIdAndUserIdAndIsActive(Integer serviceId, Integer userId, Integer isActive);
-
     UserServiceCalls findUserServiceCallsByUserId(Integer userId);
 }

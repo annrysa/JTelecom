@@ -43,7 +43,15 @@ public class ManagerUtil {
         return getAuthorizedUser().getBalance() - price;
     }
 
+    public Integer fillBalance(Integer sum) {
+        return getAuthorizedUser().getBalance() + sum;
+    }
+
     public Integer setLoyalty(Integer loyalty) {
         return getAuthorizedUser().getLoyalty() - loyalty;
+    }
+
+    public Integer fillLoyalty(Integer price) {
+        return getAuthorizedUser().getLoyalty() + (price/10);
     }
 }

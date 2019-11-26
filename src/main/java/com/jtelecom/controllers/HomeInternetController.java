@@ -3,6 +3,7 @@ package com.jtelecom.controllers;
 import com.jtelecom.entities.homeInternet.HomeInternet;
 import com.jtelecom.entities.homeInternet.UserHomeInternet;
 import com.jtelecom.services.HomeInternetService;
+import com.jtelecom.services.UserService;
 import com.jtelecom.utils.ManagerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,12 @@ public class HomeInternetController {
 
     private HomeInternetService homeInternetService;
     private ManagerUtil managerUtil;
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired
     public void setManagerUtil(ManagerUtil managerUtil) {
@@ -52,6 +59,14 @@ public class HomeInternetController {
         HomeInternet homeInternetById = homeInternetService
                 .findHomeInternetById(homeInternetId, managerUtil.getAuthorizedUserId());
         modelAndView.addObject("homeInternetInfo", homeInternetById);
+        if (homeInternetById.getPrice() > managerUtil.getAuthorizedUserBalance()) {
+            modelAndView.addObject("service", homeInternetById);
+            System.out.println("Returning home internet : " + homeInternetById);
+            modelAndView.addObject("message", "Please replenish your balance!");
+            System.out.println("message: Please replenish your balance!");
+            modelAndView.setViewName("user/home-internet-details");
+            return modelAndView;
+        }
         modelAndView.addObject("appointmentUi", new UserHomeInternet());
         modelAndView.setViewName("user/appointment-home-internet");
 
@@ -66,6 +81,7 @@ public class HomeInternetController {
         UserHomeInternet userHomeInternetInfo = homeInternetService.save(userHomeInternet);
         HomeInternet homeInternetDetailsInfo = homeInternetService
                 .findHomeInternetById(userHomeInternetInfo.getHomeInternetId(), managerUtil.getAuthorizedUserId());
+        userService.updateLoyalty(managerUtil.fillLoyalty(homeInternetDetailsInfo.getPrice()), managerUtil.getAuthorizedUserId());
         modelAndView.addObject("message", "Home Internet has been activated");
         modelAndView.addObject("homeInternetInfo", homeInternetDetailsInfo);
         modelAndView.setViewName("user/home-internet-details");

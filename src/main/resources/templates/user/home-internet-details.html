@@ -9,8 +9,10 @@
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Home Internet Tariff Details</h2>
-
+    <h2>Home Internet Tariff Details
+        <a class="btn btn-lg btn-success pull-right"
+           th:href="${'/user/home-internet'}">Back</a></h2>
+    <h4 class="text-warning text-center" th:utext="${message}"></h4>
     <div>
         <input type="hidden" th:name="homeInternetId" th:value="${homeInternetInfo.homeInternetId}"/>
 
@@ -60,7 +62,8 @@
                         <p class="form-control-static">
                             <a class="btn btn-lg btn-success"
                                th:href="${'/user/appointment-home-internet/' + homeInternetInfo.homeInternetId}">Activate</a>
-                        </p></div>
+                        </p>
+                    </div>
                 </div>
             </div>
         </form>

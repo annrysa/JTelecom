@@ -20,22 +20,13 @@ public class UserServiceInternet extends UserServices {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "is_active")
-    private Integer isActive;
-
     public UserServiceInternet() {
         super();
     }
 
-    public UserServiceInternet(int serviceId, int userId) {
+    public UserServiceInternet(Integer serviceId, Integer userId) {
         this.serviceId = serviceId;
         this.userId = userId;
-    }
-
-    public UserServiceInternet(Integer serviceId, Integer userId, Integer isActive) {
-        this.serviceId = serviceId;
-        this.userId = userId;
-        this.isActive = isActive;
     }
 
     public Integer getId() {
@@ -60,13 +51,5 @@ public class UserServiceInternet extends UserServices {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public Integer getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Integer isActive) {
-        this.isActive = isActive;
     }
 }

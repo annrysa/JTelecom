@@ -64,9 +64,7 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
     public UserServiceInternet saveServiceInternet(Integer serviceId, Integer userId) throws UserFriendlyExeption {
         UserServiceInternet userServiceInternet = new UserServiceInternet(serviceId, userId);
         UserServiceInternet saveInternet = userServiceInternetRepository.save(userServiceInternet);
-        UserServiceInternet resultInternet = userServiceInternetRepository
-                .findByServiceIdAndUserId(serviceId, userId);
-        if (resultInternet != null) {
+        if (saveInternet != null) {
             addAddsOnRecordByType(AddsOnType.INTERNET, serviceId, OrderAction.ACTIVATED, userId);
         }
         return saveInternet;
@@ -76,9 +74,7 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
     public UserServiceRoaming saveServiceRoaming(Integer serviceId, Integer userId) throws UserFriendlyExeption {
         UserServiceRoaming userServiceRoaming = new UserServiceRoaming(serviceId, userId);
         UserServiceRoaming saveRoaming = userServiceRoamingRepository.save(userServiceRoaming);
-        UserServiceRoaming resultRoaming = userServiceRoamingRepository
-                .findByServiceIdAndUserId(serviceId, userId);
-        if (resultRoaming != null) {
+        if (saveRoaming != null) {
             addAddsOnRecordByType(AddsOnType.ROAMING, serviceId, OrderAction.ACTIVATED, userId);
         }
         return saveRoaming;
@@ -88,9 +84,7 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
     public UserServiceCalls saveServiceCalls(Integer serviceId, Integer userId) throws UserFriendlyExeption {
         UserServiceCalls userServiceCalls = new UserServiceCalls(serviceId, userId);
         UserServiceCalls saveCalls = userServiceCallsRepository.save(userServiceCalls);
-        UserServiceCalls resultCalls = userServiceCallsRepository
-                .findUserServiceCallsByServiceIdAndUserId(serviceId, userId);
-        if (resultCalls != null) {
+        if (saveCalls != null) {
             addAddsOnRecordByType(AddsOnType.CALLS, serviceId, OrderAction.ACTIVATED, userId);
         }
         return saveCalls;
@@ -99,7 +93,6 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
     @Override
     public List<UserServices> findServicesByUserId(Integer userId) {
         List<UserServices> result = new ArrayList<>();
-        //todo : replace with type
         List<UserServiceCalls> calls = userServiceCallsRepository.findAllByUserId(userId);
         List<UserServiceInternet> internets = userServiceInternetRepository.findAllByUserId(userId);
         List<UserServiceRoaming> roamings = userServiceRoamingRepository.findAllByUserId(userId);
@@ -113,72 +106,44 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
 
     @Override
     public void deleteServiceInternet(Integer serviceId, Integer userId) throws UserFriendlyExeption {
-
+        UserServiceInternet userServiceInternet = userServiceInternetRepository
+                .findByServiceIdAndUserId(serviceId, userId);
+        userServiceInternetRepository.delete(userServiceInternet);
+        addAddsOnRecordByType(AddsOnType.INTERNET, serviceId, OrderAction.DEACTIVATED, userId);
     }
 
     @Override
     public void deleteServiceRoaming(Integer serviceId, Integer userId) throws UserFriendlyExeption {
-
+        UserServiceRoaming userServiceRoaming = userServiceRoamingRepository
+                .findByServiceIdAndUserId(serviceId, userId);
+        userServiceRoamingRepository.delete(userServiceRoaming);
     }
 
     @Override
     public void deleteServiceCalls(Integer serviceId, Integer userId) throws UserFriendlyExeption {
-        UserServiceCalls userServiceCalls = new UserServiceCalls(serviceId, userId);
-        userServiceCallsRepository.delete(userServiceCalls);
-        UserServiceCalls resultCalls = userServiceCallsRepository
+        UserServiceCalls userServiceCalls = userServiceCallsRepository
                 .findUserServiceCallsByServiceIdAndUserId(serviceId, userId);
-        if (resultCalls == null) {
-            addAddsOnRecordByType(AddsOnType.CALLS, serviceId, OrderAction.DEACTIVATED, userId);
-        }
+        userServiceCallsRepository.delete(userServiceCalls);
+        addAddsOnRecordByType(AddsOnType.CALLS, serviceId, OrderAction.DEACTIVATED, userId);
     }
-
-//    @Override
-//    public void deleteServiceByType(AddsOnUiModel addsOnUiModel, Integer userId) throws UserFriendlyExeption {
-//        switch (addsOnUiModel.getAddsOnType()) {
-//            case CALLS:
-//                UserServiceCalls userServiceCalls = new UserServiceCalls(addsOnUiModel.getServiceId(), userId);
-//                userServiceCallsRepository.delete(userServiceCalls);
-//                UserServiceCalls resultCalls = userServiceCallsRepository
-//                        .findUserServiceCallsByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-//                if (resultCalls == null) {
-//                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
-//                }
-//            case INTERNET:
-//                UserServiceInternet userServiceInternet = new UserServiceInternet(addsOnUiModel.getServiceId(), userId);
-//                userServiceInternetRepository.delete(userServiceInternet);
-//                UserServiceInternet resultInternet = userServiceInternetRepository
-//                        .findByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-//                if (resultInternet == null) {
-//                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
-//                }
-//            case ROAMING:
-//                UserServiceRoaming userServiceRoaming = new UserServiceRoaming(addsOnUiModel.getServiceId(), userId);
-//                userServiceRoamingRepository.delete(userServiceRoaming);
-//                UserServiceRoaming resultRoaming = userServiceRoamingRepository
-//                        .findByServiceIdAndUserId(addsOnUiModel.getServiceId(), userId);
-//                if (resultRoaming == null) {
-//                    addAddsOnRecordByType(addsOnUiModel, OrderAction.DEACTIVATED, userId);
-//                }
-//            default:
-//                throw new UserFriendlyExeption("Service type not existing");
-//        }
-//    }
 
     private void addAddsOnRecordByType(AddsOnType addsOnType, Integer serviceId, OrderAction orderAction, Integer userId) throws UserFriendlyExeption {
         switch (addsOnType) {
             case CALLS:
                 ServiceCalls serviceCallsByServiceId = addsOnAllService.findServiceCallsByServiceId(serviceId, userId);
                 addAddsOnRecord(orderAction, serviceCallsByServiceId.getName(), userId);
+                return;
             case INTERNET:
                 ServiceInternet serviceInternetByServiceId = addsOnAllService.findServiceInternetByServiceId(serviceId, userId);
                 addAddsOnRecord(orderAction, serviceInternetByServiceId.getName(), userId);
+                return;
             case ROAMING:
                 ServiceRoaming serviceRoamingByServiceId = addsOnAllService.findServiceRoamingByServiceId(serviceId, userId);
                 addAddsOnRecord(orderAction, serviceRoamingByServiceId.getName(), userId);
+                return;
             default:
                 throw new UserFriendlyExeption("Service type not existing");
         }
-
     }
 
     private void addAddsOnRecord(OrderAction orderAction, String name, Integer userId) {

@@ -9,7 +9,9 @@
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Bonus Details</h2>
+    <h2>Bonus Details
+        <a class="btn btn-lg btn-success pull-right"
+           th:href="${'/user/loyalty'}">Back</a></h2>
 
     <div>
         <h4 class="text-warning text-center" th:utext="${message}"></h4>

@@ -1,8 +1,9 @@
 package com.jtelecom.controllers;
 
+import com.jtelecom.converters.UiModelToOrderModelConverter;
 import com.jtelecom.entities.tariff.Tariff;
 import com.jtelecom.entities.tariff.UserTariff;
-import com.jtelecom.services.TariffService;
+import com.jtelecom.services.*;
 import com.jtelecom.utils.ManagerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,12 @@ public class TariffController {
 
     private TariffService tariffService;
     private ManagerUtil managerUtil;
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired
     public void setTariffService(TariffService tariffService) {
@@ -48,7 +55,7 @@ public class TariffController {
     }
 
     @RequestMapping(value = "/activateTariff/{tariffId}")
-    public String activateService(@PathVariable Integer tariffId,
+    public String activateTariff(@PathVariable Integer tariffId,
                                   Model model) {
 
         Tariff tariff = tariffService.findTariffById(tariffId, managerUtil.getAuthorizedUserId());
@@ -63,6 +70,7 @@ public class TariffController {
         UserTariff oldTariff = tariffService.findTariffByUserId(managerUtil.getAuthorizedUserId());
         UserTariff userTariff = tariffService.updateTariffIdByUserId(tariffId, oldTariff, managerUtil.getAuthorizedUserId());
         Tariff tariffCallsById = tariffService.findTariffById(tariffId, managerUtil.getAuthorizedUserId());
+        userService.updateLoyalty(managerUtil.fillLoyalty(tariffCallsById.getPrice()), managerUtil.getAuthorizedUserId());
         model.addAttribute("tariff", tariffCallsById);
         System.out.println("Returning tariff : " + tariffCallsById);
         model.addAttribute("message", "Tariff was activated!");

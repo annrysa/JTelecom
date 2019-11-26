@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
+    User findById(Integer userId);
+
     @Modifying(clearAutomatically = true)
     @Query("UPDATE User u SET u.balance =:balance WHERE u.id =:userId")
     void updateBalance(@Param("userId") Integer userId, @Param("balance") Integer balance);

@@ -34,8 +34,8 @@
             <div th:if="${not #lists.isEmpty(service.userServiceInternets)}">
                 <td>
                     <p class="form-control-static">
-                        <a class="btn btn-lg btn-success"
-                           th:text="Activated">Activated</a>
+                        <a class="btn btn-lg btn-warning"
+                           th:href="${'/user/deactivate-service-internet/' + service.serviceId}">Disconnect</a>
                     </p>
                 </td>
             </div>
@@ -54,20 +54,20 @@
             <td th:text="${call.name}">Name</td>
             <td th:text="${call.description}">Description</td>
             <td th:text="${call.price}">Price</td>
-            <td><a th:href="${'/user/service-roaming/' + call.serviceId}">View</a></td>
+            <td><a th:href="${'/user/service-calls/' + call.serviceId}">View</a></td>
             <div th:if="${#lists.isEmpty(call.userServiceCalls)}">
                 <td>
                     <p class="form-control-static">
                         <a class="btn btn-lg btn-success"
-                           th:href="${'/user/activate-service-roaming/' + call.serviceId}">Activate</a>
+                           th:href="${'/user/activate-service-calls/' + call.serviceId}">Activate</a>
                     </p>
                 </td>
             </div>
             <div th:if="${not #lists.isEmpty(call.userServiceCalls)}">
                 <td>
                     <p class="form-control-static">
-                        <a class="btn btn-lg btn-success"
-                           th:text="Activated">Activated</a>
+                        <a class="btn btn-lg btn-warning"
+                           th:href="${'/user/deactivate-service-calls/' + call.serviceId}">Disconnect</a>
                     </p>
                 </td>
             </div>
@@ -86,20 +86,20 @@
             <td th:text="${roaming.name}">Name</td>
             <td th:text="${roaming.description}">Description</td>
             <td th:text="${roaming.price}">Price</td>
-            <td><a th:href="${'/user/service-calls/' + roaming.serviceId}">View</a></td>
-            <div th:if="${#lists.isEmpty(roaming.userServiceCalls)}">
+            <td><a th:href="${'/user/service-roaming/' + roaming.serviceId}">View</a></td>
+            <div th:if="${#lists.isEmpty(roaming.userServiceRoamings)}">
                 <td>
                     <p class="form-control-static">
                         <a class="btn btn-lg btn-success"
-                           th:href="${'/user/activate-service-calls/' + roaming.serviceId}">Activate</a>
+                           th:href="${'/user/activate-service-roaming/' + roaming.serviceId}">Activate</a>
                     </p>
                 </td>
             </div>
-            <div th:if="${not #lists.isEmpty(roaming.userServiceCalls)}">
+            <div th:if="${not #lists.isEmpty(roaming.userServiceRoamings)}">
                 <td>
                     <p class="form-control-static">
-                        <a class="btn btn-lg btn-success"
-                           th:text="Activated">Activated</a>
+                        <a class="btn btn-lg btn-warning"
+                           th:href="${'/user/deactivate-service-roaming/' + roaming.serviceId}">Disconnect</a>
                     </p>
                 </td>
             </div>

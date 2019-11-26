@@ -28,7 +28,7 @@ ALTER TABLE user_role ADD CONSTRAINT role_id_fk FOREIGN KEY (role_id) REFERENCES
 ALTER TABLE user_role ADD CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES user (user_id);
 
 INSERT INTO role (role) VALUES ('USER');
-INSERT INTO user VALUES(1,'Ann','Rysa','annrysa@gmail.com','099999999',150,'$2a$10$VamRAHnSAjY7ZdRW6zCNzOI6yu4dqOOHCISnjVnDTDz0AX6foflse',1, 500);
+INSERT INTO user VALUES(1,'Ann','Rysa','annrysa@gmail.com','099999999',150,'$2a$10$VamRAHnSAjY7ZdRW6zCNzOI6yu4dqOOHCISnjVnDTDz0AX6foflse',1, 600);
 INSERT INTO user VALUES(2,'Peter','Moss','peter@gmail.com','098888888',0,'$2a$10$zUiR50T9nt8Q/1MVFf0n6unhv6J8srLEpYJ1uzOYYJ6hYEm4H9Cpa',1, 1500);
 
 INSERT INTO user_role
@@ -129,7 +129,7 @@ CREATE TABLE service_internet
 
  INSERT INTO service_roaming
  VALUES
- (3,'HalfGbyte on the road','Profitable Internet for Your vacation',0,150,'7 days', NULL,'500 MB',NULL,NULL );
+ (3,'HalfGbyte on the road','Profitable Internet for Your vacation',0,150,'7 days','-','500 MB','-','-' );
 
  INSERT INTO service_internet
  VALUES
@@ -247,7 +247,7 @@ VALUES
 
 INSERT INTO user_home_internet
 VALUES
-(1,3,1,'19 November 2019',0);
+(1,3,1,'19 November 2019 12:50',0);
 
  INSERT INTO order_history
  VALUES

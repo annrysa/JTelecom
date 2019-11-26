@@ -11,17 +11,14 @@
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
     <h2>Order history</h2>
     <div class="container">
-
-        <form th:action="@{/logout}" method="get">
-
-        </form>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
                     <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/user/home-internet}">Home Internet</a></li>
-                        <li><a href="#" th:href="@{/user/loyalty}">Bonuses</a></li>
+                        <li><a href="#" th:href="@{/user/order-history}">History</a></li>
+                        <li><a href="#" th:href="@{/user/replenish-balance}">Replenish Balance</a></li>
+                        <li><a href="#" th:href="@{/user/complete-appointment}">Complete Appointment</a></li>
                     </ul>
                 </div>
             </div>

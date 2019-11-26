@@ -64,7 +64,7 @@ public class AddsOnAllServiceImpl implements AddsOnAllService {
     @Override
     public ServiceCalls findServiceCallsByServiceId(Integer serviceId, Integer userId) {
         ServiceCalls sc = serviceCallsRepository.findServiceCallsByServiceId(serviceId);
-        UserServiceCalls usc = userServiceCallsRepository.findByServiceIdAndUserIdAndIsActive(sc.getServiceId(), userId, 1);
+        UserServiceCalls usc = userServiceCallsRepository.findUserServiceCallsByServiceIdAndUserId(sc.getServiceId(), userId);
         Set<UserServiceCalls> userServiceCallsSet = new HashSet<>();
         userServiceCallsSet.add(usc);
         sc.setUserServiceCalls(usc == null ? null : userServiceCallsSet);
@@ -74,7 +74,7 @@ public class AddsOnAllServiceImpl implements AddsOnAllService {
     @Override
     public ServiceInternet findServiceInternetByServiceId(Integer serviceId, Integer userId) {
         ServiceInternet si = serviceInternetRepository.findServiceInternetByServiceId(serviceId);
-        UserServiceInternet usi = userServiceInternetRepository.findByServiceIdAndUserIdAndIsActive(si.getServiceId(), userId, 1);
+        UserServiceInternet usi = userServiceInternetRepository.findByServiceIdAndUserId(si.getServiceId(), userId);
         Set<UserServiceInternet> userServiceInternets = new HashSet<>();
         userServiceInternets.add(usi);
         si.setUserServiceInternets(usi == null ? null : userServiceInternets);
@@ -84,7 +84,7 @@ public class AddsOnAllServiceImpl implements AddsOnAllService {
     @Override
     public ServiceRoaming findServiceRoamingByServiceId(Integer serviceId, Integer userId) {
         ServiceRoaming sr = serviceRoamingRepository.findServiceInternetByServiceId(serviceId);
-        UserServiceRoaming usr = userServiceRoamingRepository.findByServiceIdAndUserIdAndIsActive(sr.getServiceId(), userId, 1);
+        UserServiceRoaming usr = userServiceRoamingRepository.findByServiceIdAndUserId(sr.getServiceId(), userId);
         Set<UserServiceRoaming> userServiceInternets = new HashSet<>();
         userServiceInternets.add(usr);
         sr.setUserServiceRoamings(usr == null ? null : userServiceInternets);
@@ -98,7 +98,7 @@ public class AddsOnAllServiceImpl implements AddsOnAllService {
         all.forEach(serviceCalls::add);
 
         for (ServiceCalls sc : serviceCalls) {
-            UserServiceCalls usc = userServiceCallsRepository.findByServiceIdAndUserIdAndIsActive(sc.getServiceId(), userId, 1);
+            UserServiceCalls usc = userServiceCallsRepository.findUserServiceCallsByServiceIdAndUserId(sc.getServiceId(), userId);
             Set<UserServiceCalls> userServiceCallsSet = new HashSet<>();
             userServiceCallsSet.add(usc);
             sc.setUserServiceCalls(usc == null ? null : userServiceCallsSet);
@@ -113,7 +113,7 @@ public class AddsOnAllServiceImpl implements AddsOnAllService {
         all.forEach(serviceInternets::add);
 
         for (ServiceInternet si : serviceInternets) {
-            UserServiceInternet usi = userServiceInternetRepository.findByServiceIdAndUserIdAndIsActive(si.getServiceId(), userId, 1);
+            UserServiceInternet usi = userServiceInternetRepository.findByServiceIdAndUserId(si.getServiceId(), userId);
             Set<UserServiceInternet> userServiceInternets = new HashSet<>();
             userServiceInternets.add(usi);
             si.setUserServiceInternets(usi == null ? null : userServiceInternets);
@@ -128,7 +128,7 @@ public class AddsOnAllServiceImpl implements AddsOnAllService {
         all.forEach(serviceRoamings::add);
 
         for (ServiceRoaming sr : serviceRoamings) {
-            UserServiceRoaming usr = userServiceRoamingRepository.findByServiceIdAndUserIdAndIsActive(sr.getServiceId(), userId, 1);
+            UserServiceRoaming usr = userServiceRoamingRepository.findByServiceIdAndUserId(sr.getServiceId(), userId);
             Set<UserServiceRoaming> userServiceInternets = new HashSet<>();
             userServiceInternets.add(usr);
             sr.setUserServiceRoamings(usr == null ? null : userServiceInternets);

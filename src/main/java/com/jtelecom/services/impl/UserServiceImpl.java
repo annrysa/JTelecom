@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(Integer userId) {
-        return userRepository.findById(new Long(userId)).orElse(null);
+        return userRepository.findById(userId);
     }
 
     @Override
@@ -58,5 +58,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void updateLoyalty(Integer loyalty, Integer userId) {
         userRepository.updateLoyalty(userId, loyalty);
+    }
+
+    @Override
+    @Transactional
+    public void updateBalance(Integer balance, Integer userId) {
+        userRepository.updateBalance(userId, balance);
     }
 }
