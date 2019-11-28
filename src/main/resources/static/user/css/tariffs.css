@@ -5,19 +5,50 @@ body{
 #pricing-table {
     margin: 100px auto;
     text-align: center;
-    width: 892px; /* total computed width = 222 x 3 + 226 */
+    width: 70%;
 }
 
 #pricing-table .plan {
-    font: 12px 'Lucida Sans', 'trebuchet MS', Arial, Helvetica;
+    font: 22px 'Lucida Sans', 'trebuchet MS', Arial, Helvetica;
     text-shadow: 0 1px rgba(255,255,255,.8);
     background: #fff;
     border: 1px solid #ddd;
     color: #333;
-    padding: 20px;
-    width: 220px; /* plan width = 180 + 20 + 20 + 1 + 1 = 222px */
+    width: 500px;
+    height: 600px;
+    margin: 0 150px 50px 90px;
     float: left;
     position: relative;
+    border-radius: 15px !important;
+}
+
+#pricing-table .plan-body {
+    display: flex;
+    height: calc(100% - 72px);
+    flex-direction: column;
+    justify-content: center;
+}
+
+#pricing-table .h2 {
+    font-size: 27px;
+}
+
+#pricing-table .signup {
+    width: 160px;
+    height: 50px;
+    font-size: 16px !important;
+    padding: 16px 20px !important;
+}
+
+#pricing-table .plan-status {
+    font-size: 27px;
+    margin-top: 35px;
+}
+
+#pricing-table .plan-body_header {
+    height: 150px;
+    position: relative;
+    bottom: 30px;
 }
 
 #pricing-table #most-popular {
@@ -36,7 +67,6 @@ body{
 #pricing-table .plan:nth-child(1) {
     -moz-border-radius: 5px 0 0 5px;
     -webkit-border-radius: 5px 0 0 5px;
-    border-radius: 5px 0 0 5px;
 }
 
 #pricing-table .plan:nth-child(4) {
@@ -48,10 +78,10 @@ body{
 /* --------------- */
 
 #pricing-table h3 {
-    font-size: 20px;
+    border-radius: 15px 15px 0 0 !important;
+    font-size: 26px;
     font-weight: normal;
     padding: 20px;
-    margin: -20px -20px 50px -20px;
     background-color: #eee;
     background-image: -moz-linear-gradient(#fff,#eee);
     background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
@@ -79,7 +109,6 @@ body{
 #pricing-table .plan:nth-child(1) h3 {
     -moz-border-radius: 5px 0 0 0;
     -webkit-border-radius: 5px 0 0 0;
-    border-radius: 5px 0 0 0;
 }
 
 #pricing-table .plan:nth-child(4) h3 {
