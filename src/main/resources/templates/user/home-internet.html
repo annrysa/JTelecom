@@ -3,49 +3,57 @@
 <head lang="en">
 
     <title>Home Internet</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/tariffs.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/utilBack.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/mainBack.css}">
 
+    <!--    =====    NECESSARY BLOCK STARTS ! ====//-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/demo.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/header-login-signup.css}">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <!--    =====    NECESSARY BLOCK ENDS ! ====//-->
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <div th:if="${not #lists.isEmpty(homeInternetInfo)}">
-        <h2>Tariff List</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Speed</th>
-                <th>Price</th>
-                <th>Details</th>
-                <th>Status</th>
-            </tr>
-            <tr th:each="homeInternet : ${homeInternetInfo}">
-                <td th:text="${homeInternet.name}">Name</td>
-                <div th:if="${homeInternet.internetUnlimited == 1}">
-                    <td th:text="${homeInternet.internet} + ' (Unlimited)'">Description</td>
-                </div>
-                <div th:if="${homeInternet.internetUnlimited != 1}">
-                    <td th:text="${homeInternet.internet}'">Description</td>
-                </div>
-                <td th:text="${homeInternet.price}">Price</td>
-                <td><a th:href="${'/user/home-internet/' + homeInternet.homeInternetId}">View</a></td>
-                <div th:if="${not #lists.isEmpty(homeInternet.userHomeInternet)}">
-                    <td th:text="'Activated'"></td>
-                </div>
-                <div th:if="${#lists.isEmpty(homeInternet.userHomeInternet)}">
-                    <td>
-                        <p class="form-control-static">
-                            <a class="btn btn-lg btn-success"
-                               th:href="${'/user/appointment-home-internet/' + homeInternet.homeInternetId}">Activate</a>
-                        </p>
-                    </td>
 
-                </div>
-            </tr>
-        </table>
-
+<header class="header-login-signup">
+    <th:block th:include="fragments/header :: header"></th:block>
+</header>
+<div class="limiter">
+    <div class="container-login100">
+        <div id="pricing-table" class="clear">
+            <div th:if="${not #lists.isEmpty(homeInternetInfo)}">
+                <tr th:each="homeInternet : ${homeInternetInfo}">
+                    <div class="plan">
+                        <h3 th:text="${homeInternet.name}"></h3>
+                        <h5><span th:text="${homeInternet.price} + ' UAH'"></span></h5>
+                        <div th:if="${not #lists.isEmpty(homeInternet.userHomeInternet)}">
+                            <div>Activated</div>
+                        </div>
+                        <div th:if="${ #lists.isEmpty(homeInternet.userHomeInternet)}">
+                            <a class="signup"
+                               th:href="${'/user/appointment-home-internet/' + homeInternet.homeInternetId}">Get
+                                started</a>
+                        </div>
+                        <ul>
+                            <div th:if="${homeInternet.internetUnlimited == 1}">
+                                <li th:text="${homeInternet.internet} + ' (Unlimited)'"></li>
+                            </div>
+                            <div th:if="${homeInternet.internetUnlimited != 1}">
+                                <li th:text="${homeInternet.internet}"></li>
+                            </div>
+                        </ul>
+                    </div>
+                </tr>
+            </div>
+        </div>
     </div>
 </div>
-
 </body>
 </html>
