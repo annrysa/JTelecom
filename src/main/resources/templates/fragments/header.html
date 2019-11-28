@@ -2,46 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>JTelecom</title>
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
     <link href="../../static/css/style.css" th:href="@{css/style.css}" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/demo.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/header-login-signup.css}">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-<div class="container">
-    <div th:fragment="header">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
-                    <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/user/tariffs}">Tariffs</a></li>
-                        <li><a href="#" th:href="@{/user/services}">Adds On</a></li>
-                        <li><a href="#" th:href="@{/user/home-internet}">Home Internet</a></li>
-                        <li><a href="#" th:href="@{/user/loyalty}">Bonuses</a></li>
-                    </ul>
-                </div>
-                <form th:action="@{/logout}" method="get">
-                    <button class="btn btn-danger pull-right" name="registration"
-                            type="Submit">Logout
-                    </button>
-                </form>
-            </div>
+
+<header class="header-login-signup">
+
+    <div class="header-limiter">
+
+        <nav>
+            <a href="#" th:href="@{/user/user-info}">Home</a>
+            <a href="#" th:href="@{/user/tariffs}">Tariffs</a>
+            <a href="#" th:href="@{/user/services}">Adds On</a>
+            <a href="#" th:href="@{/user/home-internet}">Home Internet</a>
+            <a href="#" th:href="@{/user/loyalty}">Loyalty</a>
         </nav>
 
-        <div class="jumbotron">
-            <div class="row text-center">
-                <div class="">
-                    <h2>JTelecom</h2>
-                    <h3>Welcome</h3>
-                </div>
-            </div>
-            <div class="row text-center">
-                <img src="../../static/images/back.png" width="200" th:src="@{/images/back.png}"/>
-            </div>
-        </div>
-
+        <ul>
+            <li><a href="#"></a></li>
+            <form th:action="@{/logout}" method="get">
+                <li><a href="#">Sign up</a></li>
+            </form>
+        </ul>
     </div>
-</div>
+
+</header>
+<!--<div class="jumbotron">-->
+<!--    <img src="../../static/images/back.png" th:src="@{/images/back.png}"/>-->
+<!--</div>-->
+
 </body>
 </html>
