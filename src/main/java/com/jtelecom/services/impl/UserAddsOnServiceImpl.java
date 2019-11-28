@@ -108,23 +108,30 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
     public void deleteServiceInternet(Integer serviceId, Integer userId) throws UserFriendlyExeption {
         UserServiceInternet userServiceInternet = userServiceInternetRepository
                 .findByServiceIdAndUserId(serviceId, userId);
-        userServiceInternetRepository.delete(userServiceInternet);
-        addAddsOnRecordByType(AddsOnType.INTERNET, serviceId, OrderAction.DEACTIVATED, userId);
+        if (userServiceInternet != null) {
+            userServiceInternetRepository.delete(userServiceInternet);
+            addAddsOnRecordByType(AddsOnType.INTERNET, serviceId, OrderAction.DEACTIVATED, userId);
+        }
     }
 
     @Override
     public void deleteServiceRoaming(Integer serviceId, Integer userId) throws UserFriendlyExeption {
         UserServiceRoaming userServiceRoaming = userServiceRoamingRepository
                 .findByServiceIdAndUserId(serviceId, userId);
-        userServiceRoamingRepository.delete(userServiceRoaming);
+        if (userServiceRoaming != null) {
+            userServiceRoamingRepository.delete(userServiceRoaming);
+            addAddsOnRecordByType(AddsOnType.ROAMING, serviceId, OrderAction.DEACTIVATED, userId);
+        }
     }
 
     @Override
     public void deleteServiceCalls(Integer serviceId, Integer userId) throws UserFriendlyExeption {
         UserServiceCalls userServiceCalls = userServiceCallsRepository
                 .findUserServiceCallsByServiceIdAndUserId(serviceId, userId);
-        userServiceCallsRepository.delete(userServiceCalls);
-        addAddsOnRecordByType(AddsOnType.CALLS, serviceId, OrderAction.DEACTIVATED, userId);
+        if (userServiceCalls != null) {
+            userServiceCallsRepository.delete(userServiceCalls);
+            addAddsOnRecordByType(AddsOnType.CALLS, serviceId, OrderAction.DEACTIVATED, userId);
+        }
     }
 
     private void addAddsOnRecordByType(AddsOnType addsOnType, Integer serviceId, OrderAction orderAction, Integer userId) throws UserFriendlyExeption {

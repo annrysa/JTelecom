@@ -1,13 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <title>Spring Boot Example</title>
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/demo.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/header-basic-light.css}">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
 </head>
+
 <body>
 
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-</div>
+<header class="header-basic-light">
+
+    <div class="header-limiter">
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#" class="selected">Blog</a>
+            <a href="#">Pricing</a>
+            <a href="#">About</a>
+            <a href="#">Faq</a>
+            <a href="#">Contact</a>
+        </nav>
+    </div>
+
+</header>
+
+
 </body>
+
 </html>

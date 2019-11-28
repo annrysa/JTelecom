@@ -3,43 +3,71 @@
 <head lang="en">
 
     <title>Tariffs</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/tariffs.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/utilBack.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/mainBack.css}">
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/demo.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/header-login-signup.css}">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <div th:if="${not #lists.isEmpty(tariffs)}">
-        <h2>Tariff List</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Details</th>
-                <th>Action</th>
-            </tr>
-            <tr th:each="tariff : ${tariffs}">
-                <td th:text="${tariff.name}">Name</td>
-                <td th:text="${tariff.description}">Description</td>
-                <td th:text="${tariff.price}">Price</td>
-                <td><a th:href="${'/user/tariffs/' + tariff.tariffId}">View</a></td>
-                <div th:if="${not #lists.isEmpty(tariff.userTariff)}">
-                    <td th:text="'Actual tariff'"></td>
-                </div>
-                <div th:if="${#lists.isEmpty(tariff.userTariff)}">
-                    <td>
-                        <p class="form-control-static">
-                            <a class="btn btn-lg btn-success" th:href="${'/user/activateTariff/' + tariff.tariffId}">Activate</a>
-                        </p>
-                    </td>
 
-                </div>
-            </tr>
-        </table>
+<header class="header-login-signup">
 
+    <div class="header-limiter">
+
+        <nav>
+            <a href="#" th:href="@{/user/user-info}">Home</a>
+            <a href="#" th:href="@{/user/tariffs}">Tariffs</a>
+            <a href="#" th:href="@{/user/services}">Adds On</a>
+            <a href="#" th:href="@{/user/home-internet}">Home Internet</a>
+            <a href="#" th:href="@{/user/loyalty}">Loyalty</a>
+        </nav>
+
+        <ul>
+            <li><a href="#"></a></li>
+            <form th:action="@{/logout}" method="get">
+                <li><a href="#">Sign up</a></li>
+            </form>
+        </ul>
+    </div>
+
+</header>
+<div class="limiter">
+    <div class="container-login100">
+<!--        <div class="wrap-login100">-->
+            <div id="pricing-table" class="clear">
+                <div th:if="${not #lists.isEmpty(tariffs)}">
+                    <tr th:each="tariff : ${tariffs}">
+                        <div class="plan">
+                            <h3 th:text="${tariff.name}"></h3>
+                            <h5><span th:text="${tariff.price} + ' UAH'"></span></h5>
+                            <div th:if="${not #lists.isEmpty(tariff.userTariff)}">
+                                <div>Activated</div>
+                            </div>
+                            <div th:if="${#lists.isEmpty(tariff.userTariff)}">
+                                <a class="signup" th:href="${'/user/activateTariff/' + tariff.tariffId}">Get
+                                    started</a>
+                            </div>
+                            <ul>
+                                <li th:text="${tariff.name}"></li>
+                                <li th:text=" ${tariff.internet}"></li>
+                                <li th:text="${tariff.sms} + ' SMS'"><b>20</b> Email Accounts</li>
+                                <li th:text="${tariff.callsMin}"></li>
+                            </ul>
+                        </div>
+                    </tr>
+                </div>
+            </div>
+<!--        </div>-->
     </div>
 </div>
-
 </body>
-</html>

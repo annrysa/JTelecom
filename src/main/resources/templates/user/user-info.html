@@ -1,182 +1,189 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-
-    <title>Home</title>
-
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Info</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" th:href="@{images/icons/favicon.ico}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/bootstrap/css/bootstrap.min.css}">
+    <!--    ===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--    ===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/animate/animate.css}">
+    <!--    ===============================================================================================-->
+    <!--    ===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/perfect-scrollbar/perfect-scrollbar.css}">
+    <!--    ===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}">
+    <!--    ===============================================================================================-->
 </head>
 <body>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <div>
-        <form class="form-horizontal">
-            <div class="container">
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
-                            <ul class="nav navbar-nav">
-                                <li><a href="#" th:href="@{/user/order-history}">History</a></li>
-                                <li><a href="#" th:href="@{/user/replenish-balance}">Replenish Balance</a></li>
-                                <li><a href="#" th:href="@{/user/complete-appointment}">Complete Appointment</a></li>
-                            </ul>
+<div>
+    <form class="form-horizontal">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
+                        <ul class="nav navbar-nav">
+                            <li><a href="#" th:href="@{/user/order-history}">History</a></li>
+                            <li><a href="#" th:href="@{/user/replenish-balance}">Replenish Balance</a></li>
+                            <li><a href="#" th:href="@{/user/complete-appointment}">Complete Appointment</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="limiter">
+            <div class="container-table100">
+                <div class="wrap-table100">
+                    <div class="table100 ver1 m-b-110">
+                        <div class="table100-body js-pscroll">
+                            <table>
+                                <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">First Name</td>
+                                    <td class="cell100 column2" th:text="${userInfo.firstname}"></td>
+                                </tr>
+
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Last Name</td>
+                                    <td class="cell100 column2" th:text="${userInfo.email}"></td>
+                                </tr>
+
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Phone</td>
+                                    <td class="cell100 column2" th:text="${userInfo.phone}"></td>
+                                </tr>
+
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Balance</td>
+                                    <td class="cell100 column2" th:text="${userInfo.balance} + ' UAH'"></td>
+                                </tr>
+
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Bonuses</td>
+                                    <td class="cell100 column2" th:text="${userInfo.loyalty}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </nav>
-            </div>
-            <h3>User Info</h3>
-            <h4 class="text-warning text-center" th:utext="${message}"></h4>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Name:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${userInfo.firstname} +' '+ ${userInfo.lastname}">
-                        Name</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Email:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${userInfo.email}">Email</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Phone:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${userInfo.phone}">Phone</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Balance:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${userInfo.balance} + ' UAH'">Balance</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Bonus:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${userInfo.loyalty}">Bonus</p>
-                </div>
-            </div>
-            <h3>Tariff Info</h3>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Name:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariffInfo.name}">Name</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Description:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariffInfo.description}">Description</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Price:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariffInfo.price}">Price</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">SMS:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariffInfo.sms}">SMS</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Internet data:</label>
-                <div class="col-sm-10">
-                    <div th:if="${tariffInfo.internetUnlimited == 1}">
-                        <p class="form-control-static" th:text="Unlimited">Internet Data</p>
+
+                    <div class="table100 ver1 m-b-110">
+                        <div class="table100-body js-pscroll">
+                            <table>
+                                <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Tariff Name</td>
+                                    <td class="cell100 column2" th:text="${tariffInfo.name}"></td>
+                                </tr>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Tariff Description</td>
+                                    <td class="cell100 column2" th:text="${tariffInfo.description}"></td>
+                                </tr>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Tariff Price</td>
+                                    <td class="cell100 column2" th:text="${tariffInfo.price}"></td>
+                                </tr>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">SMS</td>
+                                    <td class="cell100 column2" th:text="${tariffInfo.sms}"></td>
+                                </tr>
+                                <div th:if="${tariffInfo.internetUnlimited == 1}">
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">Internet Data</td>
+                                        <td class="cell100 column2" th:text="Unlimited"></td>
+                                    </tr>
+                                </div>
+                                <div th:if="${tariffInfo.internetUnlimited != 1}">
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">Internet Data</td>
+                                        <td class="cell100 column2" th:text="${tariffInfo.internet}"></td>
+                                    </tr>
+                                </div>
+                                <div th:if="${tariffInfo.callsMinUnlimited == 1}">
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column2" th:text="Unlimited"></td>
+                                    </tr>
+                                </div>
+                                <div th:if="${tariffInfo.callsMinUnlimited != 1}">
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column2" th:text="${tariffInfo.callsMin}"></td>
+                                    </tr>
+                                </div>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Calls abroad mins</td>
+                                    <td class="cell100 column2" th:text="${tariffInfo.callsMinAbroad}"></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div th:if="${tariffInfo.internetUnlimited != 1}">
-                        <p class="form-control-static" th:text="${tariffInfo.internet}">Unlimited Data</p>
+
+                    <div class="table100 ver1 m-b-110">
+                        <div class="table100-body js-pscroll">
+                            <table>
+                                <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Home Internet Name</td>
+                                    <td class="cell100 column2" th:text="${homeInternetInfo.name}">Boxing</td>
+                                </tr>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Description</td>
+                                    <td class="cell100 column2" th:text="${homeInternetInfo.description}">Boxing</td>
+                                </tr>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">Price</td>
+                                    <td class="cell100 column2" th:text="${homeInternetInfo.price}">Boxing</td>
+                                </tr>
+                                <div th:if="${homeInternetInfo.internetUnlimited == 1}">
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column2"
+                                            th:text="${homeInternetInfo.internet} + ' (Unlimited)'"></td>
+                                    </tr>
+                                </div>
+                                <div th:if="${homeInternetInfo.internetUnlimited != 1}">
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column2" th:text="${homeInternetInfo.internet}"></td>
+                                    </tr>
+                                </div>
+                                <div th:if="${homeInternetUserInfo.isActive == 1}">
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column2"
+                                            th:text="'Active'"></td>
+                                    </tr>
+                                </div>
+                                <div th:if="${homeInternetUserInfo.isActive != 1}">
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column2"
+                                            th:text="'Will be active '+ ${homeInternetUserInfo.appointment}"></td>
+                                    </tr>
+                                </div>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    <h2>BONUSES!!!!! TABLE</h2>
+
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Calls mins:</label>
-                <div class="col-sm-10">
-                    <div th:if="${tariffInfo.callsMinUnlimited == 1}">
-                        <p class="form-control-static" th:text="Unlimited">Mins</p>
-                    </div>
-                    <div th:if="${tariffInfo.callsMinUnlimited != 1}">
-                        <p class="form-control-static" th:text="${tariffInfo.callsMin}">Mins</p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Calls abroad mins:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariffInfo.callsMinAbroad}">Mins abroad</p>
-                </div>
-            </div>
-            <h3>Home Internet Info</h3>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Name:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${homeInternetInfo.name}">Name</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Description:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${homeInternetInfo.description}">Description</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Price:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${homeInternetInfo.price}">Price</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Speed:</label>
-                <div class="col-sm-10">
-                    <div th:if="${homeInternetInfo.internetUnlimited == 1}">
-                        <p class="form-control-static" th:text="${homeInternetInfo.internet} + ' (Unlimited)'">Speed</p>
-                    </div>
-                    <div th:if="${homeInternetInfo.internetUnlimited != 1}">
-                        <p class="form-control-static" th:text="${homeInternetInfo.internet}">Speed</p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Status:</label>
-                <div class="col-sm-10">
-                    <div th:if="${homeInternetUserInfo.isActive == 1}">
-                        <p class="form-control-static" th:text="'Active'">Active</p>
-                    </div>
-                    <div th:if="${homeInternetUserInfo.isActive != 1}">
-                        <p class="form-control-static" th:text="'Will be active '+ ${homeInternetUserInfo.appointment}">
-                            Not active</p>
-                    </div>
-                </div>
-            </div>
-            <h3></h3>
-            <h3>Bonuses Info</h3>
-            <table class="table table-striped">
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Activation code</th>
-                    <th>Expired</th>
-                    <th>Status</th>
-                </tr>
-                <tr th:each="loyalties : ${loyaltiesInfo}">
-                    <td th:text="${loyalties.name}">Name</td>
-                    <td th:text="${loyalties.description}">Description</td>
-                    <td th:text="${loyalties.activationCode}">Code</td>
-                    <td th:text="${loyalties.dueDate}">Price</td>
-                    <div th:if="${loyalties.status == 1}">
-                        <td th:text="'Active'"></td>
-                    </div>
-                    <div th:if="${loyalties.status != 1}">
-                        <td th:text="'Expired'"></td>
-                    </div>
-                </tr>
-            </table>
-        </form>
-    </div>
+        </div>
+
+    </form>
 </div>
 </body>
 </html>
+
