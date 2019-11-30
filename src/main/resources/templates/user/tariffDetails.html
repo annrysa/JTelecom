@@ -3,89 +3,114 @@
 <head lang="en">
 
     <title>Tariff Details</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/details.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/utilBack.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/mainBack.css">
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <!--    =====    NECESSARY BLOCK STARTS ! ====//-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/header-login-signup.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <!--    =====    NECESSARY BLOCK ENDS ! ====//-->
+
 </head>
 <body>
+
+<header class="header-login-signup">
+    <th:block th:include="fragments/header :: header"></th:block>
+</header>
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
 </script>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Tariff Details
-        <a class="btn btn-lg btn-success pull-right"
-           th:href="${'/user/tariffs'}">Back</a></h2>
-    <div>
-        <h4 class="text-warning text-center" th:utext="${message}"></h4>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Name:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariff.name}">Name</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Description:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariff.description}">Description</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Price:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariff.price}+' UAH'">Price</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">SMS:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariff.sms}">SMS</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Internet data:</label>
-                <div class="col-sm-10">
-                    <div th:if="${tariff.internetUnlimited == 1}">
-                        <p class="form-control-static" th:text="Unlimited">Internet Data</p>
+<div class="limiter">
+    <div class="container-details">
+        <div class="container-block">
+            <h2>Tariff Details
+                <a class="btn btn-lg btn-success pull-right"
+                   th:href="${'/user/tariffs'}">Back</a></h2>
+            <div>
+                <h4 class="text-warning text-center" th:utext="${message}"></h4>
+                <div class="container-content">
+                    <div class="container-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Name:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" th:text="${tariff.name}">Name</p></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Description:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" th:text="${tariff.description}">Description</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Price:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" th:text="${tariff.price}+' UAH'">Price</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">SMS:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" th:text="${tariff.sms}">SMS</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Internet data:</label>
+                                <div class="col-sm-10">
+                                    <div th:if="${tariff.internetUnlimited == 1}">
+                                        <p class="form-control-static" th:text="Unlimited">Internet Data</p>
+                                    </div>
+                                    <div th:if="${tariff.internetUnlimited != 1}">
+                                        <p class="form-control-static" th:text="${tariff.internet}">Unlimited Data</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Calls mins:</label>
+                                <div class="col-sm-10">
+                                    <div th:if="${tariff.callsMinUnlimited == 1}">
+                                        <p class="form-control-static" th:text="Unlimited">Mins</p>
+                                    </div>
+                                    <div th:if="${tariff.callsMinUnlimited != 1}">
+                                        <p class="form-control-static" th:text="${tariff.callsMin}">Mins</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Calls abroad mins:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" th:text="${tariff.callsMinAbroad}">Mins abroad</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Action:</label>
+                                <div class="col-sm-10">
+                                    <div th:if="${not #lists.isEmpty(tariff.userTariff)}">
+                                        <p class="form-control-static" th:text="'Actual tariff'"></p>
+                                    </div>
+                                    <div th:if="${#lists.isEmpty(tariff.userTariff)}">
+                                        <p class="form-control-static">
+                                            <a class="btn btn-lg btn-success"
+                                               th:href="${'/user/activateTariff/' + tariff.tariffId}">Activate</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div th:if="${tariff.internetUnlimited != 1}">
-                        <p class="form-control-static" th:text="${tariff.internet}">Unlimited Data</p>
-                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Calls mins:</label>
-                <div class="col-sm-10">
-                    <div th:if="${tariff.callsMinUnlimited == 1}">
-                        <p class="form-control-static" th:text="Unlimited">Mins</p>
-                    </div>
-                    <div th:if="${tariff.callsMinUnlimited != 1}">
-                        <p class="form-control-static" th:text="${tariff.callsMin}">Mins</p>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Calls abroad mins:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${tariff.callsMinAbroad}">Mins abroad</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Action:</label>
-                <div class="col-sm-10">
-                    <div th:if="${not #lists.isEmpty(tariff.userTariff)}">
-                        <p class="form-control-static" th:text="'Actual tariff'"></p>
-                    </div>
-                    <div th:if="${#lists.isEmpty(tariff.userTariff)}">
-                        <p class="form-control-static">
-                            <a class="btn btn-lg btn-success" th:href="${'/user/activateTariff/' + tariff.tariffId}">Activate</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 </body>
 </html>

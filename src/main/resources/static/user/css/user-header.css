@@ -1,0 +1,15 @@
+.navbar-header {
+    display: flex;
+    padding:5px 40px;
+    width: fit-content;
+}
+
+.header-item{
+    margin-right:15px;
+    font-size: 20px;
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: center;
+}

@@ -19,29 +19,51 @@
     <!--    ===============================================================================================-->
     <link rel="stylesheet" type="text/css" th:href="@{css/util.css}">
     <link rel="stylesheet" type="text/css" th:href="@{css/main.css}">
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/user-header.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/utilBack.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/mainBack.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/table.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/user-info.css">
+
+
+    <!--    =====    NECESSARY BLOCK STARTS ! ====//-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/header-login-signup.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
     <!--    ===============================================================================================-->
 </head>
 <body>
+<header class="header-login-signup">
+    <th:block th:include="fragments/header :: header"></th:block>
+</header>
 <div>
     <form class="form-horizontal">
         <div class="container">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
-                        <ul class="nav navbar-nav">
-                            <li><a href="#" th:href="@{/user/order-history}">History</a></li>
-                            <li><a href="#" th:href="@{/user/replenish-balance}">Replenish Balance</a></li>
-                            <li><a href="#" th:href="@{/user/complete-appointment}">Complete Appointment</a></li>
-                        </ul>
+                        <li><a class="header-item" href="#" th:href="@{/user/order-history}">History</a></li>
+                        <li><a class="header-item" href="#" th:href="@{/user/replenish-balance}">Replenish Balance</a>
+                        </li>
+                        <li><a class="header-item" href="#" th:href="@{/user/complete-appointment}">Complete
+                            Appointment</a>
+                        </li>
                     </div>
                 </div>
             </nav>
         </div>
         <div class="limiter">
-            <div class="container-table100">
-                <div class="wrap-table100">
-                    <div class="table100 ver1 m-b-110">
+            <div class="user-info">
+                <div class="user-info-block">
+                    <div class="user-info-item">
                         <div class="table100-body js-pscroll">
                             <table>
                                 <tbody>
@@ -74,7 +96,7 @@
                         </div>
                     </div>
 
-                    <div class="table100 ver1 m-b-110">
+                    <div class="user-info-item">
                         <div class="table100-body js-pscroll">
                             <table>
                                 <tbody>
@@ -128,7 +150,7 @@
                         </div>
                     </div>
 
-                    <div class="table100 ver1 m-b-110">
+                    <div class="user-info-item">
                         <div class="table100-body js-pscroll">
                             <table>
                                 <tbody>
@@ -176,12 +198,177 @@
                             </table>
                         </div>
                     </div>
-                    <h2>BONUSES!!!!! TABLE</h2>
 
+                </div>
+                <div class="user-info-block">
+                    <div th:if="${not #lists.isEmpty(serviceInternets)}">
+                        <div class="user-info-table">
+                            <div class="table100-body js-pscroll">
+                                <table>
+                                    <tbody>
+                                    <tr class="header-row">
+                                        <th class="table-header">Name</th>
+                                        <th class="table-header">Description</th>
+                                        <th class="table-header">Price</th>
+                                        <th class="table-header">Duration</th>
+                                        <th class="table-header">Activation Cost</th>
+                                        <th class="table-header">Internet Data</th>
+                                        <th class="table-header">Sharing Support</th>
+                                    </tr>
+                                    <tr class="table-body" th:each="inter : ${serviceInternets}">
+                                        <div th:if="${not #lists.isEmpty(inter.userServiceInternets)}">
+                                            <td th:text="${inter.name}">operation</td>
+                                            <td th:text="${inter.description}">date</td>
+                                            <td th:text="${inter.price}">date</td>
+                                            <td th:text="${inter.validity}">date</td>
+                                            <td th:text="${inter.activationCost}">date</td>
+                                            <td th:text="${inter.internet}">date</td>
+                                            <div th:if="${inter.internetSharing == 1}">
+                                                <td th:text="${'Support'}">date</td>
+                                            </div>
+                                            <div th:if="${inter.internetSharing != 1}">
+                                                <td th:text="${'Not Support'}">date</td>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-info-block">
+                    <div th:if="${not #lists.isEmpty(serviceCalls)}">
+                        <div class="user-info-table">
+                            <div class="table100-body js-pscroll">
+                                <table>
+                                    <tbody>
+                                    <tr class="header-row">
+                                        <th class="service-header">Name</th>
+                                        <th class="service-header">Description</th>
+                                        <th class="service-header">Price</th>
+                                        <th class="service-header">Duration</th>
+                                        <th class="service-header">Activation Cost</th>
+                                        <th class="service-header">International Calls</th>
+                                    </tr>
+                                    <tr class="table-body" th:each="calls : ${serviceCalls}">
+                                        <div th:if="${not #lists.isEmpty(calls.userServiceCalls)}">
+                                            <td th:text="${calls.name}">operation</td>
+                                            <td th:text="${calls.description}">date</td>
+                                            <td th:text="${calls.price}">date</td>
+                                            <td th:text="${calls.validity}">date</td>
+                                            <td th:text="${calls.activationCost}">date</td>
+                                            <td th:text="${calls.callsMinAbroad}">date</td>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-info-block">
+                    <div th:if="${not #lists.isEmpty(serviceRoamings)}">
+                        <div class="user-info-table">
+                            <div class="table100-body js-pscroll">
+                                <table>
+                                    <tbody>
+                                    <tr class="header-row">
+                                        <th class="service-header">Name</th>
+                                        <th class="service-header">Description</th>
+                                        <th class="service-header">Price</th>
+                                        <th class="service-header">Duration</th>
+                                        <th class="service-header">Activation Cost</th>
+                                        <th class="service-header">Internet Data</th>
+                                        <th class="service-header">SMS</th>
+                                        <th class="service-header">International Call Income</th>
+                                        <th class="service-header">International Call Outcome</th>
+                                    </tr>
+                                    <tr class="table-body" th:each="roaming : ${serviceRoamings}">
+                                        <div th:if="${not #lists.isEmpty(roaming.userServiceRoamings)}">
+                                            <td th:text="${roaming.name}">operation</td>
+                                            <td th:text="${roaming.description}">date</td>
+                                            <td th:text="${roaming.price}">date</td>
+                                            <td th:text="${roaming.validity}">date</td>
+                                            <td th:text="${roaming.activationCost}">date</td>
+                                            <td th:text="${roaming.internet}">date</td>
+                                            <td th:text="${roaming.sms}">date</td>
+                                            <td th:text="${roaming.callsMinAbroadIn}">date</td>
+                                            <td th:text="${roaming.callsMinAbroadOut}">date</td>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-info-block">
+                    <div th:if="${not #lists.isEmpty(serviceRoamings)}">
+                        <div class="user-info-table">
+                            <div class="table100-body js-pscroll">
+                                <table>
+                                    <tbody>
+                                    <tr class="header-row">
+                                        <th class="service-header">Name</th>
+                                        <th class="service-header">Description</th>
+                                        <th class="service-header">Price</th>
+                                        <th class="service-header">Duration</th>
+                                        <th class="service-header">Activation Cost</th>
+                                        <th class="service-header">Internet Data</th>
+                                        <th class="service-header">SMS</th>
+                                        <th class="service-header">International Call Income</th>
+                                        <th class="service-header">International Call Outcome</th>
+                                    </tr>
+                                    <tr class="table-body" th:each="roaming : ${serviceRoamings}">
+                                        <div th:if="${not #lists.isEmpty(roaming.userServiceRoamings)}">
+                                            <td th:text="${roaming.name}">operation</td>
+                                            <td th:text="${roaming.description}">date</td>
+                                            <td th:text="${roaming.price}">date</td>
+                                            <td th:text="${roaming.validity}">date</td>
+                                            <td th:text="${roaming.activationCost}">date</td>
+                                            <td th:text="${roaming.internet}">date</td>
+                                            <td th:text="${roaming.sms}">date</td>
+                                            <td th:text="${roaming.callsMinAbroadIn}">date</td>
+                                            <td th:text="${roaming.callsMinAbroadOut}">date</td>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-info-block">
+                    <div th:if="${not #lists.isEmpty(loyaltiesInfo)}">
+                        <div class="user-info-table">
+                            <div class="table100-body js-pscroll">
+                                <table>
+                                    <tbody>
+                                    <tr class="header-row">
+                                        <th class="service-header">Name</th>
+                                        <th class="service-header">Description</th>
+                                        <th class="service-header">Activation Code</th>
+                                        <th class="service-header">Due Date</th>
+                                        <th class="service-header">Status</th>
+                                    </tr>
+                                    <tr class="table-body" th:each="loyalty : ${loyaltiesInfo}">
+                                        <div th:if="${loyalty.status == 1}">
+                                            <td th:text="${loyalty.name}">operation</td>
+                                            <td th:text="${loyalty.description}">date</td>
+                                            <td th:text="${loyalty.activationCode}">date</td>
+                                            <td th:text="${loyalty.dueDate}">date</td>
+                                            <td th:text="${'Active'}">date</td>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
     </form>
 </div>
 </body>

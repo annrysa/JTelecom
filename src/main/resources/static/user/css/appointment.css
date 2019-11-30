@@ -1,0 +1,46 @@
+.appointment .container-block{
+    width: 700px;
+    height: 300px;
+    margin-top: 200px;
+}
+
+.appointment-button {
+    background: #57b846;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.appointment-button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.appointment-body .container-block {
+    height: 500px;
+}
+
+.appointment-body .container-details {
+    width: 100%;
+    position: relative;
+    top: -24px;
+}
+
+.appointment-body .datetime-folder{
+    display: none;
+}
+
+.appointment-body .datetime {
+    border: #ffe8a1 solid;
+    border-radius: 5px;
+    height: 35px;
+    background: aliceblue;
+    position: relative;
+    font-size: 18px;
+    bottom: 3px;
+}
+
+.timepicker-seconds{
+    display: none !important;
+}

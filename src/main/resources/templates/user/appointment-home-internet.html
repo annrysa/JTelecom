@@ -3,76 +3,166 @@
 <head lang="en">
 
     <title>Appointment</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/details.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/utilBack.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/mainBack.css">
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <!--    =====    NECESSARY BLOCK STARTS ! ====//-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/header-login-signup.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/appointment.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="http://localhost:8080/datetime/css/tail.datetime-default-green.css">
+    <script src="http://localhost:8080/datetime/js/tail.datetime.js"></script>
+
+    <!--    =====    NECESSARY BLOCK ENDS ! ====//-->
+
 </head>
 <body>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Home Internet Tariff Details</h2>
 
-    <div>
-        <form th:action="@{/user/save-home-internet}" th:object="${appointmentUi}" method="post">
-            <input type="hidden" th:name="homeInternetId" th:value="${homeInternetInfo.homeInternetId}"/>
+<header class="header-login-signup">
+    <th:block th:include="fragments/header :: header"></th:block>
+</header>
+<div class="limiter">
+    <div class="appointment-body">
+        <div class="container-details">
+            <div class="container-block">
+                <h2>Home Internet Tariff Details</h2>
 
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Name:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${homeInternetInfo.name}">Name</p></div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Speed:</label>
-                    <div class="col-sm-10">
-                        <div th:if="${homeInternetInfo.internetUnlimited == 1}">
-                            <p class="form-control-static" th:text="${homeInternetInfo.internet} + ' (Unlimited)'">
-                                Amount</p>
-                        </div>
-                        <div th:if="${homeInternetInfo.internetUnlimited != 1}">
-                            <p class="form-control-static" th:text="${homeInternetInfo.internet}">Amount</p>
-                        </div>
+                <div class="container-content">
+                    <div class="container-body">
+                        <form th:action="@{/user/save-home-internet}" th:object="${appointmentUi}" method="post">
+                            <input type="hidden" th:name="homeInternetId"
+                                   th:value="${homeInternetInfo.homeInternetId}"/>
+
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Name:</label>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static" th:text="${homeInternetInfo.name}">Name</p></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Speed:</label>
+                                    <div class="col-sm-10">
+                                        <div th:if="${homeInternetInfo.internetUnlimited == 1}">
+                                            <p class="form-control-static"
+                                               th:text="${homeInternetInfo.internet} + ' (Unlimited)'">
+                                                Amount</p>
+                                        </div>
+                                        <div th:if="${homeInternetInfo.internetUnlimited != 1}">
+                                            <p class="form-control-static" th:text="${homeInternetInfo.internet}">
+                                                Amount</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Description:</label>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static" th:text="${homeInternetInfo.description}">
+                                            Description</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Price:</label>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static" th:text="${homeInternetInfo.price}">Price</p>
+                                    </div>
+                                </div>
+                                <div th:if="${not #lists.isEmpty(homeInternetInfo.userHomeInternet)}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Status:</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static" th:text="'Activated'">
+                                                Amount</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:if="${#lists.isEmpty(homeInternetInfo.userHomeInternet)}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Select date and time:</label>
+                                        <div class="col-sm-10">
+                                                <input type="text" id="datetimeDemo" class="datetime form-control" data-tail-value="2019-12-01 00:11:10" data-tail-calendar="tail-1" th:field="*{appointment}">
+                                                <div id="datetime-demo-holder" class="datetime-folder"><div id="data-tail-calendar-1" class="tail-datetime-calendar  calendar-static calendar-stay theme-default calendar-open" style="top: 0px; left: 0px; z-index: 99; position: static; visibility: visible; opacity: 1; display: block;"><div class="calendar-navi">    <span data-tail-navi="prev" class="calendar-button button-prev"></span>    <span data-tail-navi="switch" class="calendar-label">December 2019</span>    <span data-tail-navi="next" class="calendar-button button-next"></span></div><div class="calendar-date"><table class="calendar-day"><thead><tr><th data-tail-day="0">SUN</th><th data-tail-day="1">MON</th><th data-tail-day="2">TUE</th><th data-tail-day="3">WED</th><th data-tail-day="4">THU</th><th data-tail-day="5">FRI</th><th data-tail-day="6">SAT</th></tr></thead><tbody><tr>
+                                                    <td class="calendar-day today"><span>1</span></td>
+                                                    <td class="calendar-day"><span>2</span></td>
+                                                    <td class="calendar-day"><span>3</span></td>
+                                                    <td class="calendar-day"><span>4</span></td>
+                                                    <td class="calendar-day"><span>5</span></td>
+                                                    <td class="calendar-day"><span>6</span></td>
+                                                    <td class="calendar-day"><span>7</span></td>
+                                                </tr><tr>
+                                                    <td class="calendar-day"><span>8</span></td>
+                                                    <td class="calendar-day"><span>9</span></td>
+                                                    <td class="calendar-day"><span>10</span></td>
+                                                    <td class="calendar-day"><span>11</span></td>
+                                                    <td class="calendar-day"><span>12</span></td>
+                                                    <td class="calendar-day"><span>13</span></td>
+                                                    <td class="calendar-day"><span>14</span></td>
+                                                </tr><tr>
+                                                    <td class="calendar-day"><span>15</span></td>
+                                                    <td class="calendar-day"><span>16</span></td>
+                                                    <td class="calendar-day"><span>17</span></td>
+                                                    <td class="calendar-day"><span>18</span></td>
+                                                    <td class="calendar-day"><span>19</span></td>
+                                                    <td class="calendar-day"><span>20</span></td>
+                                                    <td class="calendar-day"><span>21</span></td>
+                                                </tr><tr>
+                                                    <td class="calendar-day"><span>22</span></td>
+                                                    <td class="calendar-day"><span>23</span></td>
+                                                    <td class="calendar-day"><span>24</span></td>
+                                                    <td class="calendar-day"><span>25</span></td>
+                                                    <td class="calendar-day"><span>26</span></td>
+                                                    <td class="calendar-day"><span>27</span></td>
+                                                    <td class="calendar-day"><span>28</span></td>
+                                                </tr><tr>
+                                                    <td class="calendar-day"><span>29</span></td>
+                                                    <td class="calendar-day"><span>30</span></td>
+                                                    <td class="calendar-day"><span>31</span></td>
+                                                    <td class="calendar-day empty"></td>
+                                                    <td class="calendar-day empty"></td>
+                                                    <td class="calendar-day empty"></td>
+                                                    <td class="calendar-day empty"></td>
+                                                </tr></tbody></table></div><div class="calendar-time"><div class="calendar-field calendar-field-h">    <input type="number" value="0" min="00" max="23" step="1">    <label>Hours</label></div><div class="calendar-field calendar-field-m">    <input type="number" value="11" min="00" max="59" step="1">    <label>Minutes</label></div><div class="calendar-field calendar-field-s"> </div></div></div></div>
+                                            </div>
+                                    </div>
+                                    <div class="appointment-button-row">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"></label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">
+                                                    <button type="submit" class="appointment-button">Submit</button>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </form>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Description:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${homeInternetInfo.description}">Description</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Price:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${homeInternetInfo.price}">Price</p>
-                    </div>
-                </div>
-                <div th:if="${not #lists.isEmpty(homeInternetInfo.userHomeInternet)}">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Status:</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-static" th:text="'Activated'">
-                                Amount</p>
-                        </div>
-                    </div>
-                </div>
-                <div th:if="${#lists.isEmpty(homeInternetInfo.userHomeInternet)}">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Select date and time:</label>
-                        <div class="col-sm-10">
-                            <p>Date Field: <input type="datetime-local" th:field="*{appointment}"/></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label"></label>
-                        <div class="col-sm-10">
-                            <p class="form-control-static">
-                                <button type="submit" class="btn btn-lg btn-success">Submit</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </form>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    tail.DateTime("#datetimeDemo", {
+        static: "#datetime-demo-holder",   /* Used for demonstration */
+        classNames: "theme-default",    /* Used for demonstration */
+        startOpen: false,                /* Used for demonstration */
+        stayOpen: true,
+        zeroSeconds: true,
+        timeSeconds: null,
+        timeFormat: "HH:ii"
+        /* Used for demonstration */
+    });
+</script>
 </body>
 </html>

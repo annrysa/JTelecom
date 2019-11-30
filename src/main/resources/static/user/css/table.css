@@ -1,0 +1,35 @@
+.container-body {
+    font-size: 20px;
+}
+
+.container-body table {
+    border-spacing: 0 15px;
+    table-layout: fixed;
+    width:100%;
+}
+
+.container-body tbody {
+    overflow: auto;
+    height: 700px;
+    display: block;
+    padding-right: 20px;
+}
+
+.container-body th {
+    width: 47%;
+}
+
+.container-body th:nth-child(1) {
+    width: 25px;
+}
+
+.container-body td:nth-child(3) {
+    text-align: center;
+}
+.container-content {
+    padding-right: 5px;
+}
+
+.container-block {
+    width:1000px;
+}

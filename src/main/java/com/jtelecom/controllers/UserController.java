@@ -6,6 +6,9 @@ import com.jtelecom.entities.homeInternet.HomeInternet;
 import com.jtelecom.entities.homeInternet.UserHomeInternet;
 import com.jtelecom.entities.loyalty.Loyalty;
 import com.jtelecom.entities.loyalty.UserLoyalty;
+import com.jtelecom.entities.services.ServiceCalls;
+import com.jtelecom.entities.services.ServiceInternet;
+import com.jtelecom.entities.services.ServiceRoaming;
 import com.jtelecom.entities.tariff.Tariff;
 import com.jtelecom.entities.tariff.UserTariff;
 import com.jtelecom.entities.user.User;
@@ -37,6 +40,12 @@ public class UserController {
     private LoyaltyService loyaltyService;
     private ManagerUtil managerUtil;
     private UiModelToOrderModelConverter uiModelToOrderModelConverter;
+    private AddsOnAllService serviceCallsService;
+
+    @Autowired
+    public void setServiceCallsService(AddsOnAllService serviceCallsService) {
+        this.serviceCallsService = serviceCallsService;
+    }
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -90,6 +99,12 @@ public class UserController {
         }
         Iterable<Loyalty> loyaltiesById = loyaltyService.findAllLoyaltyByIds(loyaltyIds);
         List<LoyaltyInfoUi> loyaltiesInfo = uiModelToOrderModelConverter.convert(loyaltiesById, loyaltyInfo);
+        Iterable<ServiceCalls> serviceCalls = serviceCallsService.findAllServiceCalls(managerUtil.getAuthorizedUserId());
+        Iterable<ServiceRoaming> serviceRoamings = serviceCallsService.findAllServiceRoaming(managerUtil.getAuthorizedUserId());
+        Iterable<ServiceInternet> serviceInternets = serviceCallsService.findAllServiceInternet(managerUtil.getAuthorizedUserId());
+        modelAndView.addObject("serviceCalls", serviceCalls);
+        modelAndView.addObject("serviceRoamings", serviceRoamings);
+        modelAndView.addObject("serviceInternets", serviceInternets);
         modelAndView.addObject("userInfo", userInfo);
         modelAndView.addObject("tariffInfo", tariffInfo);
         modelAndView.addObject("servicesInfo", servicesInfo);
@@ -137,6 +152,12 @@ public class UserController {
             }
             Iterable<Loyalty> loyaltiesById = loyaltyService.findAllLoyaltyByIds(loyaltyIds);
             List<LoyaltyInfoUi> loyaltiesInfo = uiModelToOrderModelConverter.convert(loyaltiesById, loyaltyInfo);
+            Iterable<ServiceCalls> serviceCalls = serviceCallsService.findAllServiceCalls(managerUtil.getAuthorizedUserId());
+            Iterable<ServiceRoaming> serviceRoamings = serviceCallsService.findAllServiceRoaming(managerUtil.getAuthorizedUserId());
+            Iterable<ServiceInternet> serviceInternets = serviceCallsService.findAllServiceInternet(managerUtil.getAuthorizedUserId());
+            modelAndView.addObject("serviceCalls", serviceCalls);
+            modelAndView.addObject("serviceRoamings", serviceRoamings);
+            modelAndView.addObject("serviceInternets", serviceInternets);
             modelAndView.addObject("message", "There is no active appointment!");
             modelAndView.addObject("userInfo", userInfo);
             modelAndView.addObject("tariffInfo", tariffInfo);
@@ -174,6 +195,12 @@ public class UserController {
         }
         Iterable<Loyalty> loyaltiesById = loyaltyService.findAllLoyaltyByIds(loyaltyIds);
         List<LoyaltyInfoUi> loyaltiesInfo = uiModelToOrderModelConverter.convert(loyaltiesById, loyaltyInfo);
+        Iterable<ServiceCalls> serviceCalls = serviceCallsService.findAllServiceCalls(managerUtil.getAuthorizedUserId());
+        Iterable<ServiceRoaming> serviceRoamings = serviceCallsService.findAllServiceRoaming(managerUtil.getAuthorizedUserId());
+        Iterable<ServiceInternet> serviceInternets = serviceCallsService.findAllServiceInternet(managerUtil.getAuthorizedUserId());
+        modelAndView.addObject("serviceCalls", serviceCalls);
+        modelAndView.addObject("serviceRoamings", serviceRoamings);
+        modelAndView.addObject("serviceInternets", serviceInternets);
         modelAndView.addObject("message", "Appointment was completed!");
         modelAndView.addObject("userInfo", userInfo);
         modelAndView.addObject("tariffInfo", tariffInfo);
@@ -205,6 +232,12 @@ public class UserController {
         }
         Iterable<Loyalty> loyaltiesById = loyaltyService.findAllLoyaltyByIds(loyaltyIds);
         List<LoyaltyInfoUi> loyaltiesInfo = uiModelToOrderModelConverter.convert(loyaltiesById, loyaltyInfo);
+        Iterable<ServiceCalls> serviceCalls = serviceCallsService.findAllServiceCalls(managerUtil.getAuthorizedUserId());
+        Iterable<ServiceRoaming> serviceRoamings = serviceCallsService.findAllServiceRoaming(managerUtil.getAuthorizedUserId());
+        Iterable<ServiceInternet> serviceInternets = serviceCallsService.findAllServiceInternet(managerUtil.getAuthorizedUserId());
+        modelAndView.addObject("serviceCalls", serviceCalls);
+        modelAndView.addObject("serviceRoamings", serviceRoamings);
+        modelAndView.addObject("serviceInternets", serviceInternets);
         modelAndView.addObject("message", "Your balance was replenished!");
         modelAndView.addObject("userInfo", userInfo);
         modelAndView.addObject("tariffInfo", tariffInfo);

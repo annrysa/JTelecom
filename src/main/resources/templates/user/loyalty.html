@@ -2,74 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Tariff Details</title>
+    <title>Loyalty Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/tariffs.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/utilBack.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/mainBack.css}">
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <!--    =====    NECESSARY BLOCK STARTS ! ====//-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/demo.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/header-login-signup.css}">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <!--    =====    NECESSARY BLOCK ENDS ! ====//-->
+
 </head>
 <body>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Bonuses</h2>
-    <div class="container">
 
-        <form th:action="@{/logout}" method="get">
-
-        </form>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
-                    <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/user/home-internet}">Home Internet</a></li>
-                        <li><a href="#" th:href="@{/user/loyalty}">Bonuses</a></li>
-                        <li><a href="#" th:href="@{/user/order-history}">History</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <div th:if="${not #lists.isEmpty(loyalties)}">
-
-        <table class="table table-striped">
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Details</th>
-                <th>Status</th>
-            </tr>
-            <tr th:each="loyalty, state : ${loyalties}">
-                <td th:text="${state.index+1}">No</td>
-                <td th:text="${loyalty.name}">name</td>
-                <td th:text="${loyalty.amount}">amount</td>
-                <td><a th:href="${'/user/loyalty/' + loyalty.loyaltyId}">View</a></td>
-                <div th:if="${loyalty.userLoyalty != null}">
-                    <div th:if="${not #lists.isEmpty(loyalty.userLoyalty)}">
-                        <div th:each="lu, state : ${loyalty.userLoyalty}">
-                            <div th:if="${lu.isActive == 1}">
-                                <td th:text="'Already activated'">Already activated</td>
-                            </div>
-                            <div th:if="${lu.isActive != 1}">
-                                <td>
-                                    <p class="form-control-static">
-                                        <a class="btn btn-lg btn-success"
-                                           th:href="${'/user/activateLoyalty/' + loyalty.loyaltyId}">Activate</a>
-                                    </p>
-                                </td>
+<header class="header-login-signup">
+    <th:block th:include="fragments/header :: header"></th:block>
+</header>
+<div class="limiter">
+    <div class="container-login100">
+        <!--        <div class="wrap-login100">-->
+        <div id="pricing-table" class="clear">
+            <div th:if="${not #lists.isEmpty(loyalties)}">
+                <div th:if="${not #lists.isEmpty(loyalties)}">
+                    <tr th:each="loyalty, state : ${loyalties}">
+                        <div class="plan">
+                            <h3 th:text="${loyalty.name}"></h3>
+                            <div class="plan-body">
+                                <div class="plan-body_header">
+                                    <h5><span th:text="${loyalty.amount} + ' Bonuses'"></span></h5>
+                                    <div th:if="${not #lists.isEmpty(loyalty.userLoyalty)}">
+                                        <div>Activated</div>
+                                    </div>
+                                    <div th:if="${#lists.isEmpty(loyalty.userLoyalty)}">
+                                        <a class="signup" th:href="${'/user/activateLoyalty/' + loyalty.loyaltyId}">Get
+                                            started</a>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li th:text="${loyalty.description}"></li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                    <div th:if="${#lists.isEmpty(loyalty.userLoyalty)}">
-                        <td>
-                            <p class="form-control-static">
-                                <a class="btn btn-lg btn-success"
-                                   th:href="${'/user/activateLoyalty/' + loyalty.loyaltyId}">Activate</a>
-                            </p>
-                        </td>
-                    </div>
+                    </tr>
                 </div>
-            </tr>
-        </table>
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -31,19 +31,25 @@
                 <tr th:each="service : ${serviceInternets}">
                     <div class="plan">
                         <h3 th:text="${service.name}"></h3>
-                        <h5><span th:text="${service.price} + ' UAH'"></span></h5>
-                        <div th:if="${#lists.isEmpty(service.userServiceInternets)}">
-                            <a class="signup" th:href="${'/user/activate-service-internet/' + service.serviceId}">Get
-                                started</a>
+                        <div class="plan-body">
+                            <div class="plan-body_header">
+                                <h5><span th:text="${service.price} + ' UAH'"></span></h5>
+                                <div th:if="${#lists.isEmpty(service.userServiceInternets)}">
+                                    <a class="signup"
+                                       th:href="${'/user/activate-service-internet/' + service.serviceId}">Get
+                                        started</a>
+                                </div>
+                                <div th:if="${not #lists.isEmpty(service.userServiceInternets)}">
+                                    <a class="signup"
+                                       th:href="${'/user/deactivate-service-internet/' + service.serviceId}">Deactivated</a>
+                                </div>
+                            </div>
+                            <ul>
+                                <li th:text="${service.validity} + ' validity'"></li>
+                                <li th:text=" ${service.activationCost + ' UAH activation cost'}"></li>
+                                <li><a th:href="${'/user/service-internet/' + service.serviceId}">View</a></li>
+                            </ul>
                         </div>
-                        <div th:if="${not #lists.isEmpty(service.userServiceInternets)}">
-                            <a class="signup" th:href="${'/user/deactivate-service-internet/' + service.serviceId}">Deactivated</a>
-                        </div>
-                        <ul>
-                            <li th:text="${service.validity} + ' validity'"></li>
-                            <li th:text=" ${service.activationCost + ' UAH activation cost'}"></li>
-                            <li><a th:href="${'/user/service-internet/' + service.serviceId}">View</a></li>
-                        </ul>
                     </div>
                 </tr>
             </div>
@@ -53,20 +59,24 @@
                 <tr th:each="call : ${serviceCalls}">
                     <div class="plan">
                         <h3 th:text="${call.name}"></h3>
-                        <h5><span th:text="${call.price} + ' UAH'"></span></h5>
-                        <div th:if="${#lists.isEmpty(call.userServiceCalls)}">
-                            <a class="signup" th:href="${'/user/activate-service-calls/' + call.serviceId}">Get
-                                started</a>
+                        <div class="plan-body">
+                            <div class="plan-body_header">
+                                <h5><span th:text="${call.price} + ' UAH'"></span></h5>
+                                <div th:if="${#lists.isEmpty(call.userServiceCalls)}">
+                                    <a class="signup" th:href="${'/user/activate-service-calls/' + call.serviceId}">Get
+                                        started</a>
+                                </div>
+                                <div th:if="${not #lists.isEmpty(call.userServiceCalls)}">
+                                    <a class="signup"
+                                       th:href="${'/user/deactivate-service-calls/' + call.serviceId}">Deactivated</a>
+                                </div>
+                            </div>
+                            <ul>
+                                <li th:text="${call.validity} + ' validity'"></li>
+                                <li th:text=" ${call.activationCost + ' UAH activation cost'}"></li>
+                                <li><a th:href="${'/user/service-calls/' + call.serviceId}">View</a></li>
+                            </ul>
                         </div>
-                        <div th:if="${not #lists.isEmpty(call.userServiceCalls)}">
-                            <a class="signup"
-                               th:href="${'/user/deactivate-service-calls/' + call.serviceId}">Deactivated</a>
-                        </div>
-                        <ul>
-                            <li th:text="${call.validity} + ' validity'"></li>
-                            <li th:text=" ${call.activationCost + ' UAH activation cost'}"></li>
-                            <li><a th:href="${'/user/service-calls/' + call.serviceId}">View</a></li>
-                        </ul>
                     </div>
                 </tr>
             </div>
@@ -75,20 +85,25 @@
                 <tr th:each="roaming : ${serviceRoamings}">
                     <div class="plan">
                         <h3 th:text="${roaming.name}"></h3>
-                        <h5><span th:text="${roaming.price} + ' UAH'"></span></h5>
-                        <div th:if="${#lists.isEmpty(roaming.userServiceRoamings)}">
-                            <a class="signup" th:href="${'/user/activate-service-roaming/' + roaming.serviceId}">Get
-                                started</a>
+                        <div class="plan-body">
+                            <div class="plan-body_header">
+                                <h5><span th:text="${roaming.price} + ' UAH'"></span></h5>
+                                <div th:if="${#lists.isEmpty(roaming.userServiceRoamings)}">
+                                    <a class="signup"
+                                       th:href="${'/user/activate-service-roaming/' + roaming.serviceId}">Get
+                                        started</a>
+                                </div>
+                                <div th:if="${not #lists.isEmpty(roaming.userServiceRoamings)}">
+                                    <a class="signup"
+                                       th:href="${'/user/deactivate-service-roaming/' + roaming.serviceId}">Deactivated</a>
+                                </div>
+                            </div>
+                            <ul>
+                                <li th:text="${roaming.validity} + ' validity'"></li>
+                                <li th:text=" ${roaming.activationCost + ' UAH activation cost'}"></li>
+                                <li><a th:href="${'/user/service-roaming/' + roaming.serviceId}">View</a></li>
+                            </ul>
                         </div>
-                        <div th:if="${not #lists.isEmpty(roaming.userServiceRoamings)}">
-                            <a class="signup"
-                               th:href="${'/user/deactivate-service-roaming/' + roaming.serviceId}">Deactivated</a>
-                        </div>
-                        <ul>
-                            <li th:text="${roaming.validity} + ' validity'"></li>
-                            <li th:text=" ${roaming.activationCost + ' UAH activation cost'}"></li>
-                            <li><a th:href="${'/user/service-roaming/' + roaming.serviceId}">View</a></li>
-                        </ul>
                     </div>
                 </tr>
             </div>

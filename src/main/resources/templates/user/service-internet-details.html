@@ -3,83 +3,112 @@
 <head lang="en">
 
     <title>Internet Add On</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/details.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/utilBack.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/mainBack.css">
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <!--    =====    NECESSARY BLOCK STARTS ! ====//-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/header-login-signup.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <!--    =====    NECESSARY BLOCK ENDS ! ====//-->
+
 </head>
 <body>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Internet Add On Details
-        <a class="btn btn-lg btn-success pull-right"
-           th:href="${'/user/services'}">Back</a></h2>
-    <h4 class="text-warning text-center" th:utext="${message}"></h4>
-    <div>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Name:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${serviceInternet.name}">Name</p>
+
+<header class="header-login-signup">
+    <th:block th:include="fragments/header :: header"></th:block>
+</header>
+<div class="limiter">
+    <div class="container-details">
+        <div class="container-block">
+            <h2>Internet Add On Details
+                <a class="btn btn-lg btn-success pull-right"
+                   th:href="${'/user/services'}">Back</a></h2>
+            <h4 class="text-warning text-center" th:utext="${message}"></h4>
+            <div class="container-content">
+                <div class="container-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Name:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" th:text="${serviceInternet.name}">Name</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Description:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" th:text="${serviceInternet.description}">Name</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">What you get:</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" th:text="${serviceInternet.internet}">What you
+                                        get:</p>
+                                </div>
+                            </div>
+                            <div th:if="${serviceInternet.internetSharing == 1}">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Sharing:</label>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static" th:text="'Support Internet sharing'">Support
+                                            Internet
+                                            sharing</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Price:</label>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static" th:text="${serviceInternet.price}">Price</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Activation cost:</label>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static" th:text="${serviceInternet.activationCost}">
+                                            Activation
+                                            cost</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Validity:</label>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static" th:text="${serviceInternet.validity}">
+                                            Validity</p>
+                                    </div>
+                                </div>
+                                <div th:if="${not #lists.isEmpty(serviceInternet.userServiceInternets)}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Status:</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static">
+                                                <a class="btn btn-lg btn-warning"
+                                                   th:href="${'/user/deactivate-service-internet/' + serviceInternet.serviceId}">Disconnect</a>
+                                            </p></div>
+                                    </div>
+                                </div>
+                                <div th:if="${#lists.isEmpty(serviceInternet.userServiceInternets)}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Activate:</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static">
+                                                <a class="btn btn-lg btn-success"
+                                                   th:href="${'/user/activate-service-internet/' + serviceInternet.serviceId}">Activate</a>
+                                            </p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Description:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${serviceInternet.description}">Name</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">What you get:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static" th:text="${serviceInternet.internet}">What you get:</p>
-                </div>
-            </div>
-            <div th:if="${serviceInternet.internetSharing == 1}">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Sharing:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="'Support Internet sharing'">Support Internet sharing</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Price:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${serviceInternet.price}">Price</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Activation cost:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${serviceInternet.activationCost}">Activation cost</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Validity:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${serviceInternet.validity}">Validity</p>
-                    </div>
-                </div>
-                <div th:if="${not #lists.isEmpty(serviceInternet.userServiceInternets)}">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Status:</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-static">
-                                <a class="btn btn-lg btn-warning"
-                                   th:href="${'/user/deactivate-service-internet/' + serviceInternet.serviceId}">Disconnect</a>
-                            </p></div>
-                    </div>
-                </div>
-                <div th:if="${#lists.isEmpty(serviceInternet.userServiceInternets)}">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Activate:</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-static">
-                                <a class="btn btn-lg btn-success"
-                                   th:href="${'/user/activate-service-internet/' + serviceInternet.serviceId}">Activate</a>
-                            </p></div>
-                    </div>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 </body>

@@ -31,6 +31,8 @@
 .header-login-signup .header-limiter a {
 	color: #ffffff;
 	text-decoration: none;
+	font-size: 25px !important;
+	margin-right: 25px;
 }
 
 .header-login-signup .header-limiter nav {
@@ -84,6 +86,9 @@
 	background-color: #3a3c3e;
 	padding: 10px 15px;
 	border-radius: 3px;
+	position: relative;
+	bottom: 12px;
+	right: -300px;
 }
 
 /* Making the header responsive */

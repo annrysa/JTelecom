@@ -1,0 +1,32 @@
+.balance .container-block{
+        width: 500px;
+        height: 400px;
+}
+
+.balance .container-block .form-group:nth-child(2) .col-sm-2 {
+    white-space: nowrap;
+}
+
+.balance-input {
+    border: #ffe8a1 solid;
+    border-radius: 5px;
+    height: 35px;
+    background: aliceblue;
+}
+
+.balance-input:focus {
+    border: #00ad5f solid;
+}
+
+.balance-button {
+    background: #57b846;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.balance-button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+}

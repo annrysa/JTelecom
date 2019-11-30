@@ -3,41 +3,66 @@
 <head lang="en">
 
     <title>Tariff Details</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/user-header.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/utilBack.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/mainBack.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/details.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/table.css">
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <!--    =====    NECESSARY BLOCK STARTS ! ====//-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Light, Basic Header</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/user/css/header-login-signup.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <!--    =====    NECESSARY BLOCK ENDS ! ====//-->
+
 </head>
 <body>
+
+<header class="header-login-signup">
+    <th:block th:include="fragments/header :: header"></th:block>
+</header>
 <div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <h2>Order history</h2>
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/user/user-info}">Home</a>
-                    <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/user/order-history}">History</a></li>
-                        <li><a href="#" th:href="@{/user/replenish-balance}">Replenish Balance</a></li>
-                        <li><a href="#" th:href="@{/user/complete-appointment}">Complete Appointment</a></li>
-                    </ul>
+                    <li><a class="header-item" href="#" th:href="@{/user/order-history}">History</a></li>
+                    <li><a class="header-item" href="#" th:href="@{/user/replenish-balance}">Replenish Balance</a></li>
+                    <li><a class="header-item" href="#" th:href="@{/user/complete-appointment}">Complete Appointment</a>
+                    </li>
                 </div>
             </div>
         </nav>
     </div>
-    <div th:if="${not #lists.isEmpty(orderHistory)}">
+    <div class="container-details">
+        <div class="container-block">
+            <h2>Order history</h2>
 
-        <table class="table table-striped">
-            <tr>
-                <th></th>
-                <th>Operation</th>
-                <th>Date</th>
-            </tr>
-            <tr th:each="order, state : ${orderHistory}">
-                <td th:text="${state.index+1}">Name</td>
-                <td th:text="${order.name}">operation</td>
-                <td th:text="${order.dateTime}">date</td>
-            </tr>
-        </table>
+            <div th:if="${not #lists.isEmpty(orderHistory)}">
+                <div class="container-content">
+                    <div class="container-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <th></th>
+                                <th>Operation</th>
+                                <th>Date</th>
+                            </tr>
+                            <tr th:each="order, state : ${orderHistory}">
+                                <td th:text="${state.index+1}">Name</td>
+                                <td th:text="${order.name}">operation</td>
+                                <td th:text="${order.dateTime}">date</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
