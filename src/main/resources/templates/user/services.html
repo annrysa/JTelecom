@@ -41,7 +41,7 @@
                                 </div>
                                 <div th:if="${not #lists.isEmpty(service.userServiceInternets)}">
                                     <a class="signup"
-                                       th:href="${'/user/deactivate-service-internet/' + service.serviceId}">Deactivated</a>
+                                       th:href="${'/user/deactivate-service-internet/' + service.serviceId}">Deactivate</a>
                                 </div>
                             </div>
                             <ul>
@@ -68,7 +68,7 @@
                                 </div>
                                 <div th:if="${not #lists.isEmpty(call.userServiceCalls)}">
                                     <a class="signup"
-                                       th:href="${'/user/deactivate-service-calls/' + call.serviceId}">Deactivated</a>
+                                       th:href="${'/user/deactivate-service-calls/' + call.serviceId}">Deactivate</a>
                                 </div>
                             </div>
                             <ul>
@@ -95,7 +95,7 @@
                                 </div>
                                 <div th:if="${not #lists.isEmpty(roaming.userServiceRoamings)}">
                                     <a class="signup"
-                                       th:href="${'/user/deactivate-service-roaming/' + roaming.serviceId}">Deactivated</a>
+                                       th:href="${'/user/deactivate-service-roaming/' + roaming.serviceId}">Deactivate</a>
                                 </div>
                             </div>
                             <ul>

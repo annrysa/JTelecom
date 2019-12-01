@@ -49,6 +49,7 @@
                                 <li th:text=" ${tariff.internet}"></li>
                                 <li th:text="${tariff.sms} + ' SMS'"><b>20</b> Email Accounts</li>
                                 <li th:text="${tariff.callsMin}"></li>
+                                <li><a th:href="${'/user/tariffs/' + tariff.tariffId}">View</a></li>
                             </ul>
                         </div>
                     </div>

@@ -29,12 +29,9 @@
             <a href="#" th:href="@{/user/loyalty}">Loyalty</a>
         </nav>
 
-        <ul>
-            <li><a href="#"></a></li>
-            <form th:action="@{/logout}" method="get">
-                <li><a href="#">Sign up</a></li>
-            </form>
-        </ul>
+        <form th:action="@{/logout}" method="get">
+            <a class="sign-button" href="#">Log out</a>
+        </form>
     </div>
 
 </header>

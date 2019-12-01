@@ -52,6 +52,17 @@ public class HomeInternetServiceImpl implements HomeInternetService {
     }
 
     @Override
+    public HomeInternet findHomeInternetDetailsById(Integer id, Integer userId) {
+        HomeInternet hm = homeInternetRepository.findByHomeInternetId(id);
+        UserHomeInternet userHomeInternet = userHomeInternetRepository
+                .findByHomeInternetIdAndUserId(hm.getHomeInternetId(), userId);
+        Set<UserHomeInternet> uhm = new HashSet<>();
+        uhm.add(userHomeInternet);
+        hm.setUserHomeInternet(userHomeInternet == null ? null : uhm);
+        return hm;
+    }
+
+    @Override
     public UserHomeInternet findByInternetIdAndUserId(Integer id, Integer userId) {
         return userHomeInternetRepository.findByHomeInternetIdAndUserId(id, userId);
     }
@@ -66,7 +77,7 @@ public class HomeInternetServiceImpl implements HomeInternetService {
         Iterable<HomeInternet> all = homeInternetRepository.findAll();
         for (HomeInternet hm : all) {
             UserHomeInternet userHomeInternet = userHomeInternetRepository
-                    .findByHomeInternetIdAndUserIdAndIsActive(hm.getHomeInternetId(), userId, 1);
+                    .findByHomeInternetIdAndUserId(hm.getHomeInternetId(), userId);
             Set<UserHomeInternet> uhm = new HashSet<>();
             uhm.add(userHomeInternet);
             hm.setUserHomeInternet(userHomeInternet == null ? null : uhm);

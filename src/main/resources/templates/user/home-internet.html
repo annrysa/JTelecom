@@ -51,6 +51,7 @@
                                 <div th:if="${homeInternet.internetUnlimited != 1}">
                                     <li th:text="${homeInternet.internet}"></li>
                                 </div>
+                                <li><a th:href="${'/user/home-internet/' + homeInternet.homeInternetId}">View</a></li>
                             </ul>
                         </div>
                     </div>

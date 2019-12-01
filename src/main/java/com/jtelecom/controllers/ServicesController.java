@@ -105,8 +105,8 @@ public class ServicesController {
         if (service.getPrice() > managerUtil.getAuthorizedUserBalance()) {
             model.addAttribute("serviceInternet", service);
             System.out.println("Returning service internet : " + service);
-            model.addAttribute("message", "Please replenish your balance!");
-            System.out.println("message: Please replenish your balance!");
+            model.addAttribute("message", "Please top up your balance!");
+            System.out.println("message: Please top up your balance!");
             return "user/service-internet-details";
         }
         UserServiceInternet userServices = userAddsOnService.saveServiceInternet(serviceId, managerUtil.getAuthorizedUserId());
@@ -127,7 +127,7 @@ public class ServicesController {
         if (service.getPrice() > managerUtil.getAuthorizedUserBalance()) {
             model.addAttribute("serviceCalls", service);
             System.out.println("Returning service calls : " + service);
-            model.addAttribute("message", "Please replenish your balance!");
+            model.addAttribute("message", "Please top up your balance!");
             System.out.println("message: Please replenish your balance!");
             return "user/service-calls-details";
         }
@@ -149,7 +149,7 @@ public class ServicesController {
         if (service.getPrice() > managerUtil.getAuthorizedUserBalance()) {
             model.addAttribute("serviceRoaming", service);
             System.out.println("Returning service roaming : " + service);
-            model.addAttribute("message", "Please replenish your balance!");
+            model.addAttribute("message", "Please top up your balance!");
             System.out.println("message: Please replenish your balance!");
             return "user/service-roaming-details";
         }

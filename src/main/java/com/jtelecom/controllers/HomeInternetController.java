@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/user")
 public class HomeInternetController {
@@ -47,7 +50,15 @@ public class HomeInternetController {
     @RequestMapping(value = {"/home-internet/{homeInternetId}"}, method = RequestMethod.GET)
     public ModelAndView homeInternetDetails(@PathVariable Integer homeInternetId, ModelAndView modelAndView) {
         HomeInternet homeInternetDetailsInfo = homeInternetService
-                .findHomeInternetById(homeInternetId, managerUtil.getAuthorizedUserId());
+                .findHomeInternetDetailsById(homeInternetId, managerUtil.getAuthorizedUserId());
+        modelAndView.addObject("homeInternetInfo", homeInternetDetailsInfo);
+        if (homeInternetDetailsInfo.getUserHomeInternet() != null) {
+            List<UserHomeInternet> us = new ArrayList<>(homeInternetDetailsInfo.getUserHomeInternet());
+            UserHomeInternet userHomeInternet = us.get(0);
+            if (userHomeInternet != null && userHomeInternet.getIsActive() != 1 && userHomeInternet.getAppointment() != null) {
+                modelAndView.addObject("appointmentInfo", us.get(0));
+            }
+        }
         modelAndView.addObject("homeInternetInfo", homeInternetDetailsInfo);
         modelAndView.setViewName("user/home-internet-details");
         return modelAndView;
@@ -62,8 +73,8 @@ public class HomeInternetController {
         if (homeInternetById.getPrice() > managerUtil.getAuthorizedUserBalance()) {
             modelAndView.addObject("service", homeInternetById);
             System.out.println("Returning home internet : " + homeInternetById);
-            modelAndView.addObject("message", "Please replenish your balance!");
-            System.out.println("message: Please replenish your balance!");
+            modelAndView.addObject("message", "Please top up your balance!");
+            System.out.println("message: Please top up your balance!");
             modelAndView.setViewName("user/home-internet-details");
             return modelAndView;
         }
@@ -80,7 +91,7 @@ public class HomeInternetController {
         userHomeInternet.setIsActive(0);
         UserHomeInternet userHomeInternetInfo = homeInternetService.save(userHomeInternet);
         HomeInternet homeInternetDetailsInfo = homeInternetService
-                .findHomeInternetById(userHomeInternetInfo.getHomeInternetId(), managerUtil.getAuthorizedUserId());
+                .findHomeInternetDetailsById(userHomeInternetInfo.getHomeInternetId(), managerUtil.getAuthorizedUserId());
         userService.updateLoyalty(managerUtil.fillLoyalty(homeInternetDetailsInfo.getPrice()), managerUtil.getAuthorizedUserId());
         modelAndView.addObject("message", "Home Internet has been activated");
         modelAndView.addObject("homeInternetInfo", homeInternetDetailsInfo);

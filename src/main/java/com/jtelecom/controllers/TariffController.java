@@ -63,7 +63,7 @@ public class TariffController {
         if (tariff.getPrice() > authorizedUserBalance) {
             model.addAttribute("tariff", tariff);
             System.out.println("Returning tariff : " + tariff);
-            model.addAttribute("message", "Please replenish your balance!");
+            model.addAttribute("message", "Please top up your balance!");
             System.out.println("message: Please replenish your balance!");
             return "user/tariffDetails";
         }

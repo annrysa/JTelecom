@@ -6,6 +6,8 @@ import com.jtelecom.entities.homeInternet.UserHomeInternet;
 public interface HomeInternetService {
     HomeInternet findHomeInternetById(Integer id, Integer userId);
 
+    HomeInternet findHomeInternetDetailsById(Integer id, Integer userId);
+
     UserHomeInternet findByInternetIdAndUserId(Integer id, Integer userId);
 
     UserHomeInternet findUserHomeInternetByUserId(Integer userId);
