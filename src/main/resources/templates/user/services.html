@@ -45,6 +45,7 @@
                                 </div>
                             </div>
                             <ul>
+                                <li th:text="${service.description}"></li>
                                 <li th:text="${service.validity} + ' validity'"></li>
                                 <li th:text=" ${service.activationCost + ' UAH activation cost'}"></li>
                                 <li><a th:href="${'/user/service-internet/' + service.serviceId}">View</a></li>
@@ -72,6 +73,7 @@
                                 </div>
                             </div>
                             <ul>
+                                <li th:text="${call.description}"></li>
                                 <li th:text="${call.validity} + ' validity'"></li>
                                 <li th:text=" ${call.activationCost + ' UAH activation cost'}"></li>
                                 <li><a th:href="${'/user/service-calls/' + call.serviceId}">View</a></li>
@@ -99,6 +101,7 @@
                                 </div>
                             </div>
                             <ul>
+                                <li th:text="${roaming.description}"></li>
                                 <li th:text="${roaming.validity} + ' validity'"></li>
                                 <li th:text=" ${roaming.activationCost + ' UAH activation cost'}"></li>
                                 <li><a th:href="${'/user/service-roaming/' + roaming.serviceId}">View</a></li>

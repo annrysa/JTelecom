@@ -36,7 +36,14 @@
                             <div class="plan-body_header">
                                 <h5><span th:text="${homeInternet.price} + ' UAH'"></span></h5>
                                 <div th:if="${not #lists.isEmpty(homeInternet.userHomeInternet)}">
-                                    <div>Activated</div>
+                                    <div th:if="${homeInternet.userHomeInternet[0].isActive == 0}">
+                                        <div th:text="'Will be activate ' + ${homeInternet.userHomeInternet[0].appointment}">Activated</div>
+                                    </div>
+                                </div>
+                                <div th:if="${not #lists.isEmpty(homeInternet.userHomeInternet)}">
+                                    <div th:if="${homeInternet.userHomeInternet[0].isActive == 1}">
+                                        <div>Activated</div>
+                                    </div>
                                 </div>
                                 <div th:if="${ #lists.isEmpty(homeInternet.userHomeInternet)}">
                                     <a class="signup"

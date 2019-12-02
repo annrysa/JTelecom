@@ -168,27 +168,27 @@
                                 </tr>
                                 <div th:if="${homeInternetInfo.internetUnlimited == 1}">
                                     <tr class="row100 body">
-                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column1">Internet Data</td>
                                         <td class="cell100 column2"
                                             th:text="${homeInternetInfo.internet} + ' (Unlimited)'"></td>
                                     </tr>
                                 </div>
                                 <div th:if="${homeInternetInfo.internetUnlimited != 1}">
                                     <tr class="row100 body">
-                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column1">Internet Data</td>
                                         <td class="cell100 column2" th:text="${homeInternetInfo.internet}"></td>
                                     </tr>
                                 </div>
                                 <div th:if="${homeInternetUserInfo.isActive == 1}">
                                     <tr class="row100 body">
-                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column1">Status</td>
                                         <td class="cell100 column2"
                                             th:text="'Active'"></td>
                                     </tr>
                                 </div>
                                 <div th:if="${homeInternetUserInfo.isActive != 1}">
                                     <tr class="row100 body">
-                                        <td class="cell100 column1">Calls mins</td>
+                                        <td class="cell100 column1">Status</td>
                                         <td class="cell100 column2"
                                             th:text="'Will be active '+ ${homeInternetUserInfo.appointment}"></td>
                                     </tr>
@@ -275,62 +275,28 @@
                                     <tbody>
                                     <tr class="header-row">
                                         <th class="service-header">Name</th>
-                                        <th class="service-header">Description</th>
-                                        <th class="service-header">Price</th>
-                                        <th class="service-header">Duration</th>
-                                        <th class="service-header">Activation Cost</th>
-                                        <th class="service-header">Internet Data</th>
-                                        <th class="service-header">SMS</th>
                                         <th class="service-header">International Call Income</th>
                                         <th class="service-header">International Call Outcome</th>
+<!--                                        <th class="service-header">Description</th>-->
+                                        <th class="service-header">Price</th>
+                                        <th class="service-header">Duration</th>
+<!--                                        <th class="service-header">Activation Cost</th>-->
+                                        <th class="service-header">Internet Data</th>
+<!--                                        <th class="service-header">SMS</th>-->
+
                                     </tr>
                                     <tr class="table-body" th:each="roaming : ${serviceRoamings}">
                                         <div th:if="${not #lists.isEmpty(roaming.userServiceRoamings)}">
                                             <td th:text="${roaming.name}">operation</td>
-                                            <td th:text="${roaming.description}">date</td>
-                                            <td th:text="${roaming.price}">date</td>
-                                            <td th:text="${roaming.validity}">date</td>
-                                            <td th:text="${roaming.activationCost}">date</td>
-                                            <td th:text="${roaming.internet}">date</td>
-                                            <td th:text="${roaming.sms}">date</td>
                                             <td th:text="${roaming.callsMinAbroadIn}">date</td>
                                             <td th:text="${roaming.callsMinAbroadOut}">date</td>
-                                        </div>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="user-info-block">
-                    <div th:if="${not #lists.isEmpty(serviceRoamings)}">
-                        <div class="user-info-table">
-                            <div class="table100-body js-pscroll">
-                                <table>
-                                    <tbody>
-                                    <tr class="header-row">
-                                        <th class="service-header">Name</th>
-                                        <th class="service-header">Description</th>
-                                        <th class="service-header">Price</th>
-                                        <th class="service-header">Duration</th>
-                                        <th class="service-header">Activation Cost</th>
-                                        <th class="service-header">Internet Data</th>
-                                        <th class="service-header">SMS</th>
-                                        <th class="service-header">International Call Income</th>
-                                        <th class="service-header">International Call Outcome</th>
-                                    </tr>
-                                    <tr class="table-body" th:each="roaming : ${serviceRoamings}">
-                                        <div th:if="${not #lists.isEmpty(roaming.userServiceRoamings)}">
-                                            <td th:text="${roaming.name}">operation</td>
-                                            <td th:text="${roaming.description}">date</td>
+<!--                                            <td th:text="${roaming.description}">date</td>-->
                                             <td th:text="${roaming.price}">date</td>
                                             <td th:text="${roaming.validity}">date</td>
-                                            <td th:text="${roaming.activationCost}">date</td>
+<!--                                            <td th:text="${roaming.activationCost}">date</td>-->
                                             <td th:text="${roaming.internet}">date</td>
-                                            <td th:text="${roaming.sms}">date</td>
-                                            <td th:text="${roaming.callsMinAbroadIn}">date</td>
-                                            <td th:text="${roaming.callsMinAbroadOut}">date</td>
+<!--                                            <td th:text="${roaming.sms}">date</td>-->
+
                                         </div>
                                     </tr>
                                     </tbody>
