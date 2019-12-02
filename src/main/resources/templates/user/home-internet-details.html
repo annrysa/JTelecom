@@ -51,7 +51,7 @@
                                             Amount</p>
                                     </div>
                                     <div th:if="${homeInternetInfo.internetUnlimited != 1}">
-                                        <p class="form-control-static" th:text="${homeInternetInfo.internet}">Amount</p>
+                                        <p class="form-control-static" th:text="${homeInternetInfo.internet} + ' UAH'">Amount</p>
                                     </div>
                                 </div>
                             </div>
