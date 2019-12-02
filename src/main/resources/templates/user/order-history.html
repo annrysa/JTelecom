@@ -42,8 +42,10 @@
     </div>
     <div class="container-details">
         <div class="container-block">
-            <h2>Order history</h2>
-
+            <h2>Order history
+                <a class="btn btn-lg btn-success pull-right"
+                   th:href="${'/user/user-info'}">Back</a>
+            </h2>
             <div th:if="${not #lists.isEmpty(orderHistory)}">
                 <div class="container-content">
                     <div class="container-body">

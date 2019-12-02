@@ -44,7 +44,10 @@
     <div class="balance">
         <div class="container-details">
             <div class="container-block _balance">
-                <h2>Balance</h2>
+                <h2>Balance
+                    <a class="btn btn-lg btn-success pull-right"
+                       th:href="${'/user/user-info'}">Back</a>
+                </h2>
                 <div class="container-content">
                     <div class="container-body">
                         <form th:action="@{/user/payload}" th:object="${payload}" method="post">

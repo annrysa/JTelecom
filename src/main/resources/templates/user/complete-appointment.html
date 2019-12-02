@@ -43,7 +43,10 @@
     <div class="appointment">
         <div class="container-details">
             <div class="container-block">
-                <h2>Complete Appointment</h2>
+                <h2>Complete Appointment
+                    <a class="btn btn-lg btn-success pull-right"
+                       th:href="${'/user/user-info'}">Back</a>
+                </h2>
                 <div class="container-content">
                     <div class="container-body">
                         <form th:action="@{/user/submit-appointment}" method="post">

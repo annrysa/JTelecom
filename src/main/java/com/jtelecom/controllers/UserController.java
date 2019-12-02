@@ -158,7 +158,6 @@ public class UserController {
             modelAndView.addObject("serviceCalls", serviceCalls);
             modelAndView.addObject("serviceRoamings", serviceRoamings);
             modelAndView.addObject("serviceInternets", serviceInternets);
-            modelAndView.addObject("message", "There is no active appointment!");
             modelAndView.addObject("userInfo", userInfo);
             modelAndView.addObject("tariffInfo", tariffInfo);
             modelAndView.addObject("servicesInfo", servicesInfo);
@@ -166,6 +165,7 @@ public class UserController {
             modelAndView.addObject("homeInternetInfo", homeInternetById);
             modelAndView.addObject("loyaltiesInfo", loyaltiesInfo);
             modelAndView.setViewName("user/user-info");
+            modelAndView.addObject("message", "There is no active appointment!");
             return modelAndView;
         }
         modelAndView.addObject("userInternet", homeInternetInfo);
@@ -201,7 +201,6 @@ public class UserController {
         modelAndView.addObject("serviceCalls", serviceCalls);
         modelAndView.addObject("serviceRoamings", serviceRoamings);
         modelAndView.addObject("serviceInternets", serviceInternets);
-        modelAndView.addObject("message", "Appointment was completed!");
         modelAndView.addObject("userInfo", userInfo);
         modelAndView.addObject("tariffInfo", tariffInfo);
         modelAndView.addObject("servicesInfo", servicesInfo);
@@ -209,7 +208,7 @@ public class UserController {
         modelAndView.addObject("homeInternetInfo", homeInternetById);
         modelAndView.addObject("loyaltiesInfo", loyaltiesInfo);
         modelAndView.setViewName("user/user-info");
-
+        modelAndView.addObject("message", "Appointment was completed!");
         return modelAndView;
     }
 
@@ -238,7 +237,6 @@ public class UserController {
         modelAndView.addObject("serviceCalls", serviceCalls);
         modelAndView.addObject("serviceRoamings", serviceRoamings);
         modelAndView.addObject("serviceInternets", serviceInternets);
-        modelAndView.addObject("message", "Your balance was replenished!");
         modelAndView.addObject("userInfo", userInfo);
         modelAndView.addObject("tariffInfo", tariffInfo);
         modelAndView.addObject("servicesInfo", servicesInfo);
@@ -246,6 +244,7 @@ public class UserController {
         modelAndView.addObject("homeInternetInfo", homeInternetById);
         modelAndView.addObject("loyaltiesInfo", loyaltiesInfo);
         modelAndView.setViewName("user/user-info");
+        modelAndView.addObject("message", "Your balance was replenished!");
 
         return modelAndView;
     }
