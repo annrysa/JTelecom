@@ -47,6 +47,7 @@
                     <a class="btn btn-lg btn-success pull-right"
                        th:href="${'/user/user-info'}">Back</a>
                 </h2>
+                <h4 class="text-warning text-center" th:utext="${message}"></h4>
                 <div class="container-content">
                     <div class="container-body">
                         <form th:action="@{/user/submit-appointment}" method="post">

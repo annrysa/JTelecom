@@ -35,7 +35,7 @@
         <div class="container-details">
             <div class="container-block">
                 <h2>Home Internet Tariff Details</h2>
-
+                <h4 class="text-warning text-center" th:utext="${message}"></h4>
                 <div class="container-content">
                     <div class="container-body">
                         <form th:action="@{/user/save-home-internet}" th:object="${appointmentUi}" method="post">

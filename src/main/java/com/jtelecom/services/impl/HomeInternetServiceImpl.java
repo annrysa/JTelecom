@@ -109,6 +109,12 @@ public class HomeInternetServiceImpl implements HomeInternetService {
     }
 
     @Override
+    @Transactional
+    public void update(Integer serviceId, Integer id) {
+        userHomeInternetRepository.updateHomeInternetdByUserId(serviceId, id);
+    }
+
+    @Override
     public void delete(Integer homeInternetId, Integer userId, String appointment, Integer isActive) {
         UserHomeInternet userHomeInternet = new UserHomeInternet(homeInternetId, userId, appointment, isActive);
         userHomeInternetRepository.delete(userHomeInternet);

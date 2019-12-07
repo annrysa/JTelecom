@@ -23,6 +23,7 @@ import com.jtelecom.utils.OrderRecordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +89,24 @@ public class UserAddsOnServiceImpl implements UserAddsOnService {
             addAddsOnRecordByType(AddsOnType.CALLS, serviceId, OrderAction.ACTIVATED, userId);
         }
         return saveCalls;
+    }
+
+    @Override
+    @Transactional
+    public void updateServiceCalls(Integer serviceId, Integer id) throws UserFriendlyExeption {
+        userServiceCallsRepository.updateServiceIdById(serviceId, id);
+    }
+
+    @Override
+    @Transactional
+    public void updateServiceInternet(Integer serviceId, Integer id) throws UserFriendlyExeption {
+        userServiceInternetRepository.updateServiceIdById(serviceId, id);
+    }
+
+    @Override
+    @Transactional
+    public void updateServiceRoaming(Integer serviceId, Integer id) throws UserFriendlyExeption {
+        userServiceRoamingRepository.updateServiceIdById(serviceId, id);
     }
 
     @Override

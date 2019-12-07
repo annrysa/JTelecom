@@ -16,6 +16,12 @@ public interface UserAddsOnService {
 
     UserServiceCalls saveServiceCalls(Integer serviceId, Integer userId) throws UserFriendlyExeption;
 
+    void updateServiceCalls(Integer serviceId, Integer id) throws UserFriendlyExeption;
+
+    void updateServiceInternet(Integer serviceId, Integer id) throws UserFriendlyExeption;
+
+    void updateServiceRoaming(Integer serviceId, Integer id) throws UserFriendlyExeption;
+
     List<UserServices> findServicesByUserId(Integer userId);
 
     void deleteServiceInternet(Integer serviceId, Integer userId) throws UserFriendlyExeption;

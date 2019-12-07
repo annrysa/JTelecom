@@ -110,11 +110,12 @@ public class ServicesController {
             return "user/service-internet-details";
         }
         UserServiceInternet userServices = userAddsOnService.saveServiceInternet(serviceId, managerUtil.getAuthorizedUserId());
+        userAddsOnService.updateServiceInternet(serviceId,userServices.getId());
         ServiceInternet serviceById = serviceCallsService.findServiceInternetByServiceId(serviceId, managerUtil.getAuthorizedUserId());
         Set<UserServiceInternet> si = new HashSet<>();
         si.add(userServices);
         serviceById.setUserServiceInternets(si);
-        userService.updateLoyalty(managerUtil.fillLoyalty(serviceById.getPrice()), managerUtil.getAuthorizedUserId());
+//        userService.updateLoyalty(managerUtil.fillLoyalty(price), managerUtil.getAuthorizedUserId());
         model.addAttribute("serviceInternet", serviceById);
         System.out.println("Returning service internet : " + userServices);
         return "user/service-internet-details";
@@ -132,11 +133,12 @@ public class ServicesController {
             return "user/service-calls-details";
         }
         UserServiceCalls userServiceCalls = userAddsOnService.saveServiceCalls(serviceId, managerUtil.getAuthorizedUserId());
+        userAddsOnService.updateServiceCalls(serviceId,userServiceCalls.getId());
         ServiceCalls serviceById = serviceCallsService.findServiceCallsByServiceId(serviceId, managerUtil.getAuthorizedUserId());
         Set<UserServiceCalls> si = new HashSet<>();
         si.add(userServiceCalls);
         serviceById.setUserServiceCalls(si);
-        userService.updateLoyalty(managerUtil.fillLoyalty(serviceById.getPrice()), managerUtil.getAuthorizedUserId());
+//        userService.updateLoyalty(managerUtil.fillLoyalty(serviceById.getPrice()), managerUtil.getAuthorizedUserId());
         model.addAttribute("serviceCalls", serviceById);
         System.out.println("Returning service calls : " + userServiceCalls);
         return "user/service-calls-details";
@@ -154,11 +156,12 @@ public class ServicesController {
             return "user/service-roaming-details";
         }
         UserServiceRoaming userServiceRoaming = userAddsOnService.saveServiceRoaming(serviceId, managerUtil.getAuthorizedUserId());
+        userAddsOnService.updateServiceRoaming(serviceId,userServiceRoaming.getId());
         ServiceRoaming serviceById = serviceCallsService.findServiceRoamingByServiceId(serviceId, managerUtil.getAuthorizedUserId());
         Set<UserServiceRoaming> si = new HashSet<>();
         si.add(userServiceRoaming);
         serviceById.setUserServiceRoamings(si);
-        userService.updateLoyalty(managerUtil.fillLoyalty(serviceById.getPrice()), managerUtil.getAuthorizedUserId());
+//        userService.updateLoyalty(managerUtil.fillLoyalty(serviceById.getPrice()), managerUtil.getAuthorizedUserId());
         model.addAttribute("serviceRoaming", serviceById);
         System.out.println("Returning service roaming : " + serviceById);
         return "user/service-roaming-details";

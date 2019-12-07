@@ -20,6 +20,8 @@ public interface HomeInternetService {
 
     UserHomeInternet save(UserHomeInternet userHomeInternet);
 
+    void update(Integer serviceId, Integer id);
+
     void delete(Integer homeInternetId, Integer userId, String appointment, Integer isActive);
 
     void delete(Integer userId);

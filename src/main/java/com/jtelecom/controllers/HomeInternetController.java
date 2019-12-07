@@ -90,6 +90,8 @@ public class HomeInternetController {
         userHomeInternet.setUserId(managerUtil.getAuthorizedUserId());
         userHomeInternet.setIsActive(0);
         UserHomeInternet userHomeInternetInfo = homeInternetService.save(userHomeInternet);
+        homeInternetService.update(userHomeInternet.getHomeInternetId(), userHomeInternet.getId());
+
         HomeInternet homeInternetDetailsInfo = homeInternetService
                 .findHomeInternetDetailsById(userHomeInternetInfo.getHomeInternetId(), managerUtil.getAuthorizedUserId());
         userService.updateLoyalty(managerUtil.fillLoyalty(homeInternetDetailsInfo.getPrice()), managerUtil.getAuthorizedUserId());

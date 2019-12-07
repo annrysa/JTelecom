@@ -1,12 +1,12 @@
 package com.jtelecom.repositories.homeInternet;
 
 import com.jtelecom.entities.homeInternet.UserHomeInternet;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface UserHomeInternetRepository extends CrudRepository<UserHomeInternet, Long> {
+public interface UserHomeInternetRepository extends JpaRepository<UserHomeInternet, Long> {
 
     UserHomeInternet findByHomeInternetIdAndUserId(Integer homeInternetId, Integer userId);
 
@@ -17,4 +17,9 @@ public interface UserHomeInternetRepository extends CrudRepository<UserHomeInter
     @Modifying(clearAutomatically = true)
     @Query("UPDATE UserHomeInternet u SET u.isActive =1 WHERE u.userId =:userId AND u.homeInternetId =:homeInternetId")
     void completeAppointment(@Param("userId") Integer userId, @Param("homeInternetId") Integer homeInternetId);
+
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE UserHomeInternet u SET u.homeInternetId =:homeInternetId WHERE u.id =:id")
+    void updateHomeInternetdByUserId(@Param("homeInternetId") Integer homeInternetId, @Param("id") Integer id);
+
 }

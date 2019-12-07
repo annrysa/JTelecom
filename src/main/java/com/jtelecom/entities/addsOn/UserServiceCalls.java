@@ -1,11 +1,15 @@
 package com.jtelecom.entities.addsOn;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user_service_calls")
 public class UserServiceCalls extends UserServices {
 
@@ -19,10 +23,6 @@ public class UserServiceCalls extends UserServices {
 
     @Column(name = "user_id")
     private Integer userId;
-
-    public UserServiceCalls() {
-        super();
-    }
 
     public UserServiceCalls(Integer serviceId, Integer userId) {
         this.serviceId = serviceId;
